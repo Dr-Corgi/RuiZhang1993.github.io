@@ -14,7 +14,7 @@
 <meta property="og:description" content="由于之前实验室的Deep Learning设备用的是Ubuntu 16.04系统，不知道是Ubuntu本身的原因还是系统中出现的其它问题，原先的环境一直不太稳定，经常出现中途死机的现象。因此最近重新把机器的系统换成了比较稳定的CentOS，从零开始搭建DL环境。">
 <meta property="og:image" content="http://www.centoscn.com/uploads/allimg/140724/1-140H400364Q25.jpg">
 <meta property="og:image" content="http://www.augsky.com/wp-content/uploads/2014/11/linuxdd.jpg">
-<meta property="og:updated_time" content="2017-08-23T17:03:14.000Z">
+<meta property="og:updated_time" content="2017-08-24T02:45:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS 7 下 Cuda &amp; Tensorflow 环境搭建实践">
 <meta name="twitter:description" content="由于之前实验室的Deep Learning设备用的是Ubuntu 16.04系统，不知道是Ubuntu本身的原因还是系统中出现的其它问题，原先的环境一直不太稳定，经常出现中途死机的现象。因此最近重新把机器的系统换成了比较稳定的CentOS，从零开始搭建DL环境。">
@@ -108,8 +108,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>由于之前实验室的Deep Learning设备用的是Ubuntu 16.04系统，不知道是Ubuntu本身的原因还是系统中出现的其它问题，原先的环境一直不太稳定，经常出现中途死机的现象。因此最近重新把机器的系统换成了比较稳定的CentOS，从零开始搭建DL环境。<br><a id="more"></a></p>
+<p>由于之前实验室的Deep Learning设备用的是Ubuntu 16.04系统，不知道是Ubuntu本身的原因还是系统中出现的其它问题，原先的环境一直不太稳定，经常出现中途死机的现象。因此最近重新把机器的系统换成了比较稳定的CentOS，从零开始搭建DL环境。</p>
 </blockquote>
+<a id="more"></a>
 <h2 id="（一）CentOS安装usb启动盘制作"><a href="#（一）CentOS安装usb启动盘制作" class="headerlink" title="（一）CentOS安装usb启动盘制作"></a>（一）CentOS安装usb启动盘制作</h2><p>制作usb启动盘应该算是比较常规的工作流程，这里简单列一下一些使用到的资源：<br>(1) CentOS 7 下载：<br><a href="http://www.centoscn.com/CentosSoft/iso/2016/1214/8276.html" target="_blank" rel="external">http://www.centoscn.com/CentosSoft/iso/2016/1214/8276.html</a><br>(2) 软碟通破解版下载：<br><a href="http://www.linuxidc.com/Linux/2012-11/74577.htm" target="_blank" rel="external">http://www.linuxidc.com/Linux/2012-11/74577.htm</a><br>在制作好启动盘之后，设置usb启动，进入如下界面：<br><img src="http://www.centoscn.com/uploads/allimg/140724/1-140H400364Q25.jpg" alt="CentOS安装"><br>先不要急着按回车进入，将光标移到箭头指向的这一行（第一行，Install CentOS 7）后，按Tab键，可以看到下方出现了启动命令参数。<br>将启动参数修改如下，再回车进入安装界面：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt;vmlinuz initrd=initrd.img inst.stage2=hd:/dev/sdc4 quiet</div></pre></td></tr></table></figure></p>
 <p>这里的hd:xxx应该是u盘对应的硬件盘符，需要按实际情况进行修改。如果不知道u盘对应哪个盘符，可以通过以下命令来查看：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt;vmlinuz initrd=initrd.img linux dd quiet</div></pre></td></tr></table></figure></p>
 <p><img src="http://www.augsky.com/wp-content/uploads/2014/11/linuxdd.jpg" alt="查看盘符"><br>随后即可进入可视化安装界面，此处不再赘述。</p>
@@ -162,7 +163,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/04/21/CentOS-7-下-Cuda-Tensorflow-环境搭建实践/" data-id="cj6pugldm0000orup4rsy70j5" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2017/04/21/CentOS-7-下-Cuda-Tensorflow-环境搭建实践/" data-id="cj6pujugz0004pgupk8pgsdp6" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
