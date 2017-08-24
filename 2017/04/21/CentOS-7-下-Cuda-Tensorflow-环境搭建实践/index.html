@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CentOS 7 下 Cuda &amp; Tensorflow 环境搭建实践 | Rui Zhang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="由于之前实验室的Deep Learning设备用的是Ubuntu 16.04系统，不知道是Ubuntu本身的原因还是系统中出现的其它问题，原先的环境一直不太稳定，经常出现中途死机的现象。因此最近重新把机器的系统换成了比较稳定的CentOS，从零开始搭建DL环境。">
+<meta name="keywords" content="cuda,tensorflow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS 7 下 Cuda &amp; Tensorflow 环境搭建实践">
+<meta property="og:url" content="http://blog.RuiZhang1993.win/2017/04/21/CentOS-7-下-Cuda-Tensorflow-环境搭建实践/index.html">
+<meta property="og:site_name" content="Rui Zhang">
+<meta property="og:description" content="由于之前实验室的Deep Learning设备用的是Ubuntu 16.04系统，不知道是Ubuntu本身的原因还是系统中出现的其它问题，原先的环境一直不太稳定，经常出现中途死机的现象。因此最近重新把机器的系统换成了比较稳定的CentOS，从零开始搭建DL环境。">
+<meta property="og:image" content="http://www.centoscn.com/uploads/allimg/140724/1-140H400364Q25.jpg">
+<meta property="og:image" content="http://www.augsky.com/wp-content/uploads/2014/11/linuxdd.jpg">
+<meta property="og:updated_time" content="2017-08-23T17:03:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CentOS 7 下 Cuda &amp; Tensorflow 环境搭建实践">
+<meta name="twitter:description" content="由于之前实验室的Deep Learning设备用的是Ubuntu 16.04系统，不知道是Ubuntu本身的原因还是系统中出现的其它问题，原先的环境一直不太稳定，经常出现中途死机的现象。因此最近重新把机器的系统换成了比较稳定的CentOS，从零开始搭建DL环境。">
+<meta name="twitter:image" content="http://www.centoscn.com/uploads/allimg/140724/1-140H400364Q25.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Rui Zhang" type="application/atom+xml">
+  
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/styles.css">
+  
+
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="main-menu-navbar">
+      <ul class="nav navbar-nav">
+        
+          <li><a class=""
+                 href="/index.html">Home</a></li>
+        
+          <li><a class=""
+                 href="/archives/">Archives</a></li>
+        
+      </ul>
+
+      <!--
+      <ul class="nav navbar-nav navbar-right">
+        
+          <li><a href="/atom.xml" title="RSS Feed"><i class="fa fa-rss"></i></a></li>
+        
+      </ul>
+      -->
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+  <div class="container">
+    <div class="blog-header">
+  <h1 class="blog-title">Rui Zhang</h1>
+  
+</div>
+
+    <div class="row">
+        <div class="col-sm-8 blog-main">
+          <article id="post-CentOS-7-下-Cuda-Tensorflow-环境搭建实践" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 class="article-title" itemprop="name">
+      CentOS 7 下 Cuda &amp; Tensorflow 环境搭建实践
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/2017/04/21/CentOS-7-下-Cuda-Tensorflow-环境搭建实践/" class="article-date"><time datetime="2017-04-21T03:36:26.000Z" itemprop="datePublished">2017-04-21</time></a>
+</div>
+
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>由于之前实验室的Deep Learning设备用的是Ubuntu 16.04系统，不知道是Ubuntu本身的原因还是系统中出现的其它问题，原先的环境一直不太稳定，经常出现中途死机的现象。因此最近重新把机器的系统换成了比较稳定的CentOS，从零开始搭建DL环境。<br><a id="more"></a></p>
+</blockquote>
+<h2 id="（一）CentOS安装usb启动盘制作"><a href="#（一）CentOS安装usb启动盘制作" class="headerlink" title="（一）CentOS安装usb启动盘制作"></a>（一）CentOS安装usb启动盘制作</h2><p>制作usb启动盘应该算是比较常规的工作流程，这里简单列一下一些使用到的资源：<br>(1) CentOS 7 下载：<br><a href="http://www.centoscn.com/CentosSoft/iso/2016/1214/8276.html" target="_blank" rel="external">http://www.centoscn.com/CentosSoft/iso/2016/1214/8276.html</a><br>(2) 软碟通破解版下载：<br><a href="http://www.linuxidc.com/Linux/2012-11/74577.htm" target="_blank" rel="external">http://www.linuxidc.com/Linux/2012-11/74577.htm</a><br>在制作好启动盘之后，设置usb启动，进入如下界面：<br><img src="http://www.centoscn.com/uploads/allimg/140724/1-140H400364Q25.jpg" alt="CentOS安装"><br>先不要急着按回车进入，将光标移到箭头指向的这一行（第一行，Install CentOS 7）后，按Tab键，可以看到下方出现了启动命令参数。<br>将启动参数修改如下，再回车进入安装界面：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt;vmlinuz initrd=initrd.img inst.stage2=hd:/dev/sdc4 quiet</div></pre></td></tr></table></figure></p>
+<p>这里的hd:xxx应该是u盘对应的硬件盘符，需要按实际情况进行修改。如果不知道u盘对应哪个盘符，可以通过以下命令来查看：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt;vmlinuz initrd=initrd.img linux dd quiet</div></pre></td></tr></table></figure></p>
+<p><img src="http://www.augsky.com/wp-content/uploads/2014/11/linuxdd.jpg" alt="查看盘符"><br>随后即可进入可视化安装界面，此处不再赘述。</p>
+<h2 id="（二）Cuda-8-0安装与CuDNN设置"><a href="#（二）Cuda-8-0安装与CuDNN设置" class="headerlink" title="（二）Cuda 8.0安装与CuDNN设置"></a>（二）Cuda 8.0安装与CuDNN设置</h2><p>cuda安装是最为繁琐的一步，最经常出现各种奇奇怪怪的问题。<br>首先要确保你的显卡支持cuda(<a href="https://developer.nvidia.com/cuda-gpus" target="_blank" rel="external">Cuda GPUs List</a>)，查看显卡的命令是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lspci | grerp -i vga</div></pre></td></tr></table></figure></p>
+<p>接着安装gcc，因为我是新装的系统，本身不带gcc，所以直接安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo yum install gcc</div></pre></td></tr></table></figure></p>
+<p>安装完毕后查看一下gcc装上了没：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gcc --version</div></pre></td></tr></table></figure></p>
+<p>接下来是cuda安装之前的重要准备工作（划重点）。</p>
+<h3 id="1-1-安装正确的kernel-header"><a href="#1-1-安装正确的kernel-header" class="headerlink" title="1.1 安装正确的kernel header"></a>1.1 安装正确的kernel header</h3><p>如果没有安装好kernel header，在运行cuda安装脚本的过程中就会报错，大致的提示是没有kernel的源代码。因此在运行cuda安装之前先安装kernel header。方法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install kernel-devel-$(uname -r) kernel-headers-$(uname -r)</div></pre></td></tr></table></figure></p>
+<p>其中，uname -r命令可以查看当前内核的版本。执行上述之后查看路径/usr/src/kernels/，如果看到与当前内核版本对应的文件，说明安装成功。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ls /usr/src/kernels/</div></pre></td></tr></table></figure></p>
+<h3 id="1-2-禁用Nouveau组件"><a href="#1-2-禁用Nouveau组件" class="headerlink" title="1.2 禁用Nouveau组件"></a>1.2 禁用Nouveau组件</h3><p>Nouveau是由第三方为NVIDIA显卡开发的一个开源3D驱动，在安装cuda之前我们需要将其禁用。<br>首先通过init 3进入命令行模式.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">init 3</div></pre></td></tr></table></figure></p>
+<p>将驱动Nouveau加入到黑名单中，如果路径/etc/modprobe.d/下没有blacklist.conf文件，直接创建一个就好：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi /etc/modprobe.d/blacklist.conf</div></pre></td></tr></table></figure></p>
+<p>编辑文件内容为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">blacklist nouveau</div></pre></td></tr></table></figure></p>
+<p>接着，使用dracut重新建立 initramfs image file（执行任何操作前记得做好备份）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mv /boot/initramfs-$(uname -r).img /boot/initramfs-$(uname -r).img.bak</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo dracut -v /boot/initramfs-$(uname -r).img $(uname -r)</div></pre></td></tr></table></figure>
+<p>重启至命令行模式，若发现字体变大，说明Nouveau已经被成功禁用。至此完成cuda安装的前期准备工作。  </p>
+<h3 id="1-3-Cuda-8-0安装"><a href="#1-3-Cuda-8-0安装" class="headerlink" title="1.3 Cuda 8.0安装"></a>1.3 Cuda 8.0安装</h3><p>其实踩完了上面的坑之后，cuda 8.0的安装就非常简单了。首先从cuda官网下载与系统相符合的runfile安装包，执行安装，一路y下去即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo sh cuda_8.0.61_375.26_linux.run</div></pre></td></tr></table></figure></p>
+<p>安装完成后还要修改环境变量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi ~/.bashrc</div></pre></td></tr></table></figure></p>
+<p>在环境变量中加入以下内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">export PATH=/usr/local/cuda-8.0/bin:$PATH</div><div class="line">export LD_LIBRARY_PATH=/usr/local/cuda-8.0/lib64:$LD_LIBRARY_PATH</div></pre></td></tr></table></figure></p>
+<p>再使用source命令使环境变量立即生效即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source ~/.bashrc</div></pre></td></tr></table></figure></p>
+<h3 id="1-4-CuDNN配置"><a href="#1-4-CuDNN配置" class="headerlink" title="1.4 CuDNN配置"></a>1.4 CuDNN配置</h3><p>CuDNN其实是一个可选项，具体的配置过程也不难。首先去CuDNN的网站上注册账号，并且下载CuDNN 5.1 for cuda 8.0的包。<br>解压文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar zxvf cudnn-8.0-linux-x64-v5.1.tgz</div></pre></td></tr></table></figure></p>
+<p>得到一个名为cuda的文件夹，然后将文件夹中的内容复制到cuda路径中即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cp ./cuda/include/* /usr/local/cuda-8.0/include/</div><div class="line">cp ./cuda/lib64/* /usr/local/cuda-8.0/lib64/</div></pre></td></tr></table></figure></p>
+<h2 id="（三）Anaconda安装（貌似有墙！）"><a href="#（三）Anaconda安装（貌似有墙！）" class="headerlink" title="（三）Anaconda安装（貌似有墙！）"></a>（三）Anaconda安装（貌似有墙！）</h2><p>Anaconda也是常规安装了，首先去<a href="https://www.continuum.io/downloads/" target="_blank" rel="external">官网</a>下载Anaconda对应系统的安装包，根据官网提示运行命令即可。不过似乎有墙，需要自带梯子。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bash Anaconda2-4.3.1-Linux-x86_64.sh</div></pre></td></tr></table></figure></p>
+<h2 id="（四）Tensorflow安装（貌似也有墙？）"><a href="#（四）Tensorflow安装（貌似也有墙？）" class="headerlink" title="（四）Tensorflow安装（貌似也有墙？）"></a>（四）Tensorflow安装（貌似也有墙？）</h2><p>Tensorflow安装也一样是常规操作，直接通过pip就可以安装了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.0.1-cp27-none-linux_x86_64.whl</div></pre></td></tr></table></figure></p>
+<p>安装完毕后，打开python，执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">import tensorflow as tf</div><div class="line">hello = tf.constant(&apos;Hello, TensorFlow!&apos;)</div><div class="line">sess = tf.Session()</div><div class="line">print sess.run(hello)</div><div class="line">a = tf.constant(10)</div><div class="line">b = tf.constant(32)</div><div class="line">print sess.run(a+b)</div></pre></td></tr></table></figure></p>
+<p>正常情况下是能够运行的，这就说明tensorflow环境已经搭建完成了。</p>
+<h2 id="（五）其他碎碎念"><a href="#（五）其他碎碎念" class="headerlink" title="（五）其他碎碎念"></a>（五）其他碎碎念</h2><h3 id="5-1-设置CentOS-7默认运行图形-命令行界面"><a href="#5-1-设置CentOS-7默认运行图形-命令行界面" class="headerlink" title="5.1 设置CentOS 7默认运行图形/命令行界面"></a>5.1 设置CentOS 7默认运行图形/命令行界面</h3><p>在以往的CentOS系统中，我们可以通过文件/etc/inittab设置默认启动的界面，但在CentOS 7中打开文件/etc/inittab我们可以看到，这个文件不再起作用了。取而代之的是两个命令：<br>(1)默认启动图形界面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl set-default graphical.target</div></pre></td></tr></table></figure></p>
+<p>(2)默认启动命令行界面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl set-default multi-user.target</div></pre></td></tr></table></figure></p>
+<p>当然，可以用下面命令来查看当前默认启动的界面模式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl get-default</div></pre></td></tr></table></figure></p>
+<h3 id="5-2-tensorflow出现ImportError"><a href="#5-2-tensorflow出现ImportError" class="headerlink" title="5.2 tensorflow出现ImportError"></a>5.2 tensorflow出现ImportError</h3><p>我在运行测试代码的时候没有遇到过这个问题，但在跑自己的模型的时候出现了一次ImportError的报错，报错内容大概是：“libcudart.so.8.0: cannot open shared object file: No such file or directory”。<br>几经查阅，找到如下的解决方案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo ldconfig /usr/local/cuda/lib64</div></pre></td></tr></table></figure></p>
+<p>完美解决。  </p>
+<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><ol>
+<li>CentOS 7（1611）正式版下载, <a href="http://www.centoscn.com/CentosSoft/iso/2016/1214/8276.html" target="_blank" rel="external">http://www.centoscn.com/CentosSoft/iso/2016/1214/8276.html</a></li>
+<li>软碟通UltraISO v9.5.3.2901 简体中文完美注册版, <a href="http://www.linuxidc.com/Linux/2012-11/74577.htm" target="_blank" rel="external">http://www.linuxidc.com/Linux/2012-11/74577.htm</a></li>
+<li>U盘安装CentOS7的最终解决方案, <a href="http://www.centoscn.com/image-text/setup/2015/0613/5648.html" target="_blank" rel="external">http://www.centoscn.com/image-text/setup/2015/0613/5648.html</a></li>
+<li>Cuda GPUs, <a href="https://developer.nvidia.com/cuda-gpus" target="_blank" rel="external">https://developer.nvidia.com/cuda-gpus</a></li>
+<li>cuda编程学习之路(1): centos7下cuda7.5环境搭建, <a href="http://www.jianshu.com/p/59f80d77d705" target="_blank" rel="external">http://www.jianshu.com/p/59f80d77d705</a></li>
+<li>centos7.0禁用The Nouveau kernel driver的方法, <a href="http://www.centoscn.com/CentosBug/softbug/2014/1013/3927.html" target="_blank" rel="external">http://www.centoscn.com/CentosBug/softbug/2014/1013/3927.html</a></li>
+<li>CUDA 8.0 Downloads, <a href="https://developer.nvidia.com/cuda-downloads" target="_blank" rel="external">https://developer.nvidia.com/cuda-downloads</a></li>
+<li>Anaconda官网, <a href="https://www.continuum.io/downloads" target="_blank" rel="external">https://www.continuum.io/downloads</a></li>
+<li>CuDNN官网, <a href="https://developer.nvidia.com/cudnn" target="_blank" rel="external">https://developer.nvidia.com/cudnn</a></li>
+<li>Tensorflow的ImportError解决方案<a href="http://blog.csdn.net/breeze5428/article/details/54412016" target="_blank" rel="external">http://blog.csdn.net/breeze5428/article/details/54412016</a></li>
+</ol>
+
+      
+    </div>
+
+    
+      
+
+    
+
+    <footer class="article-footer">
+      <a data-url="http://blog.RuiZhang1993.win/2017/04/21/CentOS-7-下-Cuda-Tensorflow-环境搭建实践/" data-id="cj6pucdtd0004nrup6nh7nfai" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cuda/">cuda</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow/">tensorflow</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+    
+<ul id="article-nav" class="nav nav-pills nav-justified">
+  
+  <li role="presentation">
+    <a href="/2017/01/19/Mac下卸载-更新numpy/" id="article-nav-older" class="article-nav-link-wrap">
+      <i class="fa fa-chevron-left pull-left"></i>
+      <span class="article-nav-link-title">Mac下卸载/更新numpy</span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+
+  
+</article>
+
+
+
+
+        </div>
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          
+  <div class="sidebar-module sidebar-module-inset">
+  <h4>About</h4>
+  - Ph.D student @ SCUT </br> - Research domains: </br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NLP, chatbot
+
+</div>
+
+
+  
+
+
+  
+  <div class="sidebar-module">
+    <h4>Tags</h4>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Mac/">Mac</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Natural-Language-Process/">Natural Language Process</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/cuda/">cuda</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/numpy/">numpy</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/python/">python</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/tensorflow/">tensorflow</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/xgboost/">xgboost</a><span class="sidebar-module-list-count">1</span></li></ul>
+  </div>
+
+
+
+  
+  <div class="sidebar-module">
+    <h4>Tag Cloud</h4>
+    <p class="tagcloud">
+      <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/Natural-Language-Process/" style="font-size: 10px;">Natural Language Process</a> <a href="/tags/cuda/" style="font-size: 10px;">cuda</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/tensorflow/" style="font-size: 10px;">tensorflow</a> <a href="/tags/xgboost/" style="font-size: 10px;">xgboost</a>
+    </p>
+  </div>
+
+
+  
+  <div class="sidebar-module">
+    <h4>Archives</h4>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/04/">April 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/01/">January 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/11/">November 2016</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/05/">May 2016</a><span class="sidebar-module-list-count">1</span></li></ul>
+  </div>
+
+
+
+  
+  <div class="sidebar-module">
+    <h4>Recents</h4>
+    <ul class="sidebar-module-list">
+      
+        <li>
+          <a href="/2017/04/21/CentOS-7-下-Cuda-Tensorflow-环境搭建实践/">CentOS 7 下 Cuda &amp; Tensorflow 环境搭建实践</a>
+        </li>
+      
+        <li>
+          <a href="/2017/01/19/Mac下卸载-更新numpy/">Mac下卸载/更新numpy</a>
+        </li>
+      
+        <li>
+          <a href="/2016/11/17/Python中文文本处理/">Python中文文本处理</a>
+        </li>
+      
+        <li>
+          <a href="/2016/05/29/xgboost-Windows7-32bit-xgboost环境搭建/">Windows7-32bit xgboost环境搭建</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+
+        </div>
+    </div>
+  </div>
+  <footer class="blog-footer">
+  <div class="container">
+    <div id="footer-info" class="inner">
+      &copy; 2017 RuiZhang1993<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+  
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" integrity="sha384-8gBf6Y4YYq7Jx97PIqmTwLPin4hxIzQw5aDmUg/DDhul9fFpbbLcLh3nTIIDJKhx" crossorigin="anonymous"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+</body>
+</html>

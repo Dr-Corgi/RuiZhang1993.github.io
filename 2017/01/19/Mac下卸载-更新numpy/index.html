@@ -3,14 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2017 | Rui Zhang</title>
+  <title>Mac下卸载/更新numpy | Rui Zhang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Rui Zhang">
-<meta property="og:url" content="http://blog.RuiZhang1993.win/archives/2017/index.html">
+  <meta name="description" content="今天安装PyTorch的时候发现numpy模块需要更新，使用pip install -U numpy的时候发现有些操作被系统禁止了（不是sudo权限的原因）。百度了一下发现是系统的安全机制引起的。具体的解决方案如下：  重启电脑，重启时按住command+R 进入“OS X工具程式”界面，打开终端，输入csrutil，重启电脑即可。  Reference Mac环境下，numpy升级问题。http">
+<meta name="keywords" content="Mac,numpy,python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac下卸载&#x2F;更新numpy">
+<meta property="og:url" content="http://blog.RuiZhang1993.win/2017/01/19/Mac下卸载-更新numpy/index.html">
 <meta property="og:site_name" content="Rui Zhang">
+<meta property="og:description" content="今天安装PyTorch的时候发现numpy模块需要更新，使用pip install -U numpy的时候发现有些操作被系统禁止了（不是sudo权限的原因）。百度了一下发现是系统的安全机制引起的。具体的解决方案如下：  重启电脑，重启时按住command+R 进入“OS X工具程式”界面，打开终端，输入csrutil，重启电脑即可。  Reference Mac环境下，numpy升级问题。http">
+<meta property="og:updated_time" content="2017-01-19T07:06:33.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Rui Zhang">
+<meta name="twitter:title" content="Mac下卸载&#x2F;更新numpy">
+<meta name="twitter:description" content="今天安装PyTorch的时候发现numpy模块需要更新，使用pip install -U numpy的时候发现有些操作被系统禁止了（不是sudo权限的原因）。百度了一下发现是系统的安全机制引起的。具体的解决方案如下：  重启电脑，重启时按住command+R 进入“OS X工具程式”界面，打开终端，输入csrutil，重启电脑即可。  Reference Mac环境下，numpy升级问题。http">
   
     <link rel="alternate" href="/atom.xml" title="Rui Zhang" type="application/atom+xml">
   
@@ -49,7 +54,7 @@
           <li><a class=""
                  href="/index.html">Home</a></li>
         
-          <li><a class="active"
+          <li><a class=""
                  href="/archives/">Archives</a></li>
         
       </ul>
@@ -73,60 +78,84 @@
 
     <div class="row">
         <div class="col-sm-8 blog-main">
-          
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <header class="archive-article-header">
+          <article id="post-Mac下卸载-更新numpy" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
     
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/21/CentOS-7-下-Cuda-Tensorflow-环境搭建实践/">CentOS 7 下 Cuda &amp; Tensorflow 环境搭建实践</a>
+    <h1 class="article-title" itemprop="name">
+      Mac下卸载/更新numpy
     </h1>
   
 
 
+  </header>
+
+  <div class="article-meta">
     <div class="article-datetime">
-  <a href="/2017/04/21/CentOS-7-下-Cuda-Tensorflow-环境搭建实践/" class="archive-article-date"><time datetime="2017-04-21T03:36:26.000Z" itemprop="datePublished">April 21st</time></a>
+  <a href="/2017/01/19/Mac下卸载-更新numpy/" class="article-date"><time datetime="2017-01-19T07:01:05.000Z" itemprop="datePublished">2017-01-19</time></a>
 </div>
 
-  </header>
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天安装PyTorch的时候发现numpy模块需要更新，使用pip install -U numpy的时候发现有些操作被系统禁止了（不是sudo权限的原因）。百度了一下发现是系统的安全机制引起的。具体的解决方案如下：</p>
+<ol>
+<li>重启电脑，重启时按住command+R</li>
+<li>进入“OS X工具程式”界面，打开终端，输入csrutil，重启电脑即可。</li>
+</ol>
+<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><ol>
+<li>Mac环境下，numpy升级问题。<a href="http://blog.csdn.net/u010566350/article/details/50455480" target="_blank" rel="external">http://blog.csdn.net/u010566350/article/details/50455480</a></li>
+</ol>
+
+      
+    </div>
+
+    
+      
+
+    
+
+    <footer class="article-footer">
+      <a data-url="http://blog.RuiZhang1993.win/2017/01/19/Mac下卸载-更新numpy/" data-id="cj6pucdsy0000nruppaz2mf93" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/numpy/">numpy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+    
+<ul id="article-nav" class="nav nav-pills nav-justified">
+  
+  <li role="presentation">
+    <a href="/2016/11/17/Python中文文本处理/" id="article-nav-older" class="article-nav-link-wrap">
+      <i class="fa fa-chevron-left pull-left"></i>
+      <span class="article-nav-link-title">Python中文文本处理</span>
+    </a>
+  </li>
+  
+  
+  <li role="presentation">
+    <a href="/2017/04/21/CentOS-7-下-Cuda-Tensorflow-环境搭建实践/" id="article-nav-newer" class="article-nav-link-wrap">
+      <span class="article-nav-link-title">CentOS 7 下 Cuda &amp; Tensorflow 环境搭建实践</span>
+      <i class="fa fa-chevron-right pull-right"></i>
+    </a>
+  </li>
+  
+</ul>
+
+
+  
 </article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <header class="archive-article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/19/Mac下卸载-更新numpy/">Mac下卸载/更新numpy</a>
-    </h1>
-  
-
-
-    <div class="article-datetime">
-  <a href="/2017/01/19/Mac下卸载-更新numpy/" class="archive-article-date"><time datetime="2017-01-19T07:01:05.000Z" itemprop="datePublished">January 19th</time></a>
-</div>
-
-  </header>
-</article>
-
-  
-  
-    </div></section>
-  
 
 
 

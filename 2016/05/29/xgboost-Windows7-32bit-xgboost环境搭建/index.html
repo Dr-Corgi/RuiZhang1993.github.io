@@ -3,14 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2017 | Rui Zhang</title>
+  <title>Windows7-32bit xgboost环境搭建 | Rui Zhang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Rui Zhang">
-<meta property="og:url" content="http://blog.RuiZhang1993.win/archives/2017/index.html">
+  <meta name="description" content="由于陈天奇大神在xgboost后来的版本中拿掉了windows文件夹，所以刚上手xgboost安装的时候根本用不了网上教程中使用VS编译方法。直到看到Stackoverflow上面的这个问答，才真正解决了问题。话不多说，以下是完整的解决方案。">
+<meta name="keywords" content="xgboost">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows7-32bit xgboost环境搭建">
+<meta property="og:url" content="http://blog.RuiZhang1993.win/2016/05/29/xgboost-Windows7-32bit-xgboost环境搭建/index.html">
 <meta property="og:site_name" content="Rui Zhang">
+<meta property="og:description" content="由于陈天奇大神在xgboost后来的版本中拿掉了windows文件夹，所以刚上手xgboost安装的时候根本用不了网上教程中使用VS编译方法。直到看到Stackoverflow上面的这个问答，才真正解决了问题。话不多说，以下是完整的解决方案。">
+<meta property="og:updated_time" content="2017-08-23T17:00:57.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Rui Zhang">
+<meta name="twitter:title" content="Windows7-32bit xgboost环境搭建">
+<meta name="twitter:description" content="由于陈天奇大神在xgboost后来的版本中拿掉了windows文件夹，所以刚上手xgboost安装的时候根本用不了网上教程中使用VS编译方法。直到看到Stackoverflow上面的这个问答，才真正解决了问题。话不多说，以下是完整的解决方案。">
   
     <link rel="alternate" href="/atom.xml" title="Rui Zhang" type="application/atom+xml">
   
@@ -49,7 +54,7 @@
           <li><a class=""
                  href="/index.html">Home</a></li>
         
-          <li><a class="active"
+          <li><a class=""
                  href="/archives/">Archives</a></li>
         
       </ul>
@@ -73,60 +78,84 @@
 
     <div class="row">
         <div class="col-sm-8 blog-main">
-          
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <header class="archive-article-header">
+          <article id="post-xgboost-Windows7-32bit-xgboost环境搭建" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
     
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/21/CentOS-7-下-Cuda-Tensorflow-环境搭建实践/">CentOS 7 下 Cuda &amp; Tensorflow 环境搭建实践</a>
+    <h1 class="article-title" itemprop="name">
+      Windows7-32bit xgboost环境搭建
     </h1>
   
 
 
+  </header>
+
+  <div class="article-meta">
     <div class="article-datetime">
-  <a href="/2017/04/21/CentOS-7-下-Cuda-Tensorflow-环境搭建实践/" class="archive-article-date"><time datetime="2017-04-21T03:36:26.000Z" itemprop="datePublished">April 21st</time></a>
+  <a href="/2016/05/29/xgboost-Windows7-32bit-xgboost环境搭建/" class="article-date"><time datetime="2016-05-28T16:57:15.000Z" itemprop="datePublished">2016-05-29</time></a>
 </div>
 
-  </header>
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>由于陈天奇大神在xgboost后来的版本中拿掉了windows文件夹，所以刚上手xgboost安装的时候根本用不了网上教程中使用VS编译方法。直到看到Stackoverflow上面的这个<a href="http://stackoverflow.com/questions/33749735/how-to-install-xgboost-package-in-python-windows-platform" target="_blank" rel="external">问答</a>，才真正解决了问题。话不多说，以下是完整的解决方案。  </p>
+<a id="more"></a>
+<ul>
+<li>git clone <a href="https://github.com/dmlc/xgboost" target="_blank" rel="external">https://github.com/dmlc/xgboost</a></li>
+<li>git checkout 9bc3d16</li>
+<li>使用VS打开xgboost/windows文件夹中的项目sln文件</li>
+<li>在VS中，点击Build/Configuration Manager。将Active solution configuration改为Release。（如果是64-bit系统，将Active solution platform改为x64）</li>
+<li>Rebuild xgboost, xgboost_wrapper</li>
+<li>将xgboost/windows/xgboost/Release里面的所有文件拷贝到xgboost/windows/xgboost_wrapper文件夹中</li>
+<li>回到xgboost/python-package，运行命令python setup.py install，一般这一步就能成功了</li>
+<li>检查xgboost是否安装成功，运行python -c “import xgboost”  </li>
+</ul>
+<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><ul>
+<li>rain1024, Answering: “How to install xgboost package in python (windows platform)?”, <a href="http://stackoverflow.com/questions/33749735/how-to-install-xgboost-package-in-python-windows-platform" target="_blank" rel="external">http://stackoverflow.com/questions/33749735/how-to-install-xgboost-package-in-python-windows-platform</a></li>
+</ul>
+
+      
+    </div>
+
+    
+      
+
+    
+
+    <footer class="article-footer">
+      <a data-url="http://blog.RuiZhang1993.win/2016/05/29/xgboost-Windows7-32bit-xgboost环境搭建/" data-id="cj6pucdtb0003nrupodxxzios" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/xgboost/">xgboost</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+    
+<ul id="article-nav" class="nav nav-pills nav-justified">
+  
+  
+  <li role="presentation">
+    <a href="/2016/11/17/Python中文文本处理/" id="article-nav-newer" class="article-nav-link-wrap">
+      <span class="article-nav-link-title">Python中文文本处理</span>
+      <i class="fa fa-chevron-right pull-right"></i>
+    </a>
+  </li>
+  
+</ul>
+
+
+  
 </article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <header class="archive-article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/01/19/Mac下卸载-更新numpy/">Mac下卸载/更新numpy</a>
-    </h1>
-  
-
-
-    <div class="article-datetime">
-  <a href="/2017/01/19/Mac下卸载-更新numpy/" class="archive-article-date"><time datetime="2017-01-19T07:01:05.000Z" itemprop="datePublished">January 19th</time></a>
-</div>
-
-  </header>
-</article>
-
-  
-  
-    </div></section>
-  
 
 
 
