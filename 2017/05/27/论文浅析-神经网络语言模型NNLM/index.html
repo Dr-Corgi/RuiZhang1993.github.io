@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>神经网络语言模型NNLM | Rui Zhang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="标题：A neural probabilistic language model作者：Bengio Y, Ducharme R, Vincent P, et al.来源：Journal of machine learning research, 2003, 3(Feb): 1137-1155.论文地址：http://www.jmlr.org/papers/volume3/bengio03a/ben">
+<meta name="keywords" content="NLP,deep learning,论文笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="神经网络语言模型NNLM">
+<meta property="og:url" content="http://ruizhang1993.github.io/2017/05/27/论文浅析-神经网络语言模型NNLM/index.html">
+<meta property="og:site_name" content="Rui Zhang">
+<meta property="og:description" content="标题：A neural probabilistic language model作者：Bengio Y, Ducharme R, Vincent P, et al.来源：Journal of machine learning research, 2003, 3(Feb): 1137-1155.论文地址：http://www.jmlr.org/papers/volume3/bengio03a/ben">
+<meta property="og:image" content="http://i1.piimg.com/587765/e3254073d029beb5.png">
+<meta property="og:image" content="http://i1.piimg.com/587765/13cdbe3a7914a7f5.png">
+<meta property="og:image" content="http://i4.buimg.com/587765/336a02fb9e88762a.png">
+<meta property="og:image" content="http://i4.buimg.com/587765/2af2db322d05b7cb.png">
+<meta property="og:image" content="http://i1.piimg.com/587765/2467eca1adde8898.png">
+<meta property="og:image" content="http://i1.piimg.com/587765/6da8966a927ffe50.png">
+<meta property="og:image" content="http://i1.piimg.com/587765/52f158bed7a21561.png">
+<meta property="og:updated_time" content="2017-08-24T03:39:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="神经网络语言模型NNLM">
+<meta name="twitter:description" content="标题：A neural probabilistic language model作者：Bengio Y, Ducharme R, Vincent P, et al.来源：Journal of machine learning research, 2003, 3(Feb): 1137-1155.论文地址：http://www.jmlr.org/papers/volume3/bengio03a/ben">
+<meta name="twitter:image" content="http://i1.piimg.com/587765/e3254073d029beb5.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Rui Zhang" type="application/atom+xml">
+  
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/styles.css">
+  
+
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="main-menu-navbar">
+      <ul class="nav navbar-nav">
+        
+          <li><a class=""
+                 href="/index.html">Home</a></li>
+        
+          <li><a class=""
+                 href="/archives/">Archives</a></li>
+        
+      </ul>
+
+      <!--
+      <ul class="nav navbar-nav navbar-right">
+        
+          <li><a href="/atom.xml" title="RSS Feed"><i class="fa fa-rss"></i></a></li>
+        
+      </ul>
+      -->
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+  <div class="container">
+    <div class="blog-header">
+  <h1 class="blog-title">Rui Zhang</h1>
+  
+</div>
+
+    <div class="row">
+        <div class="col-sm-8 blog-main">
+          <article id="post-论文浅析-神经网络语言模型NNLM" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 class="article-title" itemprop="name">
+      神经网络语言模型NNLM
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/2017/05/27/论文浅析-神经网络语言模型NNLM/" class="article-date"><time datetime="2017-05-27T11:14:15.000Z" itemprop="datePublished">2017-05-27</time></a>
+</div>
+
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>标题：A neural probabilistic language model<br>作者：Bengio Y, Ducharme R, Vincent P, et al.<br>来源：Journal of machine learning research, 2003, 3(Feb): 1137-1155.<br>论文地址：<a href="http://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf" target="_blank" rel="external">http://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf</a>  </p>
+<p>这篇文章是最早使用神经网络来构建概率语言模型的工作，也是现在比较流行的“词向量”最早的相关工作之一。文章提出了利用一个三层的神经网络来学习概率语言模型，通过给定的上文窗口，模型预测下一个位置的输出词语，在经过足够次数的训练迭代后，神经网络将学习到语言的规律，而词向量将作为模型的副产品得到。</p>
+<a id="more"></a>
+<h4 id="简单理解语言概率模型"><a href="#简单理解语言概率模型" class="headerlink" title="简单理解语言概率模型"></a>简单理解语言概率模型</h4><p>在了解NNLM模型之前，我们先直观了解一下语言概率模型。  </p>
+<p>假设现在让你回答这样一道选择题：“今天我同学请我吃了一碗<strong>_</strong>。”备选答案包括“A.iphone B.阴阳师 C.炸酱面 D.可乐”。让你在四个答案中选择一个最合适的，你会怎么选？  </p>
+<p>显然，选项C在这里最为合适。可是，为什么要选C而不是其他答案呢？因为这里空缺部分的上下文文本决定了可选项对应的概率分布。因为上下文提到了“吃”，那么“iphone”和“阴阳师”看起来就不像是特别合理的答案，而上下文中又包含了“一碗”这样的量词，那么“炸酱面”是正确答案的概率显然要比“可乐”高得多。  </p>
+<p>让我们稍微正式一点地定义一下语言概率模型。语言概率模型可以理解为单词序列 {w_1, w_2, …, w_N} 的概率，即：<br><img src="http://i1.piimg.com/587765/e3254073d029beb5.png" alt="http://i1.piimg.com/587765/e3254073d029beb5.png"><br>上面公式中的s表示一个句子(sentence)，句子包含了T个词语。那么这个句子的概率就是这T个词语的条件概率相乘的乘积。  </p>
+<p>假设T＝2，也就是句子s的长度为2，比如说这个句子是“Hello World”。那么p(s)=p(w_1)p(w_2|w_1)。这里的w_1表示句子的第一个词语“Hello”，w_2表示第二个词语“World”。p(w_1)表示“Hello”这个词语作为句子第一个词语出现的概率，而p(w_2|w_1)则表示“World”这个词语紧跟在“Hello”这个词语之后的概率。  </p>
+<p>但是，如果句子很长的话，这个条件概率计算会非常的复杂。因此，为了简化上述的公式，我们常常将概率公式近似的替换为：<br><img src="http://i1.piimg.com/587765/13cdbe3a7914a7f5.png" alt="http://i1.piimg.com/587765/13cdbe3a7914a7f5.png"><br>在上述公式中，我们将条件概率中对上下文中t-1个词语的依赖缩减到了n个词语的依赖。<br>这个简化怎么理解呢？回顾一下本节开始的那道选择题，我们做出“杂酱面”的选择的时候考察的是上下文“吃了一碗”，而那些距离比较远的文本内容“今天我同学请我”其实对于后面的词语选择影响并不大，所以我们可以将这里的条件概率进行简化，认为影响当前词语概率的是当前位置的前n个词。</p>
+<h4 id="神经网络语言模型NNLM"><a href="#神经网络语言模型NNLM" class="headerlink" title="神经网络语言模型NNLM"></a>神经网络语言模型NNLM</h4><p>接下来我们来看看Bengio的模型。<br>Bengio的模型采用一个三层的神经网络来构建语言模型。给定单词w_t的上文{w_{t−n+1}, …, w_{t−1}}， 模型首先将每个单词w_i映射到一个共享的查找表(Lookup Table)中的一行。进而，模型根据查找表得到上文与词向量的映射，经过一个中间隐藏层，利用一个带Softmax层的前馈神经网络预测下一个单词w_t的条件概率。<br><img src="http://i4.buimg.com/587765/336a02fb9e88762a.png" alt="http://i4.buimg.com/587765/336a02fb9e88762a.png"><br>我们来梳理一下这里提到的几个概念。  </p>
+<p>首先是查找表（Lookup Table）。查找表其实也就是我们说的词向量（这个说法并不准确，但是你也可以这么理解），在模型中它是一个V行d列的矩阵，其中V是词汇表的大小，d是词向量的维度。最终我们得到的词向量就是一个d维的词向量。查找表在模型最开始建立的时候是随机赋值的，我们在模型训练迭代的过程中不断地更新查找表的值，直到模型收敛。  </p>
+<p>如果还是不能理解，不妨看看下面这张图：<br><img src="http://i4.buimg.com/587765/2af2db322d05b7cb.png" alt="http://i4.buimg.com/587765/2af2db322d05b7cb.png"><br>这里，我们的词汇表一共包含了3个词语｛”Hello”, “World”和”Peter”｝，所以|V|=3。我们选择d=4，就得到了上面这个3x4的查找表。那为什么要引入查找表呢？因为文本是没有办法直接参与到神经网络的数值计算的，因此我们需要一个中介来将文本和数字对应起来，查找表正充当了这样一个角色。</p>
+<p>在有了查找表之后，我们可以将单词上文中的n个单词表示n个d维的向量，然后我们将它们首尾相连拼接起来，得到一个(nd)维的向量。这就是上图模型中中间那个网络层做的事情，非常简单，将几个单词的词向量拼成一个长长的就可以了。当然，为了增加模型的表示能力，这里引入了一个非线性激活函数tanh来对词向量进行处理。tanh函数是一个值域在[-1,1]的非线性激活函数，属于人工神经网络算法中的基本概念，这里就不赘述了，大家可以简单看一下tanh函数的公式和图像：<br><img src="http://i1.piimg.com/587765/2467eca1adde8898.png" alt="http://i1.piimg.com/587765/2467eca1adde8898.png"><br><img src="http://i1.piimg.com/587765/6da8966a927ffe50.png" alt="http://i1.piimg.com/587765/6da8966a927ffe50.png">  </p>
+<p>最后，是整个模型的输出部分，也就是模型图中最顶上的那一层。在中间层我们得到了一个nd维的词向量拼接，经过tanh激活函数后，我们利用一个简单的全连接层(Fully Connection)将中间层网络连接到一个V维的网络层。通过对这层|V|维网络层进行Softmax归一化，我们得到了对这V个词语的预测概率。</p>
+<p>Softmax在这里起到了归一化的作用，他的计算公式是：<br><img src="http://i1.piimg.com/587765/52f158bed7a21561.png" alt="http://i1.piimg.com/587765/52f158bed7a21561.png"></p>
+<p>注意到了吗，最顶端的网络层是V维的，也就是和我们的词典一样大小的维度，到这里的时候我们就试图让网络预测出下一个输出词语的概率。  </p>
+<p>具体怎么做呢？回到杂酱面的例子。我们的上文输入是“吃了一碗”，我们的词表包括｛iphone，阴阳师，杂酱面，可乐｝。在模型初始阶段我们可能会得到一个归一化后的概率结果(0.7, 0.01, 0.23, 0.06)，这时候我们预测输出为“iphone”的概率最高。这可不行，我们要教给模型正确的答案，因此我们传入正确的结果(0.0, 0.0, 1.0, 0.0)。可见我们只给正确结果赋予1.0的概率，其他结果概率都为0.0。这样，利用神经网络的反向传播，经过一定轮次的迭代，神经网络就能够学会根据输入的上下文来预测下一个词语。这个神经网络就是我们的神经语言模型NNLM。</p>
+<p>当然，在Bengio的实现中还有一些额外的连接来加速模型的计算，我这里没有细讲，读者可以根据需要阅读一下原文。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>神经语言模型是一个非常早期的工作，其思路简单，容易实现，能够取得一定的效果。但存在一些明显的缺点，特别是从词向量训练的角度而言，它是从语言模型的角度来得到词向量，在计算效率和实际效果上都不如后来的word2vec模型。但是这篇文章仍是了解词向量的必读之作。</p>
+
+      
+    </div>
+
+    
+      
+
+    
+
+    <footer class="article-footer">
+      <a data-url="http://ruizhang1993.github.io/2017/05/27/论文浅析-神经网络语言模型NNLM/" data-id="cj6pwki3o000u1xupg9x57cay" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NLP/">NLP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/deep-learning/">deep learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/论文笔记/">论文笔记</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+    
+<ul id="article-nav" class="nav nav-pills nav-justified">
+  
+  <li role="presentation">
+    <a href="/2017/05/21/卷积操作的简单理解/" id="article-nav-older" class="article-nav-link-wrap">
+      <i class="fa fa-chevron-left pull-left"></i>
+      <span class="article-nav-link-title">卷积操作的简单理解</span>
+    </a>
+  </li>
+  
+  
+  <li role="presentation">
+    <a href="/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/" id="article-nav-newer" class="article-nav-link-wrap">
+      <span class="article-nav-link-title">[SMP-SA2017] 终身机器学习LML</span>
+      <i class="fa fa-chevron-right pull-right"></i>
+    </a>
+  </li>
+  
+</ul>
+
+
+  
+</article>
+
+
+
+
+        </div>
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          
+  <div class="sidebar-module sidebar-module-inset">
+  <h4>About</h4>
+  - Ph.D student @ SCUT </br> - Research domains: </br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NLP, chatbot
+
+</div>
+
+
+  
+
+
+  
+  <div class="sidebar-module">
+    <h4>Tags</h4>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/CNN/">CNN</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Mac/">Mac</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/NLP/">NLP</a><span class="sidebar-module-list-count">3</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/SMPSA2017/">SMPSA2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/cuda/">cuda</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/deep-learning/">deep learning</a><span class="sidebar-module-list-count">4</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/numpy/">numpy</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/python/">python</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/tensorflow/">tensorflow</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/xgboost/">xgboost</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/会议笔记/">会议笔记</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/论文笔记/">论文笔记</a><span class="sidebar-module-list-count">2</span></li></ul>
+  </div>
+
+
+
+  
+  <div class="sidebar-module">
+    <h4>Tag Cloud</h4>
+    <p class="tagcloud">
+      <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/NLP/" style="font-size: 16.67px;">NLP</a> <a href="/tags/SMPSA2017/" style="font-size: 10px;">SMPSA2017</a> <a href="/tags/cuda/" style="font-size: 10px;">cuda</a> <a href="/tags/deep-learning/" style="font-size: 20px;">deep learning</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/tensorflow/" style="font-size: 13.33px;">tensorflow</a> <a href="/tags/xgboost/" style="font-size: 10px;">xgboost</a> <a href="/tags/会议笔记/" style="font-size: 10px;">会议笔记</a> <a href="/tags/论文笔记/" style="font-size: 13.33px;">论文笔记</a>
+    </p>
+  </div>
+
+
+  
+  <div class="sidebar-module">
+    <h4>Archives</h4>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/06/">June 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/05/">May 2017</a><span class="sidebar-module-list-count">4</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/04/">April 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/01/">January 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/11/">November 2016</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/05/">May 2016</a><span class="sidebar-module-list-count">1</span></li></ul>
+  </div>
+
+
+
+  
+  <div class="sidebar-module">
+    <h4>Recents</h4>
+    <ul class="sidebar-module-list">
+      
+        <li>
+          <a href="/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/">[SMP-SA2017] 终身机器学习LML</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/27/论文浅析-神经网络语言模型NNLM/">神经网络语言模型NNLM</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/21/卷积操作的简单理解/">卷积操作的简单理解</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/19/论文浅析-构建简单的神经网络对话生成模型/">构建简单的神经网络对话生成模型</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/01/Tensorflow之legacy-seq2seq模块初探-Tensorflow-r1-0-1/">Tensorflow之legacy_seq2seq模块初探(Tensorflow==r1.0.1)</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+
+        </div>
+    </div>
+  </div>
+  <footer class="blog-footer">
+  <div class="container">
+    <div id="footer-info" class="inner">
+      &copy; 2017 RuiZhang1993<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+  
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" integrity="sha384-8gBf6Y4YYq7Jx97PIqmTwLPin4hxIzQw5aDmUg/DDhul9fFpbbLcLh3nTIIDJKhx" crossorigin="anonymous"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+</body>
+</html>

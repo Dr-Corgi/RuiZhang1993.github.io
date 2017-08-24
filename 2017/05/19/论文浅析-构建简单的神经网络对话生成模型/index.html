@@ -3,19 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Python中文文本处理 | Rui Zhang</title>
+  <title>构建简单的神经网络对话生成模型 | Rui Zhang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近因为实验需要，我需要在非常大量的原始微博数据中提取相关数据用于模型训练。因此需要利用Python对中文文本进行处理。由于Python本身在处理中文文本上就有非常多的坑，并且由于原始微博数据中有非常多要处理的地方，需要大量使用正则表达式，分词工具等等。因此在进行数据提取程序的过程中我写了这篇博客来记录这一过程中遇到的问题和相应的解决方案。">
-<meta name="keywords" content="python,NLP">
+  <meta name="description" content="标题：A Neural Conversation Model作者：Oriol Vinyals, Quoc Le来源：ICML Deep Learning Workshop 2015论文地址：https://arxiv.org/abs/1506.05869 这篇文章是最早将神经机器翻译中的seq2seq生成技术应用到人机对话任务的工作之一。文章提出了一个端到端(end-to-end)的对话生成模型，">
+<meta name="keywords" content="NLP,deep learning,论文笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python中文文本处理">
-<meta property="og:url" content="http://ruizhang1993.github.io/2016/11/17/Python中文文本处理/index.html">
+<meta property="og:title" content="构建简单的神经网络对话生成模型">
+<meta property="og:url" content="http://ruizhang1993.github.io/2017/05/19/论文浅析-构建简单的神经网络对话生成模型/index.html">
 <meta property="og:site_name" content="Rui Zhang">
-<meta property="og:description" content="最近因为实验需要，我需要在非常大量的原始微博数据中提取相关数据用于模型训练。因此需要利用Python对中文文本进行处理。由于Python本身在处理中文文本上就有非常多的坑，并且由于原始微博数据中有非常多要处理的地方，需要大量使用正则表达式，分词工具等等。因此在进行数据提取程序的过程中我写了这篇博客来记录这一过程中遇到的问题和相应的解决方案。">
-<meta property="og:updated_time" content="2017-08-24T03:21:06.000Z">
+<meta property="og:description" content="标题：A Neural Conversation Model作者：Oriol Vinyals, Quoc Le来源：ICML Deep Learning Workshop 2015论文地址：https://arxiv.org/abs/1506.05869 这篇文章是最早将神经机器翻译中的seq2seq生成技术应用到人机对话任务的工作之一。文章提出了一个端到端(end-to-end)的对话生成模型，">
+<meta property="og:image" content="http://i4.buimg.com/587765/43d28cf9bc85a222.png">
+<meta property="og:updated_time" content="2017-08-24T03:39:20.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python中文文本处理">
-<meta name="twitter:description" content="最近因为实验需要，我需要在非常大量的原始微博数据中提取相关数据用于模型训练。因此需要利用Python对中文文本进行处理。由于Python本身在处理中文文本上就有非常多的坑，并且由于原始微博数据中有非常多要处理的地方，需要大量使用正则表达式，分词工具等等。因此在进行数据提取程序的过程中我写了这篇博客来记录这一过程中遇到的问题和相应的解决方案。">
+<meta name="twitter:title" content="构建简单的神经网络对话生成模型">
+<meta name="twitter:description" content="标题：A Neural Conversation Model作者：Oriol Vinyals, Quoc Le来源：ICML Deep Learning Workshop 2015论文地址：https://arxiv.org/abs/1506.05869 这篇文章是最早将神经机器翻译中的seq2seq生成技术应用到人机对话任务的工作之一。文章提出了一个端到端(end-to-end)的对话生成模型，">
+<meta name="twitter:image" content="http://i4.buimg.com/587765/43d28cf9bc85a222.png">
   
     <link rel="alternate" href="/atom.xml" title="Rui Zhang" type="application/atom+xml">
   
@@ -78,13 +80,13 @@
 
     <div class="row">
         <div class="col-sm-8 blog-main">
-          <article id="post-Python中文文本处理" class="article article-type-post" itemscope itemprop="blogPost">
+          <article id="post-论文浅析-构建简单的神经网络对话生成模型" class="article article-type-post" itemscope itemprop="blogPost">
 
   <header class="article-header">
     
   
     <h1 class="article-title" itemprop="name">
-      Python中文文本处理
+      构建简单的神经网络对话生成模型
     </h1>
   
 
@@ -93,7 +95,7 @@
 
   <div class="article-meta">
     <div class="article-datetime">
-  <a href="/2016/11/17/Python中文文本处理/" class="article-date"><time datetime="2016-11-17T10:41:19.000Z" itemprop="datePublished">2016-11-17</time></a>
+  <a href="/2017/05/19/论文浅析-构建简单的神经网络对话生成模型/" class="article-date"><time datetime="2017-05-19T13:22:51.000Z" itemprop="datePublished">2017-05-19</time></a>
 </div>
 
     
@@ -104,27 +106,21 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>最近因为实验需要，我需要在非常大量的原始微博数据中提取相关数据用于模型训练。因此需要利用Python对中文文本进行处理。<br>由于Python本身在处理中文文本上就有非常多的坑，并且由于原始微博数据中有非常多要处理的地方，需要大量使用正则表达式，分词工具等等。<br>因此在进行数据提取程序的过程中我写了这篇博客来记录这一过程中遇到的问题和相应的解决方案。</p>
-</blockquote>
+        <p>标题：A Neural Conversation Model<br>作者：Oriol Vinyals, Quoc Le<br>来源：ICML Deep Learning Workshop 2015<br>论文地址：<a href="https://arxiv.org/abs/1506.05869" target="_blank" rel="external">https://arxiv.org/abs/1506.05869</a></p>
+<p>这篇文章是最早将神经机器翻译中的seq2seq生成技术应用到人机对话任务的工作之一。文章提出了一个端到端(end-to-end)的对话生成模型，这里的端到端可以理解为：模型的输入是一个问答对中的问句，而输出则是问答对中相应的回答。模型摒弃了对答句的复杂组织过程，而是利用语言模型不断预测下一个输出词语，直到输出句子终止符的方式来生成回答。  </p>
 <a id="more"></a>
-<h4 id="任务描述"><a href="#任务描述" class="headerlink" title="任务描述"></a>任务描述</h4><p>这次的数据提取主要包含以下几个任务：</p>
-<ol>
-<li>先对单个文件进行处理，从文件中提取出微博表情。已知这些文件都是csv格式，且为utf8编码</li>
-<li>将针对单个文件下微博表情提取的实现扩展到针对某个文件夹路径下所有文件的处理</li>
-<li>统计所有文件中出现的表情符号次数，过滤掉低频表情</li>
-<li>人工对表情的褒贬义进行标注</li>
-<li>对所有文件再进行一遍处理，过滤掉所有的表情符号和网址，记录文本的褒贬义倾向（利用表情符号褒贬义作为半监督依据），尽可能过滤垃圾文本，并对文本进行分词</li>
-</ol>
-<p>这篇博客主要涉及前3个任务的内容。</p>
-<h4 id="利用正则表达式找出微博中的表情"><a href="#利用正则表达式找出微博中的表情" class="headerlink" title="利用正则表达式找出微博中的表情"></a>利用正则表达式找出微博中的表情</h4><p>由于需要处理的文件是utf8编码的，所以采用codecs包来读取文件。codecs的使用方法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import codecs</div><div class="line">file = codecs.open(filename, mode, encode, ...)</div></pre></td></tr></table></figure></p>
-<p>利用这个方法就可以很好的读取utf8编码的文件并且避免很多麻烦。在使用完文件后应该及时调用close()方法关闭文件。</p>
-<p>在成功读取到文件之后，我需要使用正则表达式来从文本中提取微博表情。目前微博中的表情都是用中括号“[]”标识的，因此可以利用这一特点来从文本中提取。当然，有些用户也会在微博中使用中括号来将某些文本括起，但这些文本并不属于微博表情。针对这一问题我会对提取到的表情进行计数、排序。这一部分会在后面进行处理。<br>由于需要找到句子中所有的微博表情，因此需要使用findall()函数，该函数会返回一个数组，如果找不到相应匹配则返回一个空数组。具体的使用方法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import re</div><div class="line">match = re.findall(r&apos;\[.*?\]&apos;, text)</div></pre></td></tr></table></figure></p>
-<p>在这里，我使用了一个短匹配，否则很大可能会提取到一段包含了多个表情，并且可能包含其他用户文本的文段。</p>
-<h4 id="将上述方法扩展到多个文件处理"><a href="#将上述方法扩展到多个文件处理" class="headerlink" title="将上述方法扩展到多个文件处理"></a>将上述方法扩展到多个文件处理</h4><p>刚才为了便于开发，我只针对一个文件进行处理。然而我的数据文件分布在同一目录下很多个不同的文件中，因此我需要对原先的代码进行修改来让程序从同一路径下的很多个文件中读取文本信息。<br>一个很简单的思路就是给定一个路径，然后遍历该路径下的所有文件获得其文件名，然后用上一节中的方法打开文件并进行处理。在这里需要引入os包来进行这个操作，具体的使用方法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">import os</div><div class="line">for file in os.listdir(dir):</div><div class="line">    files.append(file)</div></pre></td></tr></table></figure></p>
-<p>然后就可以遍历目录下的所有文件了。</p>
-<h4 id="对表情根据频数进行排序"><a href="#对表情根据频数进行排序" class="headerlink" title="对表情根据频数进行排序"></a>对表情根据频数进行排序</h4><p>如上文所说，在表情提取的过程中由于用户输入文本的内容可能会使我们提取到错误的表情，并且在表情提取操作后我们需要通过人工方法对这些表情进行标注，所以必须对这些提取到的内容根据频数由高到低进行排序，以便后面的工作。<br>在这里我们将借助sorted()函数和lambda表达式来对字典进行排序，注意sorted函数将会返回一个数组。具体的使用方法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sorted_dict = sorted(emotionDict.items(), lambda x,y: cmp(x[1], y[1]), reverse=True)</div></pre></td></tr></table></figure></p>
-<p>在这里，emotionDict是一个统计了每个表情被提取到了多少次的字典，比如{u”[心]”: 89866, u”[哈哈]”:70798,…}等等。lambda表达式说明我们是根据字典的value来进行排序。sorted()方法默认由小到大排序，因此在这里需要将reverse设置为True。</p>
+<p>这一模型的优势是可以极大地减少对手工规则的需求。然而同时要注意的是，该模型的目标函数是一个“错误的”，或者说不完全正确的。现实是，在对话任务，特别是开放领域问答任务中，问答对往往不是唯一的，一个问题可以对应多个不同的答案。然而使用简单的Encoder-Decoder框架训练对话模型，几乎很难避免答案单一的缺陷。  </p>
+<p>此外，该模型不能够很好地解决一致性问题。</p>
+<h4 id="Encoder、Decoder和对话生成"><a href="#Encoder、Decoder和对话生成" class="headerlink" title="Encoder、Decoder和对话生成"></a>Encoder、Decoder和对话生成</h4><p>基于Seq2seq的对话系统一般使用RNN来对问答对进行编码和解码。由于基本的RNN网络不能够很好地建模远距离文本，在实践中通常会使用LSTM或者GRU等RNN变种网络来对文本进行建模。  </p>
+<p>Seq2seq可以用下图简单的描述：<br><img src="http://i4.buimg.com/587765/43d28cf9bc85a222.png" alt="seq2seq模型"></p>
+<p>假设存在一个问答对：｛问句：’A，B，C’；答句：’W，X，Y，Z’｝。图片中的矩形表示RNN网络（或者LSTM/GRU网络），图中模型包括Encoder和Decoder两个部分：RNN网络首先作为Encoder在每个时间步一次读取问句中的一个单词，直到接收到一个终止标志<eos>；在接收到终止标志之后，该RNN开始作为Decoder预测答句中的第一个单词，在下一个时间步中预测第二个单词，以此类推。  </eos></p>
+<p>在实践中，Encoder和Decoder可以是同一个RNN网络，也可以是两个分开的RNN网络。如果使用第二种方案，则需要在Decoder预测之前将Encoder的内部状态复制给Decoder。</p>
+<h4 id="损失函数与模型缺陷"><a href="#损失函数与模型缺陷" class="headerlink" title="损失函数与模型缺陷"></a>损失函数与模型缺陷</h4><p>由于在seq2seq中我们将对话生成转化成了单词预测的问题，因此我们通常采用交叉熵来计算模型损失。模型的预测结果是RNN输出经过softmax之后概率最高的词语，模型的目标则是答句中对应位置的实际词语。  </p>
+<p>值得注意的是，这种训练方法不能够很好的满足开放领域对话的需求，因为开放对话中合理答案并不是唯一的。使用seq2seq训练对话模型就会受到这样的限制。此外，由于我们是通过预测词语出现的概率来生成答句，最后我们往往会得到一些通用的回答，比如“我不知道。”“哈哈！”，不管你输入什么内容给Encoder，最后经常蹦出来这两个句子。当然我只是举个例子，实际上会出现的通用句取决于具体训练的语料。出现这一问题的原因跟我们的训练目标有关，语料的实际情况造成这些词语的对应概率高，而这些词语的概率又直接影响了文本生成的结果。</p>
+<h4 id="答案一致性问题"><a href="#答案一致性问题" class="headerlink" title="答案一致性问题"></a>答案一致性问题</h4><p>一致性问题也是对话系统中的常见问题，通常需要引入额外的知识库来解决。最简单的一致性问题如：  </p>
+<p>问：你今年几岁了？<br>答：我30岁了。<br>问：你是哪一年出生的？<br>答：2009年。  </p>
+<p>由于模型学习的是词语出现的概率，应付这类问答时就很容易出现一致性问题。因为seq2seq模型是某种程度上通过学习语言模型来生成答案，但对答案的一致性不能够形成约束，因此会出现上述的一致性问题。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>利用seq2seq模型训练机器对话生成，其模型非常简单，通过一定轮数的迭代之后可以看到效果，得到的文本相对比较流畅。但受到训练目标的约束，模型结果的多样性非常局限，问答对的主题往往很不相关，答案也不具备一致性。在利用seq2seq训练（开放领域）对话生成还有很长的路要走。</p>
 
       
     </div>
@@ -135,12 +131,12 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2016/11/17/Python中文文本处理/" data-id="cj6pwki2c00041xupt27sr0ci" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2017/05/19/论文浅析-构建简单的神经网络对话生成模型/" data-id="cj6pwki3l000s1xupwoqnxqt1" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NLP/">NLP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NLP/">NLP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/deep-learning/">deep learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/论文笔记/">论文笔记</a></li></ul>
 
 
     </footer>
@@ -150,16 +146,16 @@
 <ul id="article-nav" class="nav nav-pills nav-justified">
   
   <li role="presentation">
-    <a href="/2016/05/29/xgboost-Windows7-32bit-xgboost环境搭建/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/05/01/Tensorflow之legacy-seq2seq模块初探-Tensorflow-r1-0-1/" id="article-nav-older" class="article-nav-link-wrap">
       <i class="fa fa-chevron-left pull-left"></i>
-      <span class="article-nav-link-title">Windows7-32bit xgboost环境搭建</span>
+      <span class="article-nav-link-title">Tensorflow之legacy_seq2seq模块初探(Tensorflow==r1.0.1)</span>
     </a>
   </li>
   
   
   <li role="presentation">
-    <a href="/2017/01/19/Mac下卸载-更新numpy/" id="article-nav-newer" class="article-nav-link-wrap">
-      <span class="article-nav-link-title">Mac下卸载/更新numpy</span>
+    <a href="/2017/05/21/卷积操作的简单理解/" id="article-nav-newer" class="article-nav-link-wrap">
+      <span class="article-nav-link-title">卷积操作的简单理解</span>
       <i class="fa fa-chevron-right pull-right"></i>
     </a>
   </li>

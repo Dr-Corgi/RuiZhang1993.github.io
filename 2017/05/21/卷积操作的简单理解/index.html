@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>卷积操作的简单理解 | Rui Zhang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="什么是卷积神经网络简单来说，卷积神经网络是指那些至少在网络的一层中使用卷积运算来替代一般的矩阵乘法运算的神经网络。常用的卷积网络通常由很多层的卷积运算和池化运算堆叠起来组成。这篇文章就简单来讲讲什么是卷积运算、池化运算，以及为什么要使用卷积运算。">
+<meta name="keywords" content="deep learning,CNN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="卷积操作的简单理解">
+<meta property="og:url" content="http://ruizhang1993.github.io/2017/05/21/卷积操作的简单理解/index.html">
+<meta property="og:site_name" content="Rui Zhang">
+<meta property="og:description" content="什么是卷积神经网络简单来说，卷积神经网络是指那些至少在网络的一层中使用卷积运算来替代一般的矩阵乘法运算的神经网络。常用的卷积网络通常由很多层的卷积运算和池化运算堆叠起来组成。这篇文章就简单来讲讲什么是卷积运算、池化运算，以及为什么要使用卷积运算。">
+<meta property="og:image" content="http://i4.buimg.com/587765/2b822f6db03e5bbf.png">
+<meta property="og:image" content="http://i4.buimg.com/587765/f6e87267c7781cea.png">
+<meta property="og:image" content="http://i1.piimg.com/587765/11577f2b0c1e3c24.png">
+<meta property="og:image" content="http://i4.buimg.com/587765/3af6ad77e8d3200a.png">
+<meta property="og:image" content="http://i4.buimg.com/587765/080d0b01c8abda26.png">
+<meta property="og:image" content="http://i4.buimg.com/587765/5a09c3ffc11a2d38.png">
+<meta property="og:updated_time" content="2017-08-24T03:32:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="卷积操作的简单理解">
+<meta name="twitter:description" content="什么是卷积神经网络简单来说，卷积神经网络是指那些至少在网络的一层中使用卷积运算来替代一般的矩阵乘法运算的神经网络。常用的卷积网络通常由很多层的卷积运算和池化运算堆叠起来组成。这篇文章就简单来讲讲什么是卷积运算、池化运算，以及为什么要使用卷积运算。">
+<meta name="twitter:image" content="http://i4.buimg.com/587765/2b822f6db03e5bbf.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Rui Zhang" type="application/atom+xml">
+  
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/styles.css">
+  
+
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="main-menu-navbar">
+      <ul class="nav navbar-nav">
+        
+          <li><a class=""
+                 href="/index.html">Home</a></li>
+        
+          <li><a class=""
+                 href="/archives/">Archives</a></li>
+        
+      </ul>
+
+      <!--
+      <ul class="nav navbar-nav navbar-right">
+        
+          <li><a href="/atom.xml" title="RSS Feed"><i class="fa fa-rss"></i></a></li>
+        
+      </ul>
+      -->
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+  <div class="container">
+    <div class="blog-header">
+  <h1 class="blog-title">Rui Zhang</h1>
+  
+</div>
+
+    <div class="row">
+        <div class="col-sm-8 blog-main">
+          <article id="post-卷积操作的简单理解" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 class="article-title" itemprop="name">
+      卷积操作的简单理解
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/2017/05/21/卷积操作的简单理解/" class="article-date"><time datetime="2017-05-21T14:20:52.000Z" itemprop="datePublished">2017-05-21</time></a>
+</div>
+
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="什么是卷积神经网络"><a href="#什么是卷积神经网络" class="headerlink" title="什么是卷积神经网络"></a>什么是卷积神经网络</h4><p>简单来说，卷积神经网络是指那些至少在网络的一层中使用卷积运算来替代一般的矩阵乘法运算的神经网络。<br>常用的卷积网络通常由很多层的卷积运算和池化运算堆叠起来组成。这篇文章就简单来讲讲什么是卷积运算、池化运算，以及为什么要使用卷积运算。</p>
+<a id="more"></a>
+<h4 id="卷积核与简单的卷积操作"><a href="#卷积核与简单的卷积操作" class="headerlink" title="卷积核与简单的卷积操作"></a>卷积核与简单的卷积操作</h4><p>假设我们用下面一条公式表示卷积运算：<br>y = w * x<br>其中，x是我们的输入，y是我们的输出（或者称为特征映射），w是卷积的核函数。卷积核的作用就相当于w在这条式子上的作用。  </p>
+<p>上面的公式看起来跟我们小学或者初中学习过的一元一次函数非常相似，只不过这里的x和y不再是一个简单的实数，而是一个网格状的数据（例如，矩阵）。</p>
+<p>让我们举一个彩色图像二维卷积的例子（例子和图片来自于台湾大学李宏毅老师2016年《深度学习》课程的课件）。我们知道计算机中的彩色图像是由红、绿、蓝三组颜色通道构成的，如果你熟悉Photoshop或者前端技术的话你会知道通常这三组颜色可以分别取值0~255。为了方便起见，假设对于每种颜色通道我们只有两种取值方案：0和1。那么一张彩色图像就可以被当作由3张颜色通道图像构成，每张图像的每个像素点取值为0或者1。<br><img src="http://i4.buimg.com/587765/2b822f6db03e5bbf.png" alt="图1"><br>现在我们定义两个不同的卷积核，这里我们称之为filter。卷积核同样是一个m行n列的二维结构，假定我们取m=n=3。那么我们将得到：<br><img src="http://i4.buimg.com/587765/f6e87267c7781cea.png" alt="图2"><br>这时你可能会问，卷积核上的这些数字是怎么确定的？实际上，在模型初始化的过程中，这些数字通常是一些比较小的随机数，为了方便演示这里我们将它随机为1或者-1两个值。  </p>
+<p>这时你可能又会问，那么这些随机值有什么用呢？实际上，卷积核上每一个位置的具体数值就是我们在训练卷积网络的过程中需要去学习的参数，filter上的数值会随着我们一次次迭代而改变，最终收敛到合适的数值。（如果不能很好的理解上面这段话，重新回顾下前文y=w * x的说法。考虑真正的一元一次函数的情况，假设我们要拟合一条y=0.5x的函数，w=0.5是我们的最终目标，但在模型开始阶段我们会随机给w赋值，比如说w=3.14或者w=-2333，但是经过一定轮数的迭代之后，我们会将w收敛到0.5这个值的附近。）  </p>
+<p>那么这个w是怎么使用的呢？类似于一元一次函数那种情况，w其实是一个权值函数，只不过在网格状态下计算方式会有所不同：<br><img src="http://i1.piimg.com/587765/11577f2b0c1e3c24.png" alt="图3"><br>假定我们使用右上角的3x3卷积核（filter）来对左下角的6x6图像进行卷积计算，设定步长stride=1。那么我们首先对图像中左上角3*3的方块（红色方框）按位置分别进行计算：  </p>
+<p>(1 <em> 1) + (-1 </em> 0) + (-1 <em> 0) + (-1 </em> 0) + (1 <em> 1) + (-1 </em> 0) + (-1 <em> 0) + (-1 </em> 0) + (1 * 1) = 3  </p>
+<p>然后，我们将红色方框向右平移一个单元格（因为步长=1），使用同样的计算方法我们可以得到当前位置的卷积结果为-1。  </p>
+<p>不断重复上一步骤，当我们的红色方框的右边框与6x6图像的右边重合时，我们将红色边框向下平移一个步长大小，再从左向右进行卷积。最终，我们将得到一个4x4的卷积结果。  </p>
+<p>在这里，我们的步长stride控制了下一次卷积的位置偏移情况，假设我们令步长＝2，则第二次卷积时我们应当向右平移两个方格：<br><img src="http://i4.buimg.com/587765/3af6ad77e8d3200a.png" alt="图4">  </p>
+<p>到此为止，我们的卷积操作就完成了。  </p>
+<p>值得注意的是，我们通常会对于每个通道使用数个卷积核，也就是定义多个filter来进行上述操作。在这个例子中，假设我们为每个通道定义了2个filter，那我们将有3x2=6个卷积核。注意卷积核在训练之前是随机初始化的，因此每个卷积核在通道间是不共享的，只在当前通道内去进行卷积操作。</p>
+<h4 id="池化操作"><a href="#池化操作" class="headerlink" title="池化操作"></a>池化操作</h4><p>池化操作是卷积网络中非常常见的一种降维操作。通过卷积得到的卷积结果可能会非常庞大（在上一节的例子中我们得到了一个4x4x6的结果{注：因为有6个卷积核}，但想象一下如果我们是对一张256x256的图片进行操作而不是6x6的图片，得到的卷积结果规模将非常庞大）。过于庞大的参数量将使得模型容易过拟合，同时在后面的全连接操作中网络权值的计算将变得困难。  </p>
+<p>为了进一步减少参数，我们通常采用池化方式来减少参数。常用的池化方法有最大池、最小池、平均池等等，这里以最大池为例。  </p>
+<p>在上一节的计算中我们对一个通道使用两个filter进行卷积操作，得到了如下两个4x4的卷积结果（读者可以自行计算验证）：<br><img src="http://i4.buimg.com/587765/080d0b01c8abda26.png" alt="图5"><br>我们使用一个2x2的最大池对卷积结果进行计算，计算的方式就是从每个2x2大小的方格的数值中选出一个最大的值来代表这个方格。（如果是最小池就选最小的那个值，如果是平均池就取均值咯）那么在红色区域里的就分别是：3、0、3、1；蓝色区域里的分别就是-1、1、0、3。这样，我们就将原本两个4x4的卷积结果变成了两个2x2的小的卷积结果。把卷积层和池化层连接起来就是：<br><img src="http://i4.buimg.com/587765/5a09c3ffc11a2d38.png" alt="图6"><br>原先的大图像现在被我们用比较小的特征图像所代替，这就是卷积操作进行特征提取的全部过程。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>卷积神经网络是深度学习技术中最常用的模型之一，虽然在实际应用中会面临三维甚至更高维的数据卷积操作，但其核心思想与二维空间上的卷积操作无异。希望这篇文章有助于读者更快的理解卷积网络。</p>
+
+      
+    </div>
+
+    
+      
+
+    
+
+    <footer class="article-footer">
+      <a data-url="http://ruizhang1993.github.io/2017/05/21/卷积操作的简单理解/" data-id="cj6pwki3p000v1xup1rv3elm2" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CNN/">CNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/deep-learning/">deep learning</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+    
+<ul id="article-nav" class="nav nav-pills nav-justified">
+  
+  <li role="presentation">
+    <a href="/2017/05/19/论文浅析-构建简单的神经网络对话生成模型/" id="article-nav-older" class="article-nav-link-wrap">
+      <i class="fa fa-chevron-left pull-left"></i>
+      <span class="article-nav-link-title">构建简单的神经网络对话生成模型</span>
+    </a>
+  </li>
+  
+  
+  <li role="presentation">
+    <a href="/2017/05/27/论文浅析-神经网络语言模型NNLM/" id="article-nav-newer" class="article-nav-link-wrap">
+      <span class="article-nav-link-title">神经网络语言模型NNLM</span>
+      <i class="fa fa-chevron-right pull-right"></i>
+    </a>
+  </li>
+  
+</ul>
+
+
+  
+</article>
+
+
+
+
+        </div>
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          
+  <div class="sidebar-module sidebar-module-inset">
+  <h4>About</h4>
+  - Ph.D student @ SCUT </br> - Research domains: </br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NLP, chatbot
+
+</div>
+
+
+  
+
+
+  
+  <div class="sidebar-module">
+    <h4>Tags</h4>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/CNN/">CNN</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Mac/">Mac</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/NLP/">NLP</a><span class="sidebar-module-list-count">3</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/SMPSA2017/">SMPSA2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/cuda/">cuda</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/deep-learning/">deep learning</a><span class="sidebar-module-list-count">4</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/numpy/">numpy</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/python/">python</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/tensorflow/">tensorflow</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/xgboost/">xgboost</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/会议笔记/">会议笔记</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/论文笔记/">论文笔记</a><span class="sidebar-module-list-count">2</span></li></ul>
+  </div>
+
+
+
+  
+  <div class="sidebar-module">
+    <h4>Tag Cloud</h4>
+    <p class="tagcloud">
+      <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/NLP/" style="font-size: 16.67px;">NLP</a> <a href="/tags/SMPSA2017/" style="font-size: 10px;">SMPSA2017</a> <a href="/tags/cuda/" style="font-size: 10px;">cuda</a> <a href="/tags/deep-learning/" style="font-size: 20px;">deep learning</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/tensorflow/" style="font-size: 13.33px;">tensorflow</a> <a href="/tags/xgboost/" style="font-size: 10px;">xgboost</a> <a href="/tags/会议笔记/" style="font-size: 10px;">会议笔记</a> <a href="/tags/论文笔记/" style="font-size: 13.33px;">论文笔记</a>
+    </p>
+  </div>
+
+
+  
+  <div class="sidebar-module">
+    <h4>Archives</h4>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/06/">June 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/05/">May 2017</a><span class="sidebar-module-list-count">4</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/04/">April 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/01/">January 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/11/">November 2016</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/05/">May 2016</a><span class="sidebar-module-list-count">1</span></li></ul>
+  </div>
+
+
+
+  
+  <div class="sidebar-module">
+    <h4>Recents</h4>
+    <ul class="sidebar-module-list">
+      
+        <li>
+          <a href="/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/">[SMP-SA2017] 终身机器学习LML</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/27/论文浅析-神经网络语言模型NNLM/">神经网络语言模型NNLM</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/21/卷积操作的简单理解/">卷积操作的简单理解</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/19/论文浅析-构建简单的神经网络对话生成模型/">构建简单的神经网络对话生成模型</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/01/Tensorflow之legacy-seq2seq模块初探-Tensorflow-r1-0-1/">Tensorflow之legacy_seq2seq模块初探(Tensorflow==r1.0.1)</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+
+        </div>
+    </div>
+  </div>
+  <footer class="blog-footer">
+  <div class="container">
+    <div id="footer-info" class="inner">
+      &copy; 2017 RuiZhang1993<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+  
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" integrity="sha384-8gBf6Y4YYq7Jx97PIqmTwLPin4hxIzQw5aDmUg/DDhul9fFpbbLcLh3nTIIDJKhx" crossorigin="anonymous"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+</body>
+</html>

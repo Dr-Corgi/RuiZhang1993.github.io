@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[SMP-SA2017] 终身机器学习LML | Rui Zhang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="什么是终身机器学习(LML)？传统的机器学习通常是孤立的单任务机器学习算法：针对某个特定任务，给定一份数据集，运行某些机器学习算法，训练得到一个模型。这种传统的机器学习方法通常不会考虑到过去的知识。也就是说，每次遇到新的问题，传统机器学习方法都是从零开始训练一个新模型。这种方式被称为“机器学习1.0”。“机器学习1.0”存在着一些明显的缺点，例如每次构建模型都是一次孤立学习过程，过往学习到的知识既">
+<meta name="keywords" content="会议笔记,SMPSA2017">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[SMP-SA2017] 终身机器学习LML">
+<meta property="og:url" content="http://ruizhang1993.github.io/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/index.html">
+<meta property="og:site_name" content="Rui Zhang">
+<meta property="og:description" content="什么是终身机器学习(LML)？传统的机器学习通常是孤立的单任务机器学习算法：针对某个特定任务，给定一份数据集，运行某些机器学习算法，训练得到一个模型。这种传统的机器学习方法通常不会考虑到过去的知识。也就是说，每次遇到新的问题，传统机器学习方法都是从零开始训练一个新模型。这种方式被称为“机器学习1.0”。“机器学习1.0”存在着一些明显的缺点，例如每次构建模型都是一次孤立学习过程，过往学习到的知识既">
+<meta property="og:updated_time" content="2017-08-24T03:40:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[SMP-SA2017] 终身机器学习LML">
+<meta name="twitter:description" content="什么是终身机器学习(LML)？传统的机器学习通常是孤立的单任务机器学习算法：针对某个特定任务，给定一份数据集，运行某些机器学习算法，训练得到一个模型。这种传统的机器学习方法通常不会考虑到过去的知识。也就是说，每次遇到新的问题，传统机器学习方法都是从零开始训练一个新模型。这种方式被称为“机器学习1.0”。“机器学习1.0”存在着一些明显的缺点，例如每次构建模型都是一次孤立学习过程，过往学习到的知识既">
+  
+    <link rel="alternate" href="/atom.xml" title="Rui Zhang" type="application/atom+xml">
+  
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/styles.css">
+  
+
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="main-menu-navbar">
+      <ul class="nav navbar-nav">
+        
+          <li><a class=""
+                 href="/index.html">Home</a></li>
+        
+          <li><a class=""
+                 href="/archives/">Archives</a></li>
+        
+      </ul>
+
+      <!--
+      <ul class="nav navbar-nav navbar-right">
+        
+          <li><a href="/atom.xml" title="RSS Feed"><i class="fa fa-rss"></i></a></li>
+        
+      </ul>
+      -->
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+  <div class="container">
+    <div class="blog-header">
+  <h1 class="blog-title">Rui Zhang</h1>
+  
+</div>
+
+    <div class="row">
+        <div class="col-sm-8 blog-main">
+          <article id="post-SMP-SA2017-终身机器学习-Lifelong-Machine-Learning" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 class="article-title" itemprop="name">
+      [SMP-SA2017] 终身机器学习LML
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/" class="article-date"><time datetime="2017-06-11T03:34:12.000Z" itemprop="datePublished">2017-06-11</time></a>
+</div>
+
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="什么是终身机器学习-LML-？"><a href="#什么是终身机器学习-LML-？" class="headerlink" title="什么是终身机器学习(LML)？"></a>什么是终身机器学习(LML)？</h3><p>传统的机器学习通常是孤立的单任务机器学习算法：针对某个特定任务，给定一份数据集，运行某些机器学习算法，训练得到一个模型。<br>这种传统的机器学习方法通常不会考虑到过去的知识。也就是说，每次遇到新的问题，传统机器学习方法都是从零开始训练一个新模型。这种方式被称为“机器学习1.0”。<br>“机器学习1.0”存在着一些明显的缺点，例如每次构建模型都是一次孤立学习过程，过往学习到的知识既没有被存储，也不能被重新获取。同时，也正因为知识不能够被存储，每次训练新模型时我们总是需要大量的新的训练数据。  </p>
+<a id="more"></a>
+<p>相比于机器，人类的学习方式就不是孤立的。人类能够获取过往学习到的知识，并使用这些知识来得到一些新的知识。受此启发，人们希望通过构建一些新的机器学习算法，使得过往的知识能够被“记忆”起来，使得模型在完成每个任务后都会变得更加智能，并且在新的领域任务中发挥出指导作用。于是便有了“机器学习2.0”——终身机器学习（Lifelong Machine Learning)。</p>
+<p>终身机器学习（LML)的定义如下：假定一个学习器(Learner)由1到N依次处理过了N个任务，当它面临第N+1个任务时，它会使用在过去N个任务中习得的知识背景(Knowledge Base, KB)来协助第N+1个任务；并且，在完成第N+1个任务后，其知识背景(KB)将会从该第N+1个任务中习得新知识。  </p>
+<p>如果觉得有点绕，想象一个商品评论的褒贬分类器。首先我们训练一个分类器用于分类家用电器的商品评论。此时学习器将习得有关家用电器的分类知识，我们将这些知识存储起来。接着我们基于这些已知的知识再训练一个用于分类手机商品评论的分类器，扩充分类知识并存储起来。以此类推，每一次学习之后我们都将得到一个更加强大的知识背景，因而学习器也将变得更加“智能”。</p>
+<h3 id="迁移学习、多任务学习与LML"><a href="#迁移学习、多任务学习与LML" class="headerlink" title="迁移学习、多任务学习与LML"></a>迁移学习、多任务学习与LML</h3><p>鉴于LML在不同领域任务上进行学习的特点，我们难免要将LML于迁移学习还有多任务学习进行比较。那么这三者之间有什么关系呢？  </p>
+<p>1）迁移学习与LML。首先，迁移学习是一个不连续的过程，他并不是一个Lifelong的模型，同时也没有对知识进行存储。迁移学习是单向的，它只期望在特定目标领域获得更好的结果。</p>
+<p>2）多任务学习与LML。多任务学习并不保存相应的知识，而且当任务的数量非常多时，要对各个任务重学习非常困难。可以这么理解：一个长期在线、永不停止的多任务学习，就是LML。</p>
+<h3 id="LML与自然语言处理"><a href="#LML与自然语言处理" class="headerlink" title="LML与自然语言处理"></a>LML与自然语言处理</h3><p>显然，终身机器学习的思想非常适用与自然语言处理领域，主要原因有二：  </p>
+<p>1）自然语言知识在不同领域中往往可以共享。由于单词和短语在绝大多数不同的领域或任务中，其含义是相同的；而句子在不同领域中都具有相似的语法规则。这就使得在语法层面的自然语言处理知识可以在不同领域或任务之间共享。  </p>
+<p>2）自然语言知识在不同类型任务中都是非常有用的。自然语言处理中的问题往往相互关联，例如词性标注（POS）、指代消解、命名实体识别等等。这些都是自然语言处理中的基本任务，做好了这些基础工作，就能够在很多不同的个任务上提高效果。</p>
+<h3 id="Lifelong-情感分类"><a href="#Lifelong-情感分类" class="headerlink" title="Lifelong: 情感分类"></a>Lifelong: 情感分类</h3><p>在报告中刘兵教授介绍了终身机器学习的一个应用场景：情感分类。情感分类是自然语言处理中一个非常常见的任务，在Lifelong学习过程中，我们期望的是，能不能构建一个Lifelong的模型，使得我们不再需要为每个新的领域/任务都标注大量的数据？  </p>
+<p>报告中介绍了一个简单的模型：假定我们已经在过去进行过很多个不同情感分类任务，将这些任务的数据记录为D。使用数据D训练一个新的分类器用于目标领域，并加入一些相应的惩罚项，在大多数情况下预测准确率都可以得到平均19%的提升。（具体方法可参见其论文或在文末获取完整报告ppt）</p>
+<h3 id="Lifelong：Aspect抽取"><a href="#Lifelong：Aspect抽取" class="headerlink" title="Lifelong：Aspect抽取"></a>Lifelong：Aspect抽取</h3><p>Aspect可以理解为“主题”，例如{price, cost,…}等词汇都属于同一个aspect。Aspect抽取通常包含两个任务：主题项抽取和主题项聚类。  </p>
+<p>由于在过往的经历中观察到很多aspect也是在不同领域共享的，例如很多电子产品都包含“battery”和“screen”，因此LML也适用于aspect抽取的任务。</p>
+<p>在Aspect抽取的过程中，知识被归结为Must-link和Cannot-link的形式。应当存在于同一个主题的aspect项将形成Must-link关系，例如“picture”和“photo”；而不应存在同一主题下的aspect项将形成Cannot-link关系，例如“battery”和“picture”。</p>
+<p>针对具有大量数据的Aspect抽取任务，刘兵教授的团队提出了Lifelong Topic Modeling(LTM)模型，而针对只有少量可用数据的抽取任务，则提出了AMC模型。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>刘兵教授的报告给出了终身机器学习在情感分析领域上的一些应用。当前的LML研究仍在初步阶段，人们对LML的理解还存在一定的局限性，且当前的研究通常只聚焦与某一类特定任务上（例如，都是分类或者都是主题抽取）。此外，LML需要非常大量的数据，小数据集不能够很好的满足任务要求。</p>
+
+      
+    </div>
+
+    
+      
+
+    
+
+    <footer class="article-footer">
+      <a data-url="http://ruizhang1993.github.io/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/" data-id="cj6pwki2800031xupbkc81zg4" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SMPSA2017/">SMPSA2017</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/会议笔记/">会议笔记</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+    
+<ul id="article-nav" class="nav nav-pills nav-justified">
+  
+  <li role="presentation">
+    <a href="/2017/05/27/论文浅析-神经网络语言模型NNLM/" id="article-nav-older" class="article-nav-link-wrap">
+      <i class="fa fa-chevron-left pull-left"></i>
+      <span class="article-nav-link-title">神经网络语言模型NNLM</span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+
+  
+</article>
+
+
+
+
+        </div>
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          
+  <div class="sidebar-module sidebar-module-inset">
+  <h4>About</h4>
+  - Ph.D student @ SCUT </br> - Research domains: </br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NLP, chatbot
+
+</div>
+
+
+  
+
+
+  
+  <div class="sidebar-module">
+    <h4>Tags</h4>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/CNN/">CNN</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Mac/">Mac</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/NLP/">NLP</a><span class="sidebar-module-list-count">3</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/SMPSA2017/">SMPSA2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/cuda/">cuda</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/deep-learning/">deep learning</a><span class="sidebar-module-list-count">4</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/numpy/">numpy</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/python/">python</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/tensorflow/">tensorflow</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/xgboost/">xgboost</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/会议笔记/">会议笔记</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/论文笔记/">论文笔记</a><span class="sidebar-module-list-count">2</span></li></ul>
+  </div>
+
+
+
+  
+  <div class="sidebar-module">
+    <h4>Tag Cloud</h4>
+    <p class="tagcloud">
+      <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/NLP/" style="font-size: 16.67px;">NLP</a> <a href="/tags/SMPSA2017/" style="font-size: 10px;">SMPSA2017</a> <a href="/tags/cuda/" style="font-size: 10px;">cuda</a> <a href="/tags/deep-learning/" style="font-size: 20px;">deep learning</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/tensorflow/" style="font-size: 13.33px;">tensorflow</a> <a href="/tags/xgboost/" style="font-size: 10px;">xgboost</a> <a href="/tags/会议笔记/" style="font-size: 10px;">会议笔记</a> <a href="/tags/论文笔记/" style="font-size: 13.33px;">论文笔记</a>
+    </p>
+  </div>
+
+
+  
+  <div class="sidebar-module">
+    <h4>Archives</h4>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/06/">June 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/05/">May 2017</a><span class="sidebar-module-list-count">4</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/04/">April 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/01/">January 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/11/">November 2016</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/05/">May 2016</a><span class="sidebar-module-list-count">1</span></li></ul>
+  </div>
+
+
+
+  
+  <div class="sidebar-module">
+    <h4>Recents</h4>
+    <ul class="sidebar-module-list">
+      
+        <li>
+          <a href="/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/">[SMP-SA2017] 终身机器学习LML</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/27/论文浅析-神经网络语言模型NNLM/">神经网络语言模型NNLM</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/21/卷积操作的简单理解/">卷积操作的简单理解</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/19/论文浅析-构建简单的神经网络对话生成模型/">构建简单的神经网络对话生成模型</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/01/Tensorflow之legacy-seq2seq模块初探-Tensorflow-r1-0-1/">Tensorflow之legacy_seq2seq模块初探(Tensorflow==r1.0.1)</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+
+        </div>
+    </div>
+  </div>
+  <footer class="blog-footer">
+  <div class="container">
+    <div id="footer-info" class="inner">
+      &copy; 2017 RuiZhang1993<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+  
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" integrity="sha384-8gBf6Y4YYq7Jx97PIqmTwLPin4hxIzQw5aDmUg/DDhul9fFpbbLcLh3nTIIDJKhx" crossorigin="anonymous"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+</body>
+</html>
