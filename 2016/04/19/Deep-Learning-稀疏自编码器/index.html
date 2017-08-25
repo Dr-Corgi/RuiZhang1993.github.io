@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>稀疏自编码器 | Rui Zhang&#39;s Blogs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="自编码器 Autoencoders自编码器网络是一个应用了BP的无监督学习算法，其目标输出之等同于其输入值。也就是说，该算法试图学习一个f(x)=x的函数。   下图是一个自编码器：自编码器试图学习一个恒等函数，但是由于我们通常会限制隐藏层神经元的个数，因此我们的自编码器所学习到的通常是输入数据的一个压缩表示。">
+<meta name="keywords" content="deep learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="稀疏自编码器">
+<meta property="og:url" content="http://ruizhang1993.github.io/2016/04/19/Deep-Learning-稀疏自编码器/index.html">
+<meta property="og:site_name" content="Rui Zhang&#39;s Blogs">
+<meta property="og:description" content="自编码器 Autoencoders自编码器网络是一个应用了BP的无监督学习算法，其目标输出之等同于其输入值。也就是说，该算法试图学习一个f(x)=x的函数。   下图是一个自编码器：自编码器试图学习一个恒等函数，但是由于我们通常会限制隐藏层神经元的个数，因此我们的自编码器所学习到的通常是输入数据的一个压缩表示。">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160419/img01.png">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? a_j^{(2)}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? a_j^{(2)}(x)">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160419/img02.png">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160419/img03.png">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160419/img12.png">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160419/img04.png">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? s_2">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160419/img05.png">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160419/img06.png">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160419/img12.png">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160419/img08.png">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160419/img07.png">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160419/img12.png">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160419/img09.png">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160419/img08.png">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160419/img12.png">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160419/img10.png">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160419/img11.png">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160419/img12.png">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160419/img13.png">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160419/img14.png">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160419/img12.png">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160419/img12.png">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160419/img12.png">
+<meta property="og:updated_time" content="2017-08-25T03:52:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="稀疏自编码器">
+<meta name="twitter:description" content="自编码器 Autoencoders自编码器网络是一个应用了BP的无监督学习算法，其目标输出之等同于其输入值。也就是说，该算法试图学习一个f(x)=x的函数。   下图是一个自编码器：自编码器试图学习一个恒等函数，但是由于我们通常会限制隐藏层神经元的个数，因此我们的自编码器所学习到的通常是输入数据的一个压缩表示。">
+<meta name="twitter:image" content="http://ruizhang1993.github.io/img/article_img/160419/img01.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Rui Zhang&#39;s Blogs" type="application/atom+xml">
+  
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/styles.css">
+  
+
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="main-menu-navbar">
+      <ul class="nav navbar-nav">
+        
+          <li><a class=""
+                 href="/index.html">Home</a></li>
+        
+          <li><a class=""
+                 href="/archives/">Archives</a></li>
+        
+          <li><a class=""
+                 href="/reading-list/">Reading List</a></li>
+        
+          <li><a class=""
+                 href="/about-me/">About Me</a></li>
+        
+      </ul>
+
+      <!--
+      <ul class="nav navbar-nav navbar-right">
+        
+          <li><a href="/atom.xml" title="RSS Feed"><i class="fa fa-rss"></i></a></li>
+        
+      </ul>
+      -->
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+  <div class="container">
+    <div class="blog-header">
+  <!--<h1 class="blog-title">Rui Zhang&#39;s Blogs</h1>-->
+  
+</div>
+
+    <div class="row">
+        <div class="col-sm-8 blog-main">
+          <article id="post-Deep-Learning-稀疏自编码器" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 class="article-title" itemprop="name">
+      稀疏自编码器
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/2016/04/19/Deep-Learning-稀疏自编码器/" class="article-date"><time datetime="2016-04-19T11:57:55.000Z" itemprop="datePublished">2016-04-19</time></a>
+</div>
+
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="自编码器-Autoencoders"><a href="#自编码器-Autoencoders" class="headerlink" title="自编码器 Autoencoders"></a>自编码器 Autoencoders</h2><p><strong>自编码器网络</strong>是一个应用了BP的无监督学习算法，其目标输出之等同于其输入值。也就是说，该算法试图学习一个f(x)=x的函数。  </p>
+<p>下图是一个自编码器：<br><img src="/img/article_img/160419/img01.png" alt="autoencoder"><br>自编码器试图学习一个恒等函数，但是由于我们通常会限制隐藏层神经元的个数，因此我们的自编码器所学习到的通常是输入数据的一个压缩表示。  </p>
+<a id="more"></a>
+<p>举个例子。例如我们准备学习一个自编码网络以表示10x10像素，即包含100个像素点的图片。我们的输入x的长度为100。我们的输出y的长度与x长度相同，也为100.而我们决定使用容量为50个神经元的隐藏层。那么，在我们的自编码网络中，我们实际上强迫它学习了长度为100的输入的压缩表示。  </p>
+<p>可以预见到，如果我们的输入是完全随机的，数据的内部不包含任何的结构，那么我们的学习过程将会变得非常困难。然而，如果输入数据本身包含了某种结构，例如，输入一些相关性的特征，那么自编码网络将很容易学习到这些相关性。事实上，这个简单自编码器的最终学习到的低维表示结果将会和PCA非常相似。</p>
+<h2 id="稀疏-Sparsity"><a href="#稀疏-Sparsity" class="headerlink" title="稀疏 Sparsity"></a>稀疏 Sparsity</h2><p>关于自编码网络能够学习到数据内部结构的讨论，仅仅局限于隐藏层的神经元数量较小的前提下。对于神经元数量较大的情况，我们需要添加其他约束来达到这样一个目的。在实践中，我们通常对隐藏单元引入稀疏约束，使得自编码网络在隐藏层非常大的情况下同样也能发现数据的内部结构特性。  </p>
+<p>非正式地，如果我们使用sigmoid作为激活函数，我们认为当一个神经元的输出接近于1时，该神经元处在“活跃态”；当其输出接近于0时，该神经元处在“非活跃态”。如果我们使用tanh作为激活函数，那么我们认为当神经元的输出接近于-1时处于“非活跃态”。  </p>
+<p>通常我们使用<img src="http://www.forkosh.com/mathtex.cgi? a_j^{(2)}">来表示自编码器的隐藏单元 j 的激活情况。但是这个记号并不能反映出是什么样的输入x引起了这个激活状态。因此，我们使用<img src="http://www.forkosh.com/mathtex.cgi? a_j^{(2)}(x)">来表示给定输入x时隐藏单元的激活状态。进而：<br><img src="/img/article_img/160419/img02.png" alt="formula_01"><br>表示隐藏层的平均激活度。我们近似的添加下面的约束：<br><img src="/img/article_img/160419/img03.png" alt="formula_02"><br>其中ρ称为<strong>稀疏参数(Sparcity parameter)</strong>，通常情况下是一个接近0的值（如ρ=0.05）。换句话说，我们希望隐藏层的平均激活度在0.05左右。如果满足上述约束，说明我们的隐藏层中绝大多数的神经元处在“非活跃态”。  </p>
+<p>为了达到稀疏的目的，我们在<img src="/img/article_img/160419/img12.png" alt="formula_11">远远偏离于ρ时设置了惩罚项。一个典型的惩罚项为：<br><img src="/img/article_img/160419/img04.png" alt="formula_03"><br>其中，<img src="http://www.forkosh.com/mathtex.cgi? s_2">代表隐藏层的神经元个数，因此这里的求和中j相当于遍历了隐藏层的所有神经元。上述的惩罚项基于KL散度，也可以写成：<br><img src="/img/article_img/160419/img05.png" alt="formula_04"><br>其中，<img src="/img/article_img/160419/img06.png" alt="formula_05">是目标稀疏参数ρ的伯努利随机变量和实际平均激活度<img src="/img/article_img/160419/img12.png" alt="formula_11">的伯努利随机变量的KL散度。KL散度是用来描述两个概率分布的差异的方法。当<img src="/img/article_img/160419/img08.png" alt="formula_07">时，<img src="/img/article_img/160419/img07.png" alt="formula_06">。反之，当两个值差异越大时，KL散度的值越大。  </p>
+<p>例如，假设我们的目标稀疏参数ρ=0.2，随着实际稀疏参数<img src="/img/article_img/160419/img12.png" alt="formula_11">在[0,1]区间上变化，KL散度值的变化情况为：<br><img src="/img/article_img/160419/img09.png" alt="formula_08"></p>
+<p>由此可见，当<img src="/img/article_img/160419/img08.png" alt="formula_07">时我们将得到KL散度的最小值。因此，最小化惩罚项相当于使实际稀疏参数<img src="/img/article_img/160419/img12.png" alt="formula_11">逼近目标稀疏参数ρ。  </p>
+<h2 id="成本函数-Cost-function"><a href="#成本函数-Cost-function" class="headerlink" title="成本函数 Cost function"></a>成本函数 Cost function</h2><p>对于自编码网络，他的全局成本函数为：<br><img src="/img/article_img/160419/img10.png" alt="formula_09"><br>其中<img src="/img/article_img/160419/img11.png" alt="formula_10">是传统的梯度下降的成本函数，β控制了惩罚项的权重。<img src="/img/article_img/160419/img12.png" alt="formula_11">的值实际上受到W和b取值的影响，而隐藏单元的激活状态同样取决于W和b。  </p>
+<p>在实际算法的实现中，我们可以利用一个易于实现的trick来简单修改我们的代码以达到新的成本函数。即：在原来的方法中，我们计算第二层(隐藏层)的BP时，计算方法为：<br><img src="/img/article_img/160419/img13.png" alt="formula_12"><br>现在，我们将其变为：<br><img src="/img/article_img/160419/img14.png" alt="formula_13"><br>即可。  </p>
+<p>一个需要注意的细节是，计算上述公式时我们需要知道<img src="/img/article_img/160419/img12.png" alt="formula_11">的值。因此，在计算任何训练样例的BP之前，需要对所有训练样例进行一次前向的操作以计算平均激活度。如果训练样例的数量足够小，可以在计算机内存中保留和计算所有的<img src="/img/article_img/160419/img12.png" alt="formula_11">。如果训练样例的数量过大，以至于不能在内存中直接保留和计算，则需要通过扫描加和的方式来计算得到<img src="/img/article_img/160419/img12.png" alt="formula_11">。对于大的输入样例来说，需要进行两次前向操作来计算，实际上是非常低效的。</p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ul>
+<li>Andrew NG et al., Autoencoders and Sparsity, UFLDL Tutorial, <a href="http://ufldl.stanford.edu/wiki/index.php/Autoencoders_and_Sparsity" target="_blank" rel="external">http://ufldl.stanford.edu/wiki/index.php/Autoencoders_and_Sparsity</a></li>
+<li>Goodfellow et al. Deep Learning, BookinpreparationforMITPress, 2015</li>
+</ul>
+
+      
+    </div>
+
+    
+      
+
+    
+
+    <footer class="article-footer">
+      <a data-url="http://ruizhang1993.github.io/2016/04/19/Deep-Learning-稀疏自编码器/" data-id="cj6rc9ao3000c0gupx8t16wra" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/deep-learning/">deep learning</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+    
+<ul id="article-nav" class="nav nav-pills nav-justified">
+  
+  
+  <li role="presentation">
+    <a href="/2016/04/24/Deep-Learning-RNN循环神经网络/" id="article-nav-newer" class="article-nav-link-wrap">
+      <span class="article-nav-link-title">RNN循环神经网络</span>
+      <i class="fa fa-chevron-right pull-right"></i>
+    </a>
+  </li>
+  
+</ul>
+
+
+  
+</article>
+
+
+
+
+        </div>
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          
+  <div class="sidebar-module sidebar-module-inset">
+  <h4>About</h4>
+  <font size="4"><b>张睿</b></font></br> - 华南理工大学 博士生 </br> - 研究方向： </br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自然语言处理、聊天机器人 </br> </br> <font size="4"><b>Rui Zhang</b></font></br> - Ph.D student @ SCUT </br> - Research domains: </br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NLP, chatbot
+
+</div>
+
+
+  
+
+
+  
+  <div class="sidebar-module">
+    <h4>Tags</h4>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/CNN/">CNN</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Lex/">Lex</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Mac/">Mac</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/NLP/">NLP</a><span class="sidebar-module-list-count">4</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/PLY/">PLY</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Python/">Python</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/SMPSA2017/">SMPSA2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Windows7/">Windows7</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Yacc/">Yacc</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/cuda/">cuda</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/deep-learning/">deep learning</a><span class="sidebar-module-list-count">6</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/numpy/">numpy</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/python/">python</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/tensorflow/">tensorflow</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/xgboost/">xgboost</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/会议笔记/">会议笔记</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/数据挖掘/">数据挖掘</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/编译原理/">编译原理</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/论文笔记/">论文笔记</a><span class="sidebar-module-list-count">2</span></li></ul>
+  </div>
+
+
+
+  
+  <div class="sidebar-module">
+    <h4>Tag Cloud</h4>
+    <p class="tagcloud">
+      <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/Lex/" style="font-size: 10px;">Lex</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/NLP/" style="font-size: 16.67px;">NLP</a> <a href="/tags/PLY/" style="font-size: 10px;">PLY</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SMPSA2017/" style="font-size: 10px;">SMPSA2017</a> <a href="/tags/Windows7/" style="font-size: 10px;">Windows7</a> <a href="/tags/Yacc/" style="font-size: 10px;">Yacc</a> <a href="/tags/cuda/" style="font-size: 10px;">cuda</a> <a href="/tags/deep-learning/" style="font-size: 20px;">deep learning</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/tensorflow/" style="font-size: 13.33px;">tensorflow</a> <a href="/tags/xgboost/" style="font-size: 10px;">xgboost</a> <a href="/tags/会议笔记/" style="font-size: 10px;">会议笔记</a> <a href="/tags/数据挖掘/" style="font-size: 10px;">数据挖掘</a> <a href="/tags/编译原理/" style="font-size: 10px;">编译原理</a> <a href="/tags/论文笔记/" style="font-size: 13.33px;">论文笔记</a>
+    </p>
+  </div>
+
+
+  
+  <div class="sidebar-module">
+    <h4>Archives</h4>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/06/">June 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/05/">May 2017</a><span class="sidebar-module-list-count">4</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/04/">April 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/01/">January 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/11/">November 2016</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/07/">July 2016</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/05/">May 2016</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/04/">April 2016</a><span class="sidebar-module-list-count">2</span></li></ul>
+  </div>
+
+
+
+  
+  <div class="sidebar-module">
+    <h4>Recents</h4>
+    <ul class="sidebar-module-list">
+      
+        <li>
+          <a href="/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/">[SMP-SA2017] 终身机器学习LML</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/27/论文浅析-神经网络语言模型NNLM/">神经网络语言模型NNLM</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/21/卷积操作的简单理解/">卷积操作的简单理解</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/19/论文浅析-构建简单的神经网络对话生成模型/">构建简单的神经网络对话生成模型</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/01/Tensorflow之legacy-seq2seq模块初探-Tensorflow-r1-0-1/">Tensorflow之legacy_seq2seq模块初探(Tensorflow==r1.0.1)</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+
+        </div>
+    </div>
+  </div>
+  <footer class="blog-footer">
+  <div class="container">
+    <div id="footer-info" class="inner">
+      &copy; 2017 RuiZhang1993<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+  
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" integrity="sha384-8gBf6Y4YYq7Jx97PIqmTwLPin4hxIzQw5aDmUg/DDhul9fFpbbLcLh3nTIIDJKhx" crossorigin="anonymous"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+</body>
+</html>

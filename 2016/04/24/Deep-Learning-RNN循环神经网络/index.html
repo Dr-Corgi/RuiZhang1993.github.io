@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>RNN循环神经网络 | Rui Zhang&#39;s Blogs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="概述循环神经网络(Recurrent neural networks, RNNs)是处理序列型数据的主要工具。特别是针对输入和输出长度不能确定的数据。在RNN中最基本的一个思想是共享参数(sharing parameters)。共享参数贯穿了RNN的整个流程。相比于传统的多层神经网络，RNN的网络参数在多个时间步上共享，以允许网络处理不同长度的输入数据。换句话说，如果RNN为每一个时间步都设置了一">
+<meta name="keywords" content="deep learning,NLP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RNN循环神经网络">
+<meta property="og:url" content="http://ruizhang1993.github.io/2016/04/24/Deep-Learning-RNN循环神经网络/index.html">
+<meta property="og:site_name" content="Rui Zhang&#39;s Blogs">
+<meta property="og:description" content="概述循环神经网络(Recurrent neural networks, RNNs)是处理序列型数据的主要工具。特别是针对输入和输出长度不能确定的数据。在RNN中最基本的一个思想是共享参数(sharing parameters)。共享参数贯穿了RNN的整个流程。相比于传统的多层神经网络，RNN的网络参数在多个时间步上共享，以允许网络处理不同长度的输入数据。换句话说，如果RNN为每一个时间步都设置了一">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160424/img02.png">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160424/img01.gif">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large s_t = f_\theta (s_{t-1}, x_t)">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large s_t = g_t (x_t, x_{t-1}, x_{t-2}, ..., x_2, x_1)">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160424/img03.png">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large \mathbf{\alpha_t} = \mathbf{b} + \mathbf{W}\mathbf{s_{t-1}} + \mathbf{U} \mathbf{x_t}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large \mathbf{s_t} = tanh(\mathbf{\alpha_t})">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large \mathbf{o_t} = \mathbf{c} + \mathbf{V} \mathbf{s_t}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large \mathbf{p_t} = softmax(\mathbf{o_t})">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large \mathbf{x_t}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large \mathbf{s_{t-1}}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large \mathbf{U}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large \mathbf{W}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large \mathbf{b}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large \mathbf{\alpha_t}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large \mathbf{s_t}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large \mathbf{s_t}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large \mathbf{o_t}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large \mathbf{V}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large \mathbf{c}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large \mathbf{o_t}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large L(\mathbf{x}, \mathbf{y}) = \sum_t \mathbf{L_t} = \sum_t - \log p_{t, y_t}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \mathbf{y_t}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \mathbf{p_{t, y_t}}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \mathbf{y_t}">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160424/img05.jpg">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \mathbf{y_t}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \mathbf{y_t}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? - \log p_{t, y_t}">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160424/img04.gif">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large \mathbf{\alpha_t} = \mathbf{b} + \mathbf{W}\mathbf{s_{t-1}} + \mathbf{U} \mathbf{x_t}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large \mathbf{s_t} = tanh(\mathbf{\alpha_t})">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large \mathbf{o_t} = \mathbf{c} + \mathbf{V} \mathbf{s_t}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large \mathbf{p_t} = softmax(\mathbf{o_t})">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large L(\mathbf{x}, \mathbf{y}) = \sum_t \mathbf{L_t} = \sum_t - \log p_{t, y_t}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \bigtriangledown_{\mathbf{\alpha}} \mathbf{L}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \frac{\partial L}{\partial L_t} = 1">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large \bigtriangledown_{o_t}L">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large (\bigtriangledown_{o_t}L)_i = \frac{\partial L}{\partial o_{t,i}} = \frac{\partial L}{\partial L_t}\frac{\partial L_t}{\partial o_{t,i}} = p_{t,i} - \mathbf{1}_{i, y_t}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large \bigtriangledown_{s_T}L = \bigtriangledown_{o_T}L\frac{\partial \mathbf{o_T}}{\partial \mathbf{s_T}} = \bigtriangledown{o_T}L\mathbf{V}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large \bigtriangledown_{s_t}L = \bigtriangledown_{s_{t+1}}L\frac{\partial \mathbf{s_{t+1}}}{\partial \mathbf{s_t}} + \bigtriangledown_{o_T}L\frac{\partial \mathbf{o_t}}{\partial \mathbf{s_t}} = \bigtriangledown{s_{t+1}}L diag(1 - s_{t+1}^2)\mathbf{W} + \bigtriangledown{o_t}L\mathbf{V}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large \bigtriangledown_c L = \sum_t \bigtriangledown_{o_t} L \frac{\partial \mathbf{o_t}}{\partial \mathbf{c}} = \sum_t \bigtriangledown_{o_t} L">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large \bigtriangledown_b L = \sum_t \bigtriangledown_{s_t} L \frac{\partial \mathbf{s_t}}{\partial \mathbf{b}} = \sum_t \bigtriangledown_{s_t} L diag(1 - s_{t}^2)">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large \bigtriangledown_{\mathbf{V}} L = \sum_t \bigtriangledown_{o_t} L \frac{\partial \mathbf{o_t}}{\partial \mathbf{V}} = \sum_t \bigtriangledown_{o_t} L s_t^{\top}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large \bigtriangledown_{\mathbf{W}} L = \sum_t \bigtriangledown_{s_t} L \frac{\partial \mathbf{s_t}}{\partial \mathbf{W}} = \sum_t \bigtriangledown_{s_t} L diag(1 - s_{t}^2) s_{t-1}^{\top}">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160424/img06.png">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160424/img07.png">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160424/img08.png">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? h_{t-1}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? x_{t}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? W_{f}">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160424/img09.png">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? W_{i}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? i_{t}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? i_{t}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \tilde{C_{t}}">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160424/img10.png">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160424/img11.png">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? o_{t}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? o_{t}">
+<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? h_{t}">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160424/img12.png">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160424/img13.png">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160424/img14.png">
+<meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160424/img15.png">
+<meta property="og:updated_time" content="2017-08-25T03:51:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RNN循环神经网络">
+<meta name="twitter:description" content="概述循环神经网络(Recurrent neural networks, RNNs)是处理序列型数据的主要工具。特别是针对输入和输出长度不能确定的数据。在RNN中最基本的一个思想是共享参数(sharing parameters)。共享参数贯穿了RNN的整个流程。相比于传统的多层神经网络，RNN的网络参数在多个时间步上共享，以允许网络处理不同长度的输入数据。换句话说，如果RNN为每一个时间步都设置了一">
+<meta name="twitter:image" content="http://ruizhang1993.github.io/img/article_img/160424/img02.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Rui Zhang&#39;s Blogs" type="application/atom+xml">
+  
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/styles.css">
+  
+
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="main-menu-navbar">
+      <ul class="nav navbar-nav">
+        
+          <li><a class=""
+                 href="/index.html">Home</a></li>
+        
+          <li><a class=""
+                 href="/archives/">Archives</a></li>
+        
+          <li><a class=""
+                 href="/reading-list/">Reading List</a></li>
+        
+          <li><a class=""
+                 href="/about-me/">About Me</a></li>
+        
+      </ul>
+
+      <!--
+      <ul class="nav navbar-nav navbar-right">
+        
+          <li><a href="/atom.xml" title="RSS Feed"><i class="fa fa-rss"></i></a></li>
+        
+      </ul>
+      -->
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+  <div class="container">
+    <div class="blog-header">
+  <!--<h1 class="blog-title">Rui Zhang&#39;s Blogs</h1>-->
+  
+</div>
+
+    <div class="row">
+        <div class="col-sm-8 blog-main">
+          <article id="post-Deep-Learning-RNN循环神经网络" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 class="article-title" itemprop="name">
+      RNN循环神经网络
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/2016/04/24/Deep-Learning-RNN循环神经网络/" class="article-date"><time datetime="2016-04-24T06:11:44.000Z" itemprop="datePublished">2016-04-24</time></a>
+</div>
+
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>循环神经网络(Recurrent neural networks, RNNs)是处理<strong>序列型数据</strong>的主要工具。特别是针对输入和输出长度不能确定的数据。在RNN中最基本的一个思想是<strong>共享参数(sharing parameters)</strong>。共享参数贯穿了RNN的整个流程。相比于传统的多层神经网络，RNN的网络参数在多个时间步上共享，以允许网络处理不同长度的输入数据。换句话说，如果RNN为每一个时间步都设置了一系列的参数，那么当RNN遇到一个输入样例，其长度在训练期间没有遇到过（即没有相同长度的训练样例）时，无法正确地处理。因此，循环神经网络共享参数的特性使得它能够处理不同长度的数据，特别是在语音识别的实际运用中。<br><a id="more"></a><br><img src="/img/article_img/160424/img02.png" alt="img02"></p>
+<h2 id="循环神经网络的展开"><a href="#循环神经网络的展开" class="headerlink" title="循环神经网络的展开"></a>循环神经网络的展开</h2><p>在对循环神经网络的细节进行介绍之前，不妨首先通过展开循环神经网络来对它有个清晰的认识。在讨论循环神经网络之前，我们先简单的了解一下循环神经网络的意义。  </p>
+<p>事实上，人类的语言和记忆，往往是和一个特定的序列相关的。我们对一个事件B的记忆，往往与这一个事件B之前的另一个事件A相关联。举个例子，我们唱歌的时候，对于那些自己熟悉的歌曲，只要给出一句歌词，我们就能很自然而然的接着唱出下一句。然而，当给出一句歌词，然后要我们迅速想起这句歌词的前一句是什么时，对大多数人来说恐怕都是相当困难的。甚至，有不少人需要从这首歌的第一句重新唱起，才能想起来某一句特定歌词的前面一句究竟是什么。  </p>
+<p>上述的事实从某个角度上说明人类在处理语言或者说文本的时候，确实存在着某种“时序上的依赖”，而循环神经网络正是利用了这样一种依赖。这也就说明了为什么RNN在语音识别的实际运用中有着不错的效果。同样的道理，RNN的特性在NLP中也能得到很好的发挥。  </p>
+<p>我们先从一张动图来了解RNN的内部结构。对于一个T=4的RNN来说，其内部结构（隐藏层）总是会记录之前时间长度T内的信息：<br><img src="/img/article_img/160424/img01.gif" alt="img01"></p>
+<p>由于在每个时间步我们只接收一个输入，因此在当前时间t之前的输入(如t-1时的输入)必定储存在RNN的内部结构之中。从这个角度讲，我们可以认为这个RNN的隐藏层的状态是一个由先前状态和当前输入所驱动的函数：<br><img src="http://www.forkosh.com/mathtex.cgi? \large s_t = f_\theta (s_{t-1}, x_t)"><br>同样的，我们也可以用下面的函数来表达上面的等式：<br><img src="http://www.forkosh.com/mathtex.cgi? \large s_t = g_t (x_t, x_{t-1}, x_{t-2}, ..., x_2, x_1)">  </p>
+<p>对于上面的两个式子，我们可以这样理解：当我们将RNN运用到自然语言处理中时，假定我们要使用这个RNN去预测当前文本的下一个词语，那么我们使用当前时间步t的输入词，以及t之前的词语作为输入，得到预测结果o。再具体一点，我们在时间步t时接收到了一个输入词｛朵朵｝，而在时间步(1,2,…,t-1)时我们分别接收到了输入词{蓝蓝的}、{天}、{上}、{飘着}，那么对于一个已经训练过的RNN，我们可能得到这样一个输出词{白云}。这样，就构成了一个完整的句子｛蓝蓝的天上飘着朵朵白云｝。  </p>
+<p>在上面的例子中，我们的输出实际上依赖于当前时间步t的输入，和当前时间步t之前的输入。而后者实际上存储在RNN的隐含的内部结构当中。如果我们将RNN进行展开，将得到下面的一个图形：<br><img src="/img/article_img/160424/img03.png" alt="img03">  </p>
+<p>从这张图我们可以清晰地看到，我们在RNN中提到的所谓的“内部结构”，实际上对应的就是展开后的<strong>W</strong>。而这里的<strong>W</strong>则存储了先前输入的某些信息。  </p>
+<p>在这里，我们使用下面一组公式来描述上面的展开图：<br><img src="http://www.forkosh.com/mathtex.cgi? \large \mathbf{\alpha_t} = \mathbf{b} + \mathbf{W}\mathbf{s_{t-1}} + \mathbf{U} \mathbf{x_t}"><br><img src="http://www.forkosh.com/mathtex.cgi? \large \mathbf{s_t} = tanh(\mathbf{\alpha_t})"><br><img src="http://www.forkosh.com/mathtex.cgi? \large \mathbf{o_t} = \mathbf{c} + \mathbf{V} \mathbf{s_t}"><br><img src="http://www.forkosh.com/mathtex.cgi? \large \mathbf{p_t} = softmax(\mathbf{o_t})">   </p>
+<p>其中，<img src="http://www.forkosh.com/mathtex.cgi? \large \mathbf{x_t}">为当前时间步t时的输入。<img src="http://www.forkosh.com/mathtex.cgi? \large \mathbf{s_{t-1}}">为在当前时间步t之间，在t-1时间步下的网络中存储的内部状态。<img src="http://www.forkosh.com/mathtex.cgi? \large \mathbf{U}">表示的是从输入x到内部状态s神经元连接的权重关系。<img src="http://www.forkosh.com/mathtex.cgi? \large \mathbf{W}">表示的是从上一个时间步t-1到当前时间步t，上一个内部状态到当前内部状态之间的连接的权重关系。<img src="http://www.forkosh.com/mathtex.cgi? \large \mathbf{b}">是偏置值bias。我们使用一个tanh函数来从<img src="http://www.forkosh.com/mathtex.cgi? \large \mathbf{\alpha_t}">得到当前时间步的内部状态<img src="http://www.forkosh.com/mathtex.cgi? \large \mathbf{s_t}">。在得到了当前内部状态<img src="http://www.forkosh.com/mathtex.cgi? \large \mathbf{s_t}">之后，我们可以通过第三条等式得到网络的输出<img src="http://www.forkosh.com/mathtex.cgi? \large \mathbf{o_t}">。其中，<img src="http://www.forkosh.com/mathtex.cgi? \large \mathbf{V}">为隐藏层到输出层连接的权重关系，而<img src="http://www.forkosh.com/mathtex.cgi? \large \mathbf{c}">同样为偏置值。  </p>
+<p>假设我们使用“One-Hot”词向量表示方法，我们所得到的<img src="http://www.forkosh.com/mathtex.cgi? \large \mathbf{o_t}">应该是一个向量，分别对应了词典中各个单词出现的概率。因此我们在预测的时候使用一个softmax函数来得到概率最高的那个预测词（也就是上述的第四个等式）。</p>
+<h2 id="Teacher-Forcing与损失函数"><a href="#Teacher-Forcing与损失函数" class="headerlink" title="Teacher Forcing与损失函数"></a>Teacher Forcing与损失函数</h2><p>在讨论RNN的训练之前，我们首先要定义损失函数。对于预测文本的RNN的训练过程，实际上等同于训练RNN将一个给定长度的输入字符串映射为一个等同长度的输出字符串。因此对于整个过程的损失计算，相当于对所有时间步的损失进行累加，即：<br><img src="http://www.forkosh.com/mathtex.cgi? \large L(\mathbf{x}, \mathbf{y}) = \sum_t \mathbf{L_t} = \sum_t - \log p_{t, y_t}"><br>注意到在上面的式子中，我们使用了<img src="http://www.forkosh.com/mathtex.cgi? \mathbf{y_t}">的预测概率<img src="http://www.forkosh.com/mathtex.cgi? \mathbf{p_{t, y_t}}">计算损失。这里的<img src="http://www.forkosh.com/mathtex.cgi? \mathbf{y_t}">是在时间t时刻的目标输出。对于这个式子我们应该这样理解：<br>首先我们看一下log函数的图像：<br><img src="/img/article_img/160424/img05.jpg" alt="img05"><br>我们只考虑a&gt;1的情况。在我们的预测中，如果我们预测最终得到正确<img src="http://www.forkosh.com/mathtex.cgi? \mathbf{y_t}">的概率越大，说明我们的模型能够准确预测，相应的预测概率就越接近1。如果我们预测最终得到正确正确<img src="http://www.forkosh.com/mathtex.cgi? \mathbf{y_t}">的概率越小，说明我们的模型还不能准确预测到正确的结果，相应的预测概率就越接近0。那么对于上述的损失函数，显然，当我们的预测结果越偏离目标结果时，<img src="http://www.forkosh.com/mathtex.cgi? - \log p_{t, y_t}">越大，相应的，损失越大。  </p>
+<p>在机器学习中，我们将这种训练称为Teacher Forcing。简单来讲，在普通的机器学习中，我们计算反馈（或者说误差）使用的通常是是预测输入，而在Teacher Forcing中我们使用的是目标输入。</p>
+<h2 id="梯度计算"><a href="#梯度计算" class="headerlink" title="梯度计算"></a>梯度计算</h2><p>由于RNN存在所谓的“内部状态”，而这个内部状态的值是由多个时间步所决定的，因此在对RNN进行训练时，我们需要考虑多个时间步下的结果偏差。而传统的BP算法显然不能满足这个要求，因此我们引入了BPTT来解决这一问题。  </p>
+<p>在讨论BPTT之前我们同样先通过一张图片来了解BPTT的执行顺序：<br><img src="/img/article_img/160424/img04.gif" alt="img04"><br>其中，黑色圆点表示预测值；黄色圆点表示预测误差；橙色圆点表示求导。  </p>
+<p>我们来看看BPTT是怎样计算的。首先考虑之前提到的RNN的四个公式：<br><img src="http://www.forkosh.com/mathtex.cgi? \large \mathbf{\alpha_t} = \mathbf{b} + \mathbf{W}\mathbf{s_{t-1}} + \mathbf{U} \mathbf{x_t}"><br><img src="http://www.forkosh.com/mathtex.cgi? \large \mathbf{s_t} = tanh(\mathbf{\alpha_t})"><br><img src="http://www.forkosh.com/mathtex.cgi? \large \mathbf{o_t} = \mathbf{c} + \mathbf{V} \mathbf{s_t}"><br><img src="http://www.forkosh.com/mathtex.cgi? \large \mathbf{p_t} = softmax(\mathbf{o_t})"><br>及损失函数的计算方法：<br><img src="http://www.forkosh.com/mathtex.cgi? \large L(\mathbf{x}, \mathbf{y}) = \sum_t \mathbf{L_t} = \sum_t - \log p_{t, y_t}"><br>对于每个节点α，我们需要递归地计算其梯度<img src="http://www.forkosh.com/mathtex.cgi? \bigtriangledown_{\mathbf{\alpha}} \mathbf{L}">的值。我们从最终损失开始递归计算：<br><img src="http://www.forkosh.com/mathtex.cgi? \frac{\partial L}{\partial L_t} = 1">  </p>
+<p>而在时间步t时，对于所有i, t，输出o的梯度<img src="http://www.forkosh.com/mathtex.cgi? \large \bigtriangledown_{o_t}L">计算为：<br><img src="http://www.forkosh.com/mathtex.cgi? \large (\bigtriangledown_{o_t}L)_i = \frac{\partial L}{\partial o_{t,i}} = \frac{\partial L}{\partial L_t}\frac{\partial L_t}{\partial o_{t,i}} = p_{t,i} - \mathbf{1}_{i, y_t}">  </p>
+<p>内部状态s的计算同样取决于当前所在的时间步。当时间步为T，也就是在最终态时，有：<br><img src="http://www.forkosh.com/mathtex.cgi? \large \bigtriangledown_{s_T}L = \bigtriangledown_{o_T}L\frac{\partial \mathbf{o_T}}{\partial \mathbf{s_T}} = \bigtriangledown{o_T}L\mathbf{V}"><br>而对于t = T-1到t = 0，有：<br><img src="http://www.forkosh.com/mathtex.cgi? \large \bigtriangledown_{s_t}L = \bigtriangledown_{s_{t+1}}L\frac{\partial \mathbf{s_{t+1}}}{\partial \mathbf{s_t}} + \bigtriangledown_{o_T}L\frac{\partial \mathbf{o_t}}{\partial \mathbf{s_t}} = \bigtriangledown{s_{t+1}}L diag(1 - s_{t+1}^2)\mathbf{W} + \bigtriangledown{o_t}L\mathbf{V}"><br>式中，diag表示对角矩阵。  </p>
+<p>对于其他的梯度，可以根据前面的结果简单的计算如下：<br><img src="http://www.forkosh.com/mathtex.cgi? \large \bigtriangledown_c L = \sum_t \bigtriangledown_{o_t} L \frac{\partial \mathbf{o_t}}{\partial \mathbf{c}} = \sum_t \bigtriangledown_{o_t} L"><br><img src="http://www.forkosh.com/mathtex.cgi? \large \bigtriangledown_b L = \sum_t \bigtriangledown_{s_t} L \frac{\partial \mathbf{s_t}}{\partial \mathbf{b}} = \sum_t \bigtriangledown_{s_t} L diag(1 - s_{t}^2)"><br><img src="http://www.forkosh.com/mathtex.cgi? \large \bigtriangledown_{\mathbf{V}} L = \sum_t \bigtriangledown_{o_t} L \frac{\partial \mathbf{o_t}}{\partial \mathbf{V}} = \sum_t \bigtriangledown_{o_t} L s_t^{\top}"><br><img src="http://www.forkosh.com/mathtex.cgi? \large \bigtriangledown_{\mathbf{W}} L = \sum_t \bigtriangledown_{s_t} L \frac{\partial \mathbf{s_t}}{\partial \mathbf{W}} = \sum_t \bigtriangledown_{s_t} L diag(1 - s_{t}^2) s_{t-1}^{\top}"></p>
+<h2 id="梯度消失与LSTM"><a href="#梯度消失与LSTM" class="headerlink" title="梯度消失与LSTM"></a>梯度消失与LSTM</h2><p>对于深度网络的训练，通常都会遇到所谓“梯度消失”的问题，即对于一个深层的网络，靠近输出层的网络层有较快的训练速度，而靠近输入层的隐藏层几乎不能得到训练。<br><img src="/img/article_img/160424/img06.png" alt="img06"><br>在常见的深度网络训练思想中，我们通常使用“逐层训练”的方式来解决梯度消失的问题。而在RNN的训练中，我们可以通过RNN的变体LSTM来达到避免梯度消失问题的目的。  </p>
+<p>对于一个简单的循环神经网络，其结构如下图所示：<br><img src="/img/article_img/160424/img07.png" alt="img07">  </p>
+<p>而最基本的LSTM的结构则如下图所示：<br><img src="/img/article_img/160424/img08.png" alt="img08">  </p>
+<p>乍一看来，LSTM的结构要远比RNN复杂的多，但实际上，通过将LSTM基于RNN改进的部分进行分解，我们可以看到LSTM实际上只比RNN多了三个“门”。这三个“门”分别是：  </p>
+<p>(1)“忘记”门：我们在LSTM的第一步中通过“忘记”门来决定从内部状态中丢弃哪些信息。具体地，“忘记”门层通过读取<img src="http://www.forkosh.com/mathtex.cgi? h_{t-1}">和<img src="http://www.forkosh.com/mathtex.cgi? x_{t}">，将这两个向量进行连接。通过一个包含的所有元素均为0或1的<img src="http://www.forkosh.com/mathtex.cgi? W_{f}">来决定要舍弃哪些数据。其中，1表示“完全保留”，0表示“完全舍弃”。然后加上所谓的偏置bias。最后使用sigmoid得到“忘记”门。<br><img src="/img/article_img/160424/img09.png" alt="img09">  </p>
+<p>(2)“输入”门：我们同样使用一个包含的所有元素均为0或1的<img src="http://www.forkosh.com/mathtex.cgi? W_{i}">来决定要更新哪些值。使用一个tanh层创建一个新的候选向量。在这里<img src="http://www.forkosh.com/mathtex.cgi? i_{t}">充当了“输入”门的角色。将<img src="http://www.forkosh.com/mathtex.cgi? i_{t}">和<img src="http://www.forkosh.com/mathtex.cgi? \tilde{C_{t}}">相乘，得到一个内部状态的更新向量。<br><img src="/img/article_img/160424/img10.png" alt="img10"><br>通过将旧的内部状态与“忘记”门相乘，再与内部状态的更新向量相加，我们可以得到一个新的内部状态。<br><img src="/img/article_img/160424/img11.png" alt="img11">  </p>
+<p>(3)“输出”门：对于输出使用类似的方法可以得到一个“输出”门<img src="http://www.forkosh.com/mathtex.cgi? o_{t}">，使用<img src="http://www.forkosh.com/mathtex.cgi? o_{t}">与经过tanh操作的内部状态相乘后，可以得到输出<img src="http://www.forkosh.com/mathtex.cgi? h_{t}">。<br><img src="/img/article_img/160424/img12.png" alt="img12">  </p>
+<h2 id="LSTM的其他变体"><a href="#LSTM的其他变体" class="headerlink" title="LSTM的其他变体"></a>LSTM的其他变体</h2><p>LSTM是由Sepp于1997年提出的古老模型，因此在近几年出现了比较多的变体，简单列举如下：  </p>
+<p>(1)Gers等人于2000年提出了peephole connection：<br><img src="/img/article_img/160424/img13.png" alt="img13">  </p>
+<p>(2)另一种变体称为Coupled：<br><img src="/img/article_img/160424/img14.png" alt="img14">  </p>
+<p>(3)还有一种常见的变体GRU，由Cho等人与2014年提出：<br><img src="/img/article_img/160424/img15.png" alt="img15">  </p>
+<p>此外，Yao等人于2015年提出了Depth Gated RNN，Koutnik等人于2014年提出了Clockwork RNN。Greff等人则在2015年对当时的各类RNN进行了比较。</p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ul>
+<li>Goodfellow et al., Deep Learning, BookinpreparationforMITPress, 2015</li>
+<li>Trask, Anyone Can Learn To Code an LSTM-RNN in Python (Part 1: RNN), <a href="https://iamtrask.github.io/2015/11/15/anyone-can-code-lstm/" target="_blank" rel="external">[link]</a></li>
+<li>Sepp et al., Long Short-Term Memory,1997</li>
+<li>Kyunghyun et al., Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation, 2014</li>
+<li>Felix et al., Recurrent Nets that Time and Count, 2000</li>
+<li>Yao et al., Depth-Gated Recurrent Neural Networks, 2015</li>
+<li>Koutnik et al., A Clockwork RNN, 2014</li>
+<li>Greff et al., LSTM: A Search Space Odyssey, 2015</li>
+<li>colah, Understanding LSTM Networks, <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/" target="_blank" rel="external">[link]</a></li>
+</ul>
+
+      
+    </div>
+
+    
+      
+
+    
+
+    <footer class="article-footer">
+      <a data-url="http://ruizhang1993.github.io/2016/04/24/Deep-Learning-RNN循环神经网络/" data-id="cj6rc9ao4000d0gupxrekohfr" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NLP/">NLP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/deep-learning/">deep learning</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+    
+<ul id="article-nav" class="nav nav-pills nav-justified">
+  
+  <li role="presentation">
+    <a href="/2016/04/19/Deep-Learning-稀疏自编码器/" id="article-nav-older" class="article-nav-link-wrap">
+      <i class="fa fa-chevron-left pull-left"></i>
+      <span class="article-nav-link-title">稀疏自编码器</span>
+    </a>
+  </li>
+  
+  
+  <li role="presentation">
+    <a href="/2016/05/17/Python2-7注册表信息修复/" id="article-nav-newer" class="article-nav-link-wrap">
+      <span class="article-nav-link-title">Python2.7注册表信息修复</span>
+      <i class="fa fa-chevron-right pull-right"></i>
+    </a>
+  </li>
+  
+</ul>
+
+
+  
+</article>
+
+
+
+
+        </div>
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          
+  <div class="sidebar-module sidebar-module-inset">
+  <h4>About</h4>
+  <font size="4"><b>张睿</b></font></br> - 华南理工大学 博士生 </br> - 研究方向： </br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自然语言处理、聊天机器人 </br> </br> <font size="4"><b>Rui Zhang</b></font></br> - Ph.D student @ SCUT </br> - Research domains: </br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NLP, chatbot
+
+</div>
+
+
+  
+
+
+  
+  <div class="sidebar-module">
+    <h4>Tags</h4>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/CNN/">CNN</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Lex/">Lex</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Mac/">Mac</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/NLP/">NLP</a><span class="sidebar-module-list-count">4</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/PLY/">PLY</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Python/">Python</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/SMPSA2017/">SMPSA2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Windows7/">Windows7</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Yacc/">Yacc</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/cuda/">cuda</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/deep-learning/">deep learning</a><span class="sidebar-module-list-count">6</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/numpy/">numpy</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/python/">python</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/tensorflow/">tensorflow</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/xgboost/">xgboost</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/会议笔记/">会议笔记</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/数据挖掘/">数据挖掘</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/编译原理/">编译原理</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/论文笔记/">论文笔记</a><span class="sidebar-module-list-count">2</span></li></ul>
+  </div>
+
+
+
+  
+  <div class="sidebar-module">
+    <h4>Tag Cloud</h4>
+    <p class="tagcloud">
+      <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/Lex/" style="font-size: 10px;">Lex</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/NLP/" style="font-size: 16.67px;">NLP</a> <a href="/tags/PLY/" style="font-size: 10px;">PLY</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SMPSA2017/" style="font-size: 10px;">SMPSA2017</a> <a href="/tags/Windows7/" style="font-size: 10px;">Windows7</a> <a href="/tags/Yacc/" style="font-size: 10px;">Yacc</a> <a href="/tags/cuda/" style="font-size: 10px;">cuda</a> <a href="/tags/deep-learning/" style="font-size: 20px;">deep learning</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/tensorflow/" style="font-size: 13.33px;">tensorflow</a> <a href="/tags/xgboost/" style="font-size: 10px;">xgboost</a> <a href="/tags/会议笔记/" style="font-size: 10px;">会议笔记</a> <a href="/tags/数据挖掘/" style="font-size: 10px;">数据挖掘</a> <a href="/tags/编译原理/" style="font-size: 10px;">编译原理</a> <a href="/tags/论文笔记/" style="font-size: 13.33px;">论文笔记</a>
+    </p>
+  </div>
+
+
+  
+  <div class="sidebar-module">
+    <h4>Archives</h4>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/06/">June 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/05/">May 2017</a><span class="sidebar-module-list-count">4</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/04/">April 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/01/">January 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/11/">November 2016</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/07/">July 2016</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/05/">May 2016</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/04/">April 2016</a><span class="sidebar-module-list-count">2</span></li></ul>
+  </div>
+
+
+
+  
+  <div class="sidebar-module">
+    <h4>Recents</h4>
+    <ul class="sidebar-module-list">
+      
+        <li>
+          <a href="/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/">[SMP-SA2017] 终身机器学习LML</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/27/论文浅析-神经网络语言模型NNLM/">神经网络语言模型NNLM</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/21/卷积操作的简单理解/">卷积操作的简单理解</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/19/论文浅析-构建简单的神经网络对话生成模型/">构建简单的神经网络对话生成模型</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/01/Tensorflow之legacy-seq2seq模块初探-Tensorflow-r1-0-1/">Tensorflow之legacy_seq2seq模块初探(Tensorflow==r1.0.1)</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+
+        </div>
+    </div>
+  </div>
+  <footer class="blog-footer">
+  <div class="container">
+    <div id="footer-info" class="inner">
+      &copy; 2017 RuiZhang1993<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+  
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" integrity="sha384-8gBf6Y4YYq7Jx97PIqmTwLPin4hxIzQw5aDmUg/DDhul9fFpbbLcLh3nTIIDJKhx" crossorigin="anonymous"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+</body>
+</html>
