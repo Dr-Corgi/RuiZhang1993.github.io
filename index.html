@@ -81,281 +81,6 @@
         <div class="col-sm-8 blog-main">
           
   
-    <article id="post-HCI组11月论文共读-情感原因发现" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <header class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/14/HCI组11月论文共读-情感原因发现/">(no title)</a>
-    </h1>
-  
-
-
-  </header>
-
-  <div class="article-meta">
-    <div class="article-datetime">
-  <a href="/2017/11/14/HCI组11月论文共读-情感原因发现/" class="article-date"><time datetime="2017-11-14T03:37:49.000Z" itemprop="datePublished">2017-11-14</time></a>
-</div>
-
-    
-    
-
-  </div>
-  <div class="article-inner">
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="HCI论文共读-情感原因发现（试读版）"><a href="#HCI论文共读-情感原因发现（试读版）" class="headerlink" title="HCI论文共读 - 情感原因发现（试读版）"></a>HCI论文共读 - 情感原因发现（试读版）</h1><blockquote>
-<p>本月份起我组将举行月度论文共读活动，每月份组员阅读一定的学术文献并整理出笔记进行分享。2017年11月的论文阅读主题为“情感原因发现”，共涉及学术论文8篇。本版本为试读版本，主要用于测试笔记整理格式和邮箱推送情况。完整版本将在11月底左右进行推送。推送范围包括：HCI组成员邮箱和IBM实验室其他NLP小组成员邮箱。</p>
-</blockquote>
-<p>文章索引：</p>
-<ol>
-<li>Emotion Cause Detection with Linguistic Constructions笔记 (By: R Zhang)</li>
-<li>A Question Answering Approach to Emotion Cause Extraction笔记 (By: K Yin)</li>
-</ol>
-<h2 id="Emotion-Cause-Detection-with-Linguistic-Constructions"><a href="#Emotion-Cause-Detection-with-Linguistic-Constructions" class="headerlink" title="Emotion Cause Detection with Linguistic Constructions"></a>Emotion Cause Detection with Linguistic Constructions</h2><p><strong>Authors:</strong> Chen, Y., Lee, S. Y. M., Li, S., &amp; Huang, C. R.<br><strong>Paper URL:</strong> <a href="https://dl.acm.org/citation.cfm?id=1873802" target="_blank" rel="external">https://dl.acm.org/citation.cfm?id=1873802</a><br><strong>Year:</strong> 2010<br><strong>Notes Author:</strong> R Zhang</p>
-<h3 id="1-问题定义"><a href="#1-问题定义" class="headerlink" title="1 问题定义"></a>1 问题定义</h3><p>了解情感的存在并不足以预测未来事件或决定最佳反应，然而引发这些情感的原因一旦被发掘出来，对未来事件的预测或潜在影响的评估可以更可靠地完成。情感原因是指唤起相应情绪的因素，它们可以通过动词、名词或名词化词语来表达。<br>现有的原因检测系统主要将原因检测看作是对<strong>一个小范围的文本单元（通常是子句或者短语）对</strong>的提取，通常是｛情感类型，情感原因子句/短语｝的形式。这种方法不能够检测由多个子句所构成的情感原因。本文将情感原因发现转化为多标签分类问题，这种方法可以捕获远距离的文本信息。</p>
-<h3 id="2-语料分析"><a href="#2-语料分析" class="headerlink" title="2 语料分析"></a>2 语料分析</h3><p>文章首先对(Lee et al, 2010)提出的中文情感原因语料进行了分析，发现72％的标注项中表达了情感信息，其中80%的情感信息具备一个情感原因，而且14%的情感原因由包含多个语句的复杂事件构成。文章进一步对情绪原因进行分析，发现情绪原因通常以动词形式表达(85%)而不是名词形式(15%)出现。<br>另外20%的抽取项找不到对应情感原因主要是因为：</p>
-<ol>
-<li>抽取项在文段的开头或结尾；</li>
-<li>上下文信息意义不大（如“啊哈？”）；</li>
-<li>情感原因非常抽象。<br>作者利用分隔符号（逗号、句号、问号、感叹号等）对篇章级文本进行划分：其中Left_1为情感词所在子句前的第一个子句，Right_1为情感词所在子句后的第一个子句，其他情况依此类推。Left_0表示从情感词所在子句开始直到情感词位置的部分子句，Right_0情况相反。依照上述划分方法，对情感原因统计得到：  </li>
-</ol>
-<p><strong>表一：原因子句分布情况</strong></p>
-<table>
-<thead>
-<tr>
-<th>Position</th>
-<th>Cause(%)</th>
-<th>Position</th>
-<th>Cause(%)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Left_0</td>
-<td>12.90</td>
-<td>Right_0</td>
-<td>15.54</td>
-</tr>
-<tr>
-<td>Left_1</td>
-<td>31.37</td>
-<td>Right_1</td>
-<td>9.55</td>
-</tr>
-<tr>
-<td>Left_2</td>
-<td>13.31</td>
-<td>Right_n(n&gt;1)</td>
-<td>9.18</td>
-</tr>
-<tr>
-<td>Left_n(n&gt;2)</td>
-<td>10.15</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>Total</td>
-<td>67.73</td>
-<td></td>
-<td>32.27</td>
-</tr>
-</tbody>
-</table>
-<p><strong>表二：复合原因子句分布情况</strong></p>
-<table>
-<thead>
-<tr>
-<th>Same clause</th>
-<th>%</th>
-<th>Cross-clauses</th>
-<th>% </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Left_0</td>
-<td>16.80</td>
-<td>Left_2_1_0</td>
-<td>0.25</td>
-</tr>
-<tr>
-<td>Left_1</td>
-<td>31.82</td>
-<td>Left_2_1</td>
-<td>10.84</td>
-</tr>
-<tr>
-<td>Left_2</td>
-<td>7.33</td>
-<td>Left_1_0</td>
-<td>0.62</td>
-</tr>
-<tr>
-<td>Right_0</td>
-<td>18.97</td>
-<td>Right_0_1</td>
-<td>2.55</td>
-</tr>
-<tr>
-<td>Right_1</td>
-<td>10.59</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>Total</td>
-<td>85.75</td>
-<td></td>
-<td>14.25</td>
-</tr>
-</tbody>
-</table>
-<h3 id="3-方法描述"><a href="#3-方法描述" class="headerlink" title="3 方法描述"></a>3 方法描述</h3><p>在原因关系识别领域，通常可以将该问题划分为两步进行：1）原因候选项识别；2）原因关系检测。为了简化任务，大多数方法跳过了第一步，通常基于领域知识通过一些预定义的过滤器对候选项进行过滤。在本文中，第一个要解决的问题是原因候选项的识别。<br>给定一个情感词及其上下文，该情感词的标签为其情感原因的位置信息，例如“Left_1, Left_0”。文章提出基于此构建多标签分类模型。这种方法具有两个优点：首先它能够从上下文信息中识别情感原因；其次它能够捕获多个候选情感原因之间的关系(例如，Left_2和Left_1可以合并为一个复杂事件作为原因)。  </p>
-<p>文章使用两种特征作为分类特征，一是基于模式的特征，二是基于匹配的特征。</p>
-<h4 id="3-1-语言线索和语言模式（基于规则）"><a href="#3-1-语言线索和语言模式（基于规则）" class="headerlink" title="3.1 语言线索和语言模式（基于规则）"></a>3.1 语言线索和语言模式（基于规则）</h4><p>文章提出了6种语言识别线索，列举如下：</p>
-<table>
-<thead>
-<tr>
-<th>类别</th>
-<th>线索词</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>I. 介词</td>
-<td>为、对、对于、以</td>
-</tr>
-<tr>
-<td>II. 连词</td>
-<td>因、因为、由于、于是、所以、因而、可是</td>
-</tr>
-<tr>
-<td>III. 使动</td>
-<td>让、令、使</td>
-</tr>
-<tr>
-<td>IV. 动词</td>
-<td>想到、想起、一想、想来、说到、说起、一说、讲到、<br>讲起、一讲、谈到、谈起、一谈、提到、提起、一提</td>
-</tr>
-<tr>
-<td>V. 认知标记</td>
-<td>听、听到、听说、看、看到、看见、见到、见、<br>眼看、瞧见、知道、得知、得悉、获知、获悉、<br>发现、发觉、有</td>
-</tr>
-<tr>
-<td>VI. 其他</td>
-<td>的是、地说、于、能</td>
-</tr>
-</tbody>
-</table>
-<p>基于上述语言线索，文章将规则定义如下：<br>C = Cause 原因<br>K = Emotion Keyword 情感关键词<br>B = Clauses before the focus clause 当前子句之前的子句<br>F = Focus clause/the clause containing the emotion verb 当前子句/包含情感关键词的字句<br>A = Clauses after the focus clause 当前子句后的子句</p>
-<p>共采用了13种语言规则，列举如下：</p>
-<table>
-<thead>
-<tr>
-<th>序号</th>
-<th>规则</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>i) C(B/F) + III(F) + K(F)<br>ii) C = the nearest N/V before I in F/B</td>
-</tr>
-<tr>
-<td>2</td>
-<td>i) IV/V/I/II(B/F) + C(B/F) + K(F)<br>ii) C = the nearest N/V before K in F</td>
-</tr>
-<tr>
-<td>3</td>
-<td>i) I/II/IV/V(B) + C(B) + K(F)<br>ii) C = the nearest N/V after I/II/IV/V in B</td>
-</tr>
-<tr>
-<td>4</td>
-<td>i) K(F) + V/VI(F) + C(F/A)<br>ii) C = the nearest N/V after V/VI in A</td>
-</tr>
-<tr>
-<td>5</td>
-<td>i) K(F) + II(A) + C(A)<br>ii) C = the nearest N/V after II in A</td>
-</tr>
-<tr>
-<td>6</td>
-<td>i) III(F) + K(F) + C(F/A)<br>ii) C = the nearest N/V after K in F or A</td>
-</tr>
-<tr>
-<td>7</td>
-<td>i) 越 C 越 K<br>ii) C = the V in between the two 越 in F </td>
-</tr>
-<tr>
-<td>8</td>
-<td>i) K(F) + C(F)<br>ii) C = the nearest N/V after K in F</td>
-</tr>
-<tr>
-<td>9</td>
-<td>i) V(F) + K(F)<br>ii) C = V+(an aspectual marker) in F</td>
-</tr>
-<tr>
-<td>10</td>
-<td>i) K(F) + 的(F) + C(F)<br>ii) C = the nearest N/V + 的 + N after 的 in F</td>
-</tr>
-<tr>
-<td>11</td>
-<td>i) K(B) + IV(B) + C(F)<br>ii) C = the nearest N/V after IV in F</td>
-</tr>
-<tr>
-<td>12</td>
-<td>i) IV(B) + C(B) + K(F)<br>ii) C = the nearest N/V after IV in B</td>
-</tr>
-<tr>
-<td>13</td>
-<td>i) C(B) + K(F)<br>ii) C = the nearest N/V before K in B</td>
-</tr>
-</tbody>
-</table>
-<p>以上述的第一个规则为例：</p>
-<ol>
-<li>C(B/F) + III(F) + K(F)</li>
-<li>C = the nearst N/V before III in F/B</li>
-</ol>
-<p>上述规则的意思是，原因C是当前子句或之前的子句中“让、令、使”这些词前面距离最近的一个动词或者名词，如：“他的举动令我非常不满”。假设在Left_1位置找到了相应的原因C，则标记特征为：left_1_rule_1=1。</p>
-<h4 id="3-2-一般模式"><a href="#3-2-一般模式" class="headerlink" title="3.2 一般模式"></a>3.2 一般模式</h4><p>基于规则的方法通常具有较高的准确率，但覆盖度较低。因此文章提出更加通用的匹配模式，列举如下：</p>
-<ol>
-<li><strong>局部功能性构造</strong>：一些特定的功能词如“因为、由于”的周围会表达情感原因。对于一个特定的情感词，通过从右到左搜索Left_0直到找到一个名词或动词，这个动/名词和情感关键词之间的所有一元和二元词项都被抽取出来；</li>
-<li><strong>长距离连接构造</strong>：通过词性标注，抽取那些连词出现在候选项开头的子句；</li>
-<li><strong>通用行为和认知动词</strong>：对于类别IV和V进行扩展，如由“听”扩展出“听见、听闻”等。</li>
-</ol>
-<h3 id="4-总结"><a href="#4-总结" class="headerlink" title="4 总结"></a>4 总结</h3><p>文章提出了一种基于多标签分类的情感原因发现的思路。文章没有涉及到具体的多标签分类算法，仅仅是指出可以利用多标签分类框架解决这一问题。尽管实验结果显示基于多标签的方法效果好于单标签方法，特别是对于情感因素包含在多个子句或较长的短语中时，模型的作用能够体现出来。但文章的整体贡献较为有限。另外，基于模板的特征提取对于情感原因识别还是具有比较突出的作用。</p>
-<h2 id="A-Question-Answering-Approach-to-Emotion-Cause-Extraction"><a href="#A-Question-Answering-Approach-to-Emotion-Cause-Extraction" class="headerlink" title="A Question Answering Approach to Emotion Cause Extraction"></a>A Question Answering Approach to Emotion Cause Extraction</h2><p><strong>Authors:</strong> Gui, L., Hu, J., He, Y., Xu, R., Lu, Q., &amp; Du, J.<br><strong>Paper URL:</strong> <a href="https://arxiv.org/abs/1708.05482" target="_blank" rel="external">https://arxiv.org/abs/1708.05482</a><br><strong>Year:</strong> 2017<br><strong>Notes Author:</strong> K Yin</p>
-<h3 id="1-模型实现"><a href="#1-模型实现" class="headerlink" title="1 模型实现"></a>1 模型实现</h3><p>本文采用了Memory Network来获取文档中一个字句和情感的相关关系。为了量化字句中单词和情感词汇的相关性,首先进行word embedding，以字句中单词和情感词汇的点积来度量相关关系的强弱；在通过softmax function将其统一到0和1之间，之后将字句中每个单词对应的词向量与对应的相关系数相乘并加和以此来度量该字句与情感词汇的距离，将此值与情感词汇向量E加和，再与待学习的参数矩阵相乘并通过softmax function来说明该字句描述的时间可否导致情感词汇描述的情感发生。<br>由于考虑到一个单词的具体意思通常是上下文相关的，为了表达这种关系，作者在原来的基础上加入了卷积的操作,将卷积核的大小设置为3，考虑每个单词和情感词汇的相关性时同时将单词的前一个词汇和后一个词汇考虑进去。最后在单层网络的基础上叠加了多层网络，利用随机梯度下降法进行学习。</p>
-<h3 id="2-总结"><a href="#2-总结" class="headerlink" title="2 总结"></a>2 总结</h3><p>引入卷积的操作,对每个单词可以有效的考虑到其上下文的影响，对比孤立的考虑每个单词取得了更好的效果。</p>
-
-      
-    </div>
-
-    
-      
-
-    
-
-    <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/11/14/HCI组11月论文共读-情感原因发现/" data-id="cjgbw2sdm0005oaupn4bp30pz" class="article-share-link">
-        <i class="fa fa-share"></i> Share
-      </a>
-      
-      
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
     <article id="post-SMP-SA2017-终身机器学习-Lifelong-Machine-Learning" class="article article-type-post" itemscope itemprop="blogPost">
 
   <header class="article-header">
@@ -394,7 +119,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/" data-id="cjgbw2se1000aoaupeqlfvn9r" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/" data-id="cjgbw4sci000aorupy0qilo1t" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -449,7 +174,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/05/27/论文浅析-神经网络语言模型NNLM/" data-id="cjgbw2sgd001noaup316oy254" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2017/05/27/论文浅析-神经网络语言模型NNLM/" data-id="cjgbw4scz000porupg15e9u12" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -503,7 +228,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/05/21/卷积操作的简单理解/" data-id="cjgbw2sed000joaupfpxh63rp" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2017/05/21/卷积操作的简单理解/" data-id="cjgbw4sco000horuppklzm5zi" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -558,7 +283,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/05/19/论文浅析-构建简单的神经网络对话生成模型/" data-id="cjgbw2sgb001loaup2izgl7z9" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2017/05/19/论文浅析-构建简单的神经网络对话生成模型/" data-id="cjgbw4scv000morupcy3jak4c" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -614,7 +339,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/05/01/Tensorflow之legacy-seq2seq模块初探-Tensorflow-r1-0-1/" data-id="cjgbw2sea000hoaupkx3i2nso" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2017/05/01/Tensorflow之legacy-seq2seq模块初探-Tensorflow-r1-0-1/" data-id="cjgbw4sck000corup57f5gd3d" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -670,7 +395,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/04/21/CentOS-7-下-Cuda-Tensorflow-环境搭建实践/" data-id="cjgbw2scx0000oaupzb8qsyii" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2017/04/21/CentOS-7-下-Cuda-Tensorflow-环境搭建实践/" data-id="cjgbw4sb70000orupv35vtvqa" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -730,7 +455,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/01/19/Mac下卸载-更新numpy/" data-id="cjgbw2sde0003oaupvurjtsxq" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2017/01/19/Mac下卸载-更新numpy/" data-id="cjgbw4sbu0007oruprd7b33x4" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -793,7 +518,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2016/11/21/数据挖掘之数据预处理/" data-id="cjgbw2sg6001koaupcqr47bya" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2016/11/21/数据挖掘之数据预处理/" data-id="cjgbw4scs000korupysx6p3hv" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -849,12 +574,68 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2016/11/17/Python中文文本处理/" data-id="cjgbw2se8000foaupkge2qr0n" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2016/11/17/Python中文文本处理/" data-id="cjgbw4sbx0008orup395ut6qa" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NLP/">NLP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-PLY入门" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/11/PLY入门/">PLY入门</a>
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/2016/07/11/PLY入门/" class="article-date"><time datetime="2016-07-11T02:49:55.000Z" itemprop="datePublished">2016-07-11</time></a>
+</div>
+
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>LY是编译器构造工具lex和yacc的纯Python实现。它分为两个独立模块lex.py和yacc.py。其中，lex.py用于将输入文本根据正则表达式分解成一个token集合；yacc.py则用于根据给定的上下文无关语法来识别语言的语法。</p>
+</blockquote>
+        
+          <p class="article-more-link">
+            <a class="btn btn-primary" href="/2016/07/11/PLY入门/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+
+    
+
+    <footer class="article-footer">
+      <a data-url="http://ruizhang1993.github.io/2016/07/11/PLY入门/" data-id="cjgbw4sbm0004orup9kgo5xce" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Lex/">Lex</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PLY/">PLY</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yacc/">Yacc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编译原理/">编译原理</a></li></ul>
 
 
     </footer>
@@ -906,7 +687,7 @@
   
   <div class="sidebar-module">
     <h4>Archives</h4>
-    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/11/">November 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/06/">June 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/05/">May 2017</a><span class="sidebar-module-list-count">4</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/04/">April 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/01/">January 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/11/">November 2016</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/07/">July 2016</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/05/">May 2016</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/04/">April 2016</a><span class="sidebar-module-list-count">2</span></li></ul>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/06/">June 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/05/">May 2017</a><span class="sidebar-module-list-count">4</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/04/">April 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/01/">January 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/11/">November 2016</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/07/">July 2016</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/05/">May 2016</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/04/">April 2016</a><span class="sidebar-module-list-count">2</span></li></ul>
   </div>
 
 
@@ -915,10 +696,6 @@
   <div class="sidebar-module">
     <h4>Recents</h4>
     <ul class="sidebar-module-list">
-      
-        <li>
-          <a href="/2017/11/14/HCI组11月论文共读-情感原因发现/">(no title)</a>
-        </li>
       
         <li>
           <a href="/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/">[SMP-SA2017] 终身机器学习LML</a>
@@ -934,6 +711,10 @@
       
         <li>
           <a href="/2017/05/19/论文浅析-构建简单的神经网络对话生成模型/">构建简单的神经网络对话生成模型</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/01/Tensorflow之legacy-seq2seq模块初探-Tensorflow-r1-0-1/">Tensorflow之legacy_seq2seq模块初探(Tensorflow==r1.0.1)</a>
         </li>
       
     </ul>
