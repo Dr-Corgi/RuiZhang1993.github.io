@@ -5,12 +5,16 @@
   
   <title>Rui Zhang&#39;s Blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="HCI论文共读 - 情感原因发现（试读版） 本月份起我组将举行月度论文共读活动，每月份组员阅读一定的学术文献并整理出笔记进行分享。2017年11月的论文阅读主题为“情感原因发现”，共涉及学术论文8篇。本版本为试读版本，主要用于测试笔记整理格式和邮箱推送情况。完整版本将在11月底左右进行推送。推送范围包括：HCI组成员邮箱和IBM实验室其他NLP小组成员邮箱。  文章索引：  Emotion Cau">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Rui Zhang&#39;s Blogs">
-<meta property="og:url" content="http://ruizhang1993.github.io/index.html">
+<meta property="og:url" content="http://ruizhang1993.github.io/2017/11/14/HCI组11月论文共读-情感原因发现/index.html">
 <meta property="og:site_name" content="Rui Zhang&#39;s Blogs">
+<meta property="og:description" content="HCI论文共读 - 情感原因发现（试读版） 本月份起我组将举行月度论文共读活动，每月份组员阅读一定的学术文献并整理出笔记进行分享。2017年11月的论文阅读主题为“情感原因发现”，共涉及学术论文8篇。本版本为试读版本，主要用于测试笔记整理格式和邮箱推送情况。完整版本将在11月底左右进行推送。推送范围包括：HCI组成员邮箱和IBM实验室其他NLP小组成员邮箱。  文章索引：  Emotion Cau">
+<meta property="og:updated_time" content="2017-11-14T06:56:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Rui Zhang&#39;s Blogs">
+<meta name="twitter:description" content="HCI论文共读 - 情感原因发现（试读版） 本月份起我组将举行月度论文共读活动，每月份组员阅读一定的学术文献并整理出笔记进行分享。2017年11月的论文阅读主题为“情感原因发现”，共涉及学术论文8篇。本版本为试读版本，主要用于测试笔记整理格式和邮箱推送情况。完整版本将在11月底左右进行推送。推送范围包括：HCI组成员邮箱和IBM实验室其他NLP小组成员邮箱。  文章索引：  Emotion Cau">
   
     <link rel="alternate" href="/atom.xml" title="Rui Zhang&#39;s Blogs" type="application/atom+xml">
   
@@ -46,7 +50,7 @@
     <div class="collapse navbar-collapse" id="main-menu-navbar">
       <ul class="nav navbar-nav">
         
-          <li><a class="active"
+          <li><a class=""
                  href="/index.html">Home</a></li>
         
           <li><a class=""
@@ -79,15 +83,13 @@
 
     <div class="row">
         <div class="col-sm-8 blog-main">
-          
-  
-    <article id="post-HCI组11月论文共读-情感原因发现" class="article article-type-post" itemscope itemprop="blogPost">
+          <article id="post-HCI组11月论文共读-情感原因发现" class="article article-type-post" itemscope itemprop="blogPost">
 
   <header class="article-header">
     
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/14/HCI组11月论文共读-情感原因发现/">(no title)</a>
+    <h1 class="article-title" itemprop="name">
+      (no title)
     </h1>
   
 
@@ -351,525 +353,23 @@
     </footer>
   </div>
   
-</article>
-
-
-
+    
+<ul id="article-nav" class="nav nav-pills nav-justified">
   
-    <article id="post-SMP-SA2017-终身机器学习-Lifelong-Machine-Learning" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <header class="article-header">
-    
+  <li role="presentation">
+    <a href="/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/" id="article-nav-older" class="article-nav-link-wrap">
+      <i class="fa fa-chevron-left pull-left"></i>
+      <span class="article-nav-link-title">[SMP-SA2017] 终身机器学习LML</span>
+    </a>
+  </li>
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/">[SMP-SA2017] 终身机器学习LML</a>
-    </h1>
   
+</ul>
 
 
-  </header>
-
-  <div class="article-meta">
-    <div class="article-datetime">
-  <a href="/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/" class="article-date"><time datetime="2017-06-11T03:34:12.000Z" itemprop="datePublished">2017-06-11</time></a>
-</div>
-
-    
-    
-
-  </div>
-  <div class="article-inner">
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="什么是终身机器学习-LML-？"><a href="#什么是终身机器学习-LML-？" class="headerlink" title="什么是终身机器学习(LML)？"></a>什么是终身机器学习(LML)？</h3><p>传统的机器学习通常是孤立的单任务机器学习算法：针对某个特定任务，给定一份数据集，运行某些机器学习算法，训练得到一个模型。<br>这种传统的机器学习方法通常不会考虑到过去的知识。也就是说，每次遇到新的问题，传统机器学习方法都是从零开始训练一个新模型。这种方式被称为“机器学习1.0”。<br>“机器学习1.0”存在着一些明显的缺点，例如每次构建模型都是一次孤立学习过程，过往学习到的知识既没有被存储，也不能被重新获取。同时，也正因为知识不能够被存储，每次训练新模型时我们总是需要大量的新的训练数据。  </p>
-        
-          <p class="article-more-link">
-            <a class="btn btn-primary" href="/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-
-    
-
-    <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/" data-id="cjgbw09sc000cniupwoqosdy2" class="article-share-link">
-        <i class="fa fa-share"></i> Share
-      </a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SMPSA2017/">SMPSA2017</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/会议笔记/">会议笔记</a></li></ul>
-
-
-    </footer>
-  </div>
   
 </article>
 
-
-
-  
-    <article id="post-论文浅析-神经网络语言模型NNLM" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <header class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/27/论文浅析-神经网络语言模型NNLM/">神经网络语言模型NNLM</a>
-    </h1>
-  
-
-
-  </header>
-
-  <div class="article-meta">
-    <div class="article-datetime">
-  <a href="/2017/05/27/论文浅析-神经网络语言模型NNLM/" class="article-date"><time datetime="2017-05-27T11:14:15.000Z" itemprop="datePublished">2017-05-27</time></a>
-</div>
-
-    
-    
-
-  </div>
-  <div class="article-inner">
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>标题：A neural probabilistic language model<br>作者：Bengio Y, Ducharme R, Vincent P, et al.<br>来源：Journal of machine learning research, 2003, 3(Feb): 1137-1155.<br>论文地址：<a href="http://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf" target="_blank" rel="external">http://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf</a>  </p>
-<p>这篇文章是最早使用神经网络来构建概率语言模型的工作，也是现在比较流行的“词向量”最早的相关工作之一。文章提出了利用一个三层的神经网络来学习概率语言模型，通过给定的上文窗口，模型预测下一个位置的输出词语，在经过足够次数的训练迭代后，神经网络将学习到语言的规律，而词向量将作为模型的副产品得到。</p>
-        
-          <p class="article-more-link">
-            <a class="btn btn-primary" href="/2017/05/27/论文浅析-神经网络语言模型NNLM/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-
-    
-
-    <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/05/27/论文浅析-神经网络语言模型NNLM/" data-id="cjgbw09u4001hniupohftqk0q" class="article-share-link">
-        <i class="fa fa-share"></i> Share
-      </a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NLP/">NLP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/deep-learning/">deep learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/论文笔记/">论文笔记</a></li></ul>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-卷积操作的简单理解" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <header class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/21/卷积操作的简单理解/">卷积操作的简单理解</a>
-    </h1>
-  
-
-
-  </header>
-
-  <div class="article-meta">
-    <div class="article-datetime">
-  <a href="/2017/05/21/卷积操作的简单理解/" class="article-date"><time datetime="2017-05-21T14:20:52.000Z" itemprop="datePublished">2017-05-21</time></a>
-</div>
-
-    
-    
-
-  </div>
-  <div class="article-inner">
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="什么是卷积神经网络"><a href="#什么是卷积神经网络" class="headerlink" title="什么是卷积神经网络"></a>什么是卷积神经网络</h4><p>简单来说，卷积神经网络是指那些至少在网络的一层中使用卷积运算来替代一般的矩阵乘法运算的神经网络。<br>常用的卷积网络通常由很多层的卷积运算和池化运算堆叠起来组成。这篇文章就简单来讲讲什么是卷积运算、池化运算，以及为什么要使用卷积运算。</p>
-        
-          <p class="article-more-link">
-            <a class="btn btn-primary" href="/2017/05/21/卷积操作的简单理解/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-
-    
-
-    <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/05/21/卷积操作的简单理解/" data-id="cjgbw09tn001bniup8pvff1wh" class="article-share-link">
-        <i class="fa fa-share"></i> Share
-      </a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CNN/">CNN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/deep-learning/">deep learning</a></li></ul>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-论文浅析-构建简单的神经网络对话生成模型" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <header class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/19/论文浅析-构建简单的神经网络对话生成模型/">构建简单的神经网络对话生成模型</a>
-    </h1>
-  
-
-
-  </header>
-
-  <div class="article-meta">
-    <div class="article-datetime">
-  <a href="/2017/05/19/论文浅析-构建简单的神经网络对话生成模型/" class="article-date"><time datetime="2017-05-19T13:22:51.000Z" itemprop="datePublished">2017-05-19</time></a>
-</div>
-
-    
-    
-
-  </div>
-  <div class="article-inner">
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>标题：A Neural Conversation Model<br>作者：Oriol Vinyals, Quoc Le<br>来源：ICML Deep Learning Workshop 2015<br>论文地址：<a href="https://arxiv.org/abs/1506.05869" target="_blank" rel="external">https://arxiv.org/abs/1506.05869</a></p>
-<p>这篇文章是最早将神经机器翻译中的seq2seq生成技术应用到人机对话任务的工作之一。文章提出了一个端到端(end-to-end)的对话生成模型，这里的端到端可以理解为：模型的输入是一个问答对中的问句，而输出则是问答对中相应的回答。模型摒弃了对答句的复杂组织过程，而是利用语言模型不断预测下一个输出词语，直到输出句子终止符的方式来生成回答。  </p>
-        
-          <p class="article-more-link">
-            <a class="btn btn-primary" href="/2017/05/19/论文浅析-构建简单的神经网络对话生成模型/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-
-    
-
-    <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/05/19/论文浅析-构建简单的神经网络对话生成模型/" data-id="cjgbw09ub001kniupkmld1pkc" class="article-share-link">
-        <i class="fa fa-share"></i> Share
-      </a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NLP/">NLP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/deep-learning/">deep learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/论文笔记/">论文笔记</a></li></ul>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Tensorflow之legacy-seq2seq模块初探-Tensorflow-r1-0-1" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <header class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/01/Tensorflow之legacy-seq2seq模块初探-Tensorflow-r1-0-1/">Tensorflow之legacy_seq2seq模块初探(Tensorflow==r1.0.1)</a>
-    </h1>
-  
-
-
-  </header>
-
-  <div class="article-meta">
-    <div class="article-datetime">
-  <a href="/2017/05/01/Tensorflow之legacy-seq2seq模块初探-Tensorflow-r1-0-1/" class="article-date"><time datetime="2017-05-01T08:43:26.000Z" itemprop="datePublished">2017-05-01</time></a>
-</div>
-
-    
-    
-
-  </div>
-  <div class="article-inner">
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>本文对tensorflow中legacy_seq2seq模块中的部分重要类型和方法进行整理。文章基于tensorflow r1.0.1版本。</p>
-</blockquote>
-        
-          <p class="article-more-link">
-            <a class="btn btn-primary" href="/2017/05/01/Tensorflow之legacy-seq2seq模块初探-Tensorflow-r1-0-1/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-
-    
-
-    <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/05/01/Tensorflow之legacy-seq2seq模块初探-Tensorflow-r1-0-1/" data-id="cjgbw09ts001eniupmjyj36zk" class="article-share-link">
-        <i class="fa fa-share"></i> Share
-      </a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/deep-learning/">deep learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow/">tensorflow</a></li></ul>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-CentOS-7-下-Cuda-Tensorflow-环境搭建实践" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <header class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/21/CentOS-7-下-Cuda-Tensorflow-环境搭建实践/">CentOS 7 下 Cuda &amp; Tensorflow 环境搭建实践</a>
-    </h1>
-  
-
-
-  </header>
-
-  <div class="article-meta">
-    <div class="article-datetime">
-  <a href="/2017/04/21/CentOS-7-下-Cuda-Tensorflow-环境搭建实践/" class="article-date"><time datetime="2017-04-21T03:36:26.000Z" itemprop="datePublished">2017-04-21</time></a>
-</div>
-
-    
-    
-
-  </div>
-  <div class="article-inner">
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>由于之前实验室的Deep Learning设备用的是Ubuntu 16.04系统，不知道是Ubuntu本身的原因还是系统中出现的其它问题，原先的环境一直不太稳定，经常出现中途死机的现象。因此最近重新把机器的系统换成了比较稳定的CentOS，从零开始搭建DL环境。</p>
-</blockquote>
-        
-          <p class="article-more-link">
-            <a class="btn btn-primary" href="/2017/04/21/CentOS-7-下-Cuda-Tensorflow-环境搭建实践/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-
-    
-
-    <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/04/21/CentOS-7-下-Cuda-Tensorflow-环境搭建实践/" data-id="cjgbw09qt0000niup8nwb7dkn" class="article-share-link">
-        <i class="fa fa-share"></i> Share
-      </a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cuda/">cuda</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow/">tensorflow</a></li></ul>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Mac下卸载-更新numpy" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <header class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/19/Mac下卸载-更新numpy/">Mac下卸载/更新numpy</a>
-    </h1>
-  
-
-
-  </header>
-
-  <div class="article-meta">
-    <div class="article-datetime">
-  <a href="/2017/01/19/Mac下卸载-更新numpy/" class="article-date"><time datetime="2017-01-19T07:01:05.000Z" itemprop="datePublished">2017-01-19</time></a>
-</div>
-
-    
-    
-
-  </div>
-  <div class="article-inner">
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天安装PyTorch的时候发现numpy模块需要更新，使用pip install -U numpy的时候发现有些操作被系统禁止了（不是sudo权限的原因）。百度了一下发现是系统的安全机制引起的。具体的解决方案如下：</p>
-<ol>
-<li>重启电脑，重启时按住command+R</li>
-<li>进入“OS X工具程式”界面，打开终端，输入csrutil，重启电脑即可。</li>
-</ol>
-<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><ol>
-<li>Mac环境下，numpy升级问题。<a href="http://blog.csdn.net/u010566350/article/details/50455480" target="_blank" rel="external">http://blog.csdn.net/u010566350/article/details/50455480</a></li>
-</ol>
-
-      
-    </div>
-
-    
-      
-
-    
-
-    <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/01/19/Mac下卸载-更新numpy/" data-id="cjgbw09ry0007niuppuh7u8hd" class="article-share-link">
-        <i class="fa fa-share"></i> Share
-      </a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/numpy/">numpy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-数据挖掘之数据预处理" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <header class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/21/数据挖掘之数据预处理/">数据挖掘之数据预处理</a>
-    </h1>
-  
-
-
-  </header>
-
-  <div class="article-meta">
-    <div class="article-datetime">
-  <a href="/2016/11/21/数据挖掘之数据预处理/" class="article-date"><time datetime="2016-11-21T06:42:11.000Z" itemprop="datePublished">2016-11-21</time></a>
-</div>
-
-    
-    
-
-  </div>
-  <div class="article-inner">
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>在数据挖掘任务中，我们往往要先对数据进行预处理。本文介绍了数据处理的常见任务和常见方法。</p>
-</blockquote>
-<h4 id="数据预处理的主要任务"><a href="#数据预处理的主要任务" class="headerlink" title="数据预处理的主要任务"></a>数据预处理的主要任务</h4><p>数据预处理的主要任务包括以下几个：</p>
-<ol>
-<li>数据清洗：包括填入缺失值、平滑噪声数据、识别或移除离群点、解决数据不一致的状况</li>
-<li>数据集成：集成来自不同数据源的数据，如文件、数据库等等</li>
-<li>数据简化：如降维、数据块聚合（比如用聚类结果来替代原有数据）、数据压缩（比如利用编码减少数据长度等）</li>
-<li>数据转换：包括归一化和泛化等等</li>
-</ol>
-        
-          <p class="article-more-link">
-            <a class="btn btn-primary" href="/2016/11/21/数据挖掘之数据预处理/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-
-    
-
-    <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2016/11/21/数据挖掘之数据预处理/" data-id="cjgbw09tx001fniupp2slm9ly" class="article-share-link">
-        <i class="fa fa-share"></i> Share
-      </a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据挖掘/">数据挖掘</a></li></ul>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Python中文文本处理" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <header class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/17/Python中文文本处理/">Python中文文本处理</a>
-    </h1>
-  
-
-
-  </header>
-
-  <div class="article-meta">
-    <div class="article-datetime">
-  <a href="/2016/11/17/Python中文文本处理/" class="article-date"><time datetime="2016-11-17T10:41:19.000Z" itemprop="datePublished">2016-11-17</time></a>
-</div>
-
-    
-    
-
-  </div>
-  <div class="article-inner">
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>最近因为实验需要，我需要在非常大量的原始微博数据中提取相关数据用于模型训练。因此需要利用Python对中文文本进行处理。<br>由于Python本身在处理中文文本上就有非常多的坑，并且由于原始微博数据中有非常多要处理的地方，需要大量使用正则表达式，分词工具等等。<br>因此在进行数据提取程序的过程中我写了这篇博客来记录这一过程中遇到的问题和相应的解决方案。</p>
-</blockquote>
-        
-          <p class="article-more-link">
-            <a class="btn btn-primary" href="/2016/11/17/Python中文文本处理/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-
-    
-
-    <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2016/11/17/Python中文文本处理/" data-id="cjgbw09sa000aniupoocinqxn" class="article-share-link">
-        <i class="fa fa-share"></i> Share
-      </a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NLP/">NLP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-  <div id="page-nav">
-    <nav><ul class="pagination"><li class="disabled"><span class="page-prev"><i class="fa fa-chevron-left"></i> Prev</a></li><li class="active"><span class="page-number">1</span></li><li><a class="page-number" href="/page/2/">2</a></li><li><a class="page-next" rel="next" href="/page/2/">Next <i class="fa fa-chevron-right"></i></a></li></ul></nav>
-  </div>
 
 
 
