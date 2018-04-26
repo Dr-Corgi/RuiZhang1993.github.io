@@ -5,18 +5,18 @@
   
   <title>构建简单的神经网络对话生成模型 | Rui Zhang&#39;s Blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="标题：A Neural Conversation Model作者：Oriol Vinyals, Quoc Le来源：ICML Deep Learning Workshop 2015论文地址：https://arxiv.org/abs/1506.05869 这篇文章是最早将神经机器翻译中的seq2seq生成技术应用到人机对话任务的工作之一。文章提出了一个端到端(end-to-end)的对话生成模型，">
+  <meta name="description" content="论文《A Neural Conversation Model》整理。">
 <meta name="keywords" content="deep learning,NLP,论文笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="构建简单的神经网络对话生成模型">
 <meta property="og:url" content="http://ruizhang1993.github.io/2017/05/19/论文浅析-构建简单的神经网络对话生成模型/index.html">
 <meta property="og:site_name" content="Rui Zhang&#39;s Blogs">
-<meta property="og:description" content="标题：A Neural Conversation Model作者：Oriol Vinyals, Quoc Le来源：ICML Deep Learning Workshop 2015论文地址：https://arxiv.org/abs/1506.05869 这篇文章是最早将神经机器翻译中的seq2seq生成技术应用到人机对话任务的工作之一。文章提出了一个端到端(end-to-end)的对话生成模型，">
+<meta property="og:description" content="论文《A Neural Conversation Model》整理。">
 <meta property="og:image" content="http://i4.buimg.com/587765/43d28cf9bc85a222.png">
-<meta property="og:updated_time" content="2017-08-24T03:39:20.000Z">
+<meta property="og:updated_time" content="2018-04-26T07:34:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="构建简单的神经网络对话生成模型">
-<meta name="twitter:description" content="标题：A Neural Conversation Model作者：Oriol Vinyals, Quoc Le来源：ICML Deep Learning Workshop 2015论文地址：https://arxiv.org/abs/1506.05869 这篇文章是最早将神经机器翻译中的seq2seq生成技术应用到人机对话任务的工作之一。文章提出了一个端到端(end-to-end)的对话生成模型，">
+<meta name="twitter:description" content="论文《A Neural Conversation Model》整理。">
 <meta name="twitter:image" content="http://i4.buimg.com/587765/43d28cf9bc85a222.png">
   
     <link rel="alternate" href="/atom.xml" title="Rui Zhang&#39;s Blogs" type="application/atom+xml">
@@ -112,9 +112,12 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>标题：A Neural Conversation Model<br>作者：Oriol Vinyals, Quoc Le<br>来源：ICML Deep Learning Workshop 2015<br>论文地址：<a href="https://arxiv.org/abs/1506.05869" target="_blank" rel="external">https://arxiv.org/abs/1506.05869</a></p>
-<p>这篇文章是最早将神经机器翻译中的seq2seq生成技术应用到人机对话任务的工作之一。文章提出了一个端到端(end-to-end)的对话生成模型，这里的端到端可以理解为：模型的输入是一个问答对中的问句，而输出则是问答对中相应的回答。模型摒弃了对答句的复杂组织过程，而是利用语言模型不断预测下一个输出词语，直到输出句子终止符的方式来生成回答。  </p>
+        <blockquote>
+<p>论文《A Neural Conversation Model》整理。</p>
+</blockquote>
 <a id="more"></a>
+<p>标题：A Neural Conversation Model<br>作者：Oriol Vinyals, Quoc Le<br>来源：ICML Deep Learning Workshop 2015<br>论文地址：<a href="https://arxiv.org/abs/1506.05869" target="_blank" rel="external">https://arxiv.org/abs/1506.05869</a></p>
+<p>这篇文章是最早将神经机器翻译中的seq2seq生成技术应用到人机对话任务的工作之一。文章提出了一个端到端(end-to-end)的对话生成模型，这里的端到端可以理解为：模型的输入是一个问答对中的问句，而输出则是问答对中相应的回答。模型摒弃了对答句的复杂组织过程，而是利用语言模型不断预测下一个输出词语，直到输出句子终止符的方式来生成回答。  </p>
 <p>这一模型的优势是可以极大地减少对手工规则的需求。然而同时要注意的是，该模型的目标函数是一个“错误的”，或者说不完全正确的。现实是，在对话任务，特别是开放领域问答任务中，问答对往往不是唯一的，一个问题可以对应多个不同的答案。然而使用简单的Encoder-Decoder框架训练对话模型，几乎很难避免答案单一的缺陷。  </p>
 <p>此外，该模型不能够很好地解决一致性问题。</p>
 <h4 id="Encoder、Decoder和对话生成"><a href="#Encoder、Decoder和对话生成" class="headerlink" title="Encoder、Decoder和对话生成"></a>Encoder、Decoder和对话生成</h4><p>基于Seq2seq的对话系统一般使用RNN来对问答对进行编码和解码。由于基本的RNN网络不能够很好地建模远距离文本，在实践中通常会使用LSTM或者GRU等RNN变种网络来对文本进行建模。  </p>
@@ -137,7 +140,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/05/19/论文浅析-构建简单的神经网络对话生成模型/" data-id="cjgg7n97m0015c2upjbodaw2p" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2017/05/19/论文浅析-构建简单的神经网络对话生成模型/" data-id="cjgg7qrct000octupedggqlyg" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       

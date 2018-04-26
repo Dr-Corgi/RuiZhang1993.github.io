@@ -5,13 +5,13 @@
   
   <title>神经网络语言模型NNLM | Rui Zhang&#39;s Blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="标题：A neural probabilistic language model作者：Bengio Y, Ducharme R, Vincent P, et al.来源：Journal of machine learning research, 2003, 3(Feb): 1137-1155.论文地址：http://www.jmlr.org/papers/volume3/bengio03a/ben">
+  <meta name="description" content="论文《A neural probabilistic language model 》整理。">
 <meta name="keywords" content="deep learning,NLP,论文笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="神经网络语言模型NNLM">
 <meta property="og:url" content="http://ruizhang1993.github.io/2017/05/27/论文浅析-神经网络语言模型NNLM/index.html">
 <meta property="og:site_name" content="Rui Zhang&#39;s Blogs">
-<meta property="og:description" content="标题：A neural probabilistic language model作者：Bengio Y, Ducharme R, Vincent P, et al.来源：Journal of machine learning research, 2003, 3(Feb): 1137-1155.论文地址：http://www.jmlr.org/papers/volume3/bengio03a/ben">
+<meta property="og:description" content="论文《A neural probabilistic language model 》整理。">
 <meta property="og:image" content="http://i1.piimg.com/587765/e3254073d029beb5.png">
 <meta property="og:image" content="http://i1.piimg.com/587765/13cdbe3a7914a7f5.png">
 <meta property="og:image" content="http://i4.buimg.com/587765/336a02fb9e88762a.png">
@@ -19,10 +19,10 @@
 <meta property="og:image" content="http://i1.piimg.com/587765/2467eca1adde8898.png">
 <meta property="og:image" content="http://i1.piimg.com/587765/6da8966a927ffe50.png">
 <meta property="og:image" content="http://i1.piimg.com/587765/52f158bed7a21561.png">
-<meta property="og:updated_time" content="2017-08-24T03:39:31.000Z">
+<meta property="og:updated_time" content="2018-04-26T07:34:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="神经网络语言模型NNLM">
-<meta name="twitter:description" content="标题：A neural probabilistic language model作者：Bengio Y, Ducharme R, Vincent P, et al.来源：Journal of machine learning research, 2003, 3(Feb): 1137-1155.论文地址：http://www.jmlr.org/papers/volume3/bengio03a/ben">
+<meta name="twitter:description" content="论文《A neural probabilistic language model 》整理。">
 <meta name="twitter:image" content="http://i1.piimg.com/587765/e3254073d029beb5.png">
   
     <link rel="alternate" href="/atom.xml" title="Rui Zhang&#39;s Blogs" type="application/atom+xml">
@@ -118,9 +118,12 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>标题：A neural probabilistic language model<br>作者：Bengio Y, Ducharme R, Vincent P, et al.<br>来源：Journal of machine learning research, 2003, 3(Feb): 1137-1155.<br>论文地址：<a href="http://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf" target="_blank" rel="external">http://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf</a>  </p>
-<p>这篇文章是最早使用神经网络来构建概率语言模型的工作，也是现在比较流行的“词向量”最早的相关工作之一。文章提出了利用一个三层的神经网络来学习概率语言模型，通过给定的上文窗口，模型预测下一个位置的输出词语，在经过足够次数的训练迭代后，神经网络将学习到语言的规律，而词向量将作为模型的副产品得到。</p>
+        <blockquote>
+<p>论文《A neural probabilistic language model 》整理。</p>
+</blockquote>
 <a id="more"></a>
+<p>标题：A neural probabilistic language model<br>作者：Bengio Y, Ducharme R, Vincent P, et al.<br>来源：Journal of machine learning research, 2003, 3(Feb): 1137-1155.<br>论文地址：<a href="http://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf" target="_blank" rel="external">http://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf</a>  </p>
+<p>这篇文章是最早使用神经网络来构建概率语言模型的工作，也是现在比较流行的“词向量”最早的相关工作之一。文章提出了利用一个三层的神经网络来学习概率语言模型，通过给定的上文窗口，模型预测下一个位置的输出词语，在经过足够次数的训练迭代后，神经网络将学习到语言的规律，而词向量将作为模型的副产品得到。</p>
 <h4 id="简单理解语言概率模型"><a href="#简单理解语言概率模型" class="headerlink" title="简单理解语言概率模型"></a>简单理解语言概率模型</h4><p>在了解NNLM模型之前，我们先直观了解一下语言概率模型。  </p>
 <p>假设现在让你回答这样一道选择题：“今天我同学请我吃了一碗<strong>_</strong>。”备选答案包括“A.iphone B.阴阳师 C.炸酱面 D.可乐”。让你在四个答案中选择一个最合适的，你会怎么选？  </p>
 <p>显然，选项C在这里最为合适。可是，为什么要选C而不是其他答案呢？因为这里空缺部分的上下文文本决定了可选项对应的概率分布。因为上下文提到了“吃”，那么“iphone”和“阴阳师”看起来就不像是特别合理的答案，而上下文中又包含了“一碗”这样的量词，那么“炸酱面”是正确答案的概率显然要比“可乐”高得多。  </p>
@@ -147,7 +150,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/05/27/论文浅析-神经网络语言模型NNLM/" data-id="cjgg7n97k0013c2upo5mlgd3g" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2017/05/27/论文浅析-神经网络语言模型NNLM/" data-id="cjgg7qrcw000qctupncmtxrp6" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
