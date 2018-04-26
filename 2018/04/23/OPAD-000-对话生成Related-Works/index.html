@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>对话生成Related Works（一） | Rui Zhang&#39;s Blogs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="对话生成相关论文的Related Works整理。">
+<meta name="keywords" content="OPAD">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对话生成Related Works（一）">
+<meta property="og:url" content="http://ruizhang1993.github.io/2018/04/23/OPAD-000-对话生成Related-Works/index.html">
+<meta property="og:site_name" content="Rui Zhang&#39;s Blogs">
+<meta property="og:description" content="对话生成相关论文的Related Works整理。">
+<meta property="og:updated_time" content="2018-04-26T07:26:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="对话生成Related Works（一）">
+<meta name="twitter:description" content="对话生成相关论文的Related Works整理。">
+  
+    <link rel="alternate" href="/atom.xml" title="Rui Zhang&#39;s Blogs" type="application/atom+xml">
+  
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/css/styles.css">
+  
+
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="main-menu-navbar">
+      <ul class="nav navbar-nav">
+        
+          <li><a class=""
+                 href="/index.html">Home</a></li>
+        
+          <li><a class=""
+                 href="/archives/">Archives</a></li>
+        
+          <li><a class=""
+                 href="/tags/OPAD/">OPAD Project</a></li>
+        
+          <li><a class=""
+                 href="/about/">About Me</a></li>
+        
+      </ul>
+
+      <!--
+      <ul class="nav navbar-nav navbar-right">
+        
+          <li><a href="/atom.xml" title="RSS Feed"><i class="fa fa-rss"></i></a></li>
+        
+      </ul>
+      -->
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+  <div class="container">
+    <div class="blog-header">
+  <!--<h1 class="blog-title">Rui Zhang&#39;s Blogs</h1>-->
+  
+</div>
+
+    <div class="row">
+        <div class="col-sm-8 blog-main">
+          <article id="post-OPAD-000-对话生成Related-Works" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 class="article-title" itemprop="name">
+      对话生成Related Works（一）
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/2018/04/23/OPAD-000-对话生成Related-Works/" class="article-date"><time datetime="2018-04-23T07:48:24.000Z" itemprop="datePublished">2018-04-23</time></a>
+</div>
+
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>对话生成相关论文的Related Works整理。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="1-Learning-Discource-level-Diversity-for-Neural-Dialog-Models-using-Conditional-Variational-Autoencoders"><a href="#1-Learning-Discource-level-Diversity-for-Neural-Dialog-Models-using-Conditional-Variational-Autoencoders" class="headerlink" title="1. Learning Discource-level Diversity for Neural Dialog Models using Conditional Variational Autoencoders"></a>1. Learning Discource-level Diversity for Neural Dialog Models using Conditional Variational Autoencoders</h2><blockquote>
+<p>Since the emergence of the neural dialog model, the problem of output diversity has received much attention in the research community. Ideal output responses should be both coherent and diverse. To tackle this problem, one line of research has focused on augmenting the input of encoder-decoder models with richer context information, in order to generate more specific responses. Li et al, captured speakers’ characteristics by encoding background information and speaking style into the distributed embeddings, which are used to re-rank the generated response from an encoder-decoder model. Xing et al., maintain topic encoding based on Latent Dirichlet Allocation(LDA) of the conversation to encourage the model to output more topic coherent responses.  </p>
+</blockquote>
+<p>自从神经对话模型出现以来，输出的多样性问题在研究界受到了广泛关注。理想的应答输出应该是一致且多样化的。为了解决这个问题，一些研究主要关注于在编码器－解码器模型中增加更丰富的上下文信息输入，以生成更多具体的应答。Li等人通过将背景信息和对话风格进行编码，将对话者特征捕获到分布式表示中，并使用该分布式表示对编码器-解码器模型的生成结果进行重新排序。Xing等基于会话的LDA分布进行编码以鼓励模型产生更多话题相关的应答。</p>
+<blockquote>
+<p>On the other hand, many attempts have also been made to improve the architecture of encoder-decoder models. Li et al., proposed to optimize the standard encoder-decoder by maximizing the mutual information between input and output, which is turn reduced generic reponses. This approach penalized unconditionally high frequency responses, and favored responses that have high conditional probability given the input. Wiseman and Rush focused on improving the decoder network by alleviating the biases between training and testing. They introduced a search-based loss that directly optimized the networks for beam search decoding. The resulting model achieves better performance on word ordering, parsing and machine translation. Besides improving beam search, Li et al. pointed out that the MLE objective of an encoder-decoder model is unable to approximate the real-world goal of the conversation. Thus, they initialized a encoder-decoder model with MLE objective and leveraged reinforcement learning to fine tune the model by optimizing three heuristic rewards functions: informativity, coherence, and ease of answering.  </p>
+</blockquote>
+<p>另一方面，许多研究试图通过对编码器-解码器架构进行改进。Li等人提出通过最大化输入和输出之间的互信息来优化标准编码器-解码器，这种方法能够减少通用应答，无条件地惩罚高频响应，并偏向于在给定输入的情况下具有高条件概率的响应。Wiseman和Rush通过减少训练和测试之间的偏差来改善解码器网络。他们介绍了一种基于搜索，并直接优化了beam-search解码网络，所得到的模型在字词排序、语法分析和机器翻译方面得到了更好的性能。除了优化集束搜索外，Li等人指出编码器-解码器的MLE目标无法逼近真实世界的对话目标。因此，他们使用MLE目标结合强化学习，通过优化信息度、一致性和易于回答性三种启发式奖励来微调模型。</p>
+<h2 id="2-Controllable-Text-Generation"><a href="#2-Controllable-Text-Generation" class="headerlink" title="2. Controllable Text Generation"></a>2. Controllable Text Generation</h2><blockquote>
+<p>Recent research has made remarkable progress in deep generative models. Variational Autoencoders (VAEs) consist of encoder and generator networks which encode a data example to a latent representation and generate samples from the latent space, respectively. The model is trained by maximizing a variational lower bound on the log-likelihood of observed data under the generative model. The vanilla VAEs are incompatible with discrete latent variables as they hinder differentiable reparamerization for learning the encoder. The wake-sleep algorithm introduced for training deep directed graphical models shares similarity with VAEs by also combining an inference network with the generator. The wake phrase updates generator with the samples generated from the inference network on the training data, while the sleep phased updates the inference network based on the samples from the generator. Our method effectively combines VAEs with an extended wake-sleep algorithm in which the sleep procedure updates both the generator and the inference network (i.e. discriminators), enabling efficient collaborative semi-supervised learning.</p>
+</blockquote>
+<p>近来的研究在深度生成模型上取得了显著进展。变分自编码器(VAEs)有编码器和生成器网络组成，它将一个数据样例编码为潜在表示并从潜在空间生成样本。该模型通过最大化生成模型下观测数据的对数似然变分下界来进行训练。Vanilla 变分自编码器与离散的潜变量不相容，因为他们妨碍学习编码器过程中的可重新参数化。用以训练深度有向图模型的唤醒-睡眠算法与VAE具有相似性，通过将推理网络和生成器相结合。唤醒阶段通过推理网络基于训练数据生成的样例更新生成器，而睡眠阶段通过推理网络基于生成器的阳例更新推理网络。我们的方法有效地将VAE和扩展的唤醒-睡眠算法相结合，在睡眠过程中同时更新生成器和推理网络，从而实现有效的协作半监督学习。</p>
+<blockquote>
+<p>Besides reconstruction in the raw data space, discriminator-based metric provides a different way for learning the generator, in which the discriminator assesses synthesized samples from the generator and feedbacks learning signals. For instance, GANs use a discriminator to feedback the probability of a sample being recognized as a real example. Larsen et al. combine VAEs and GANs for enhance image generation. Dosovitskiy &amp; Brox; Gatys et al. use discriminator networks for measuring high-level perceptual similarity. Applying discriminators to text generation is difficule due to the non-differentiability of the discrete samples. Yu et al. resort to policy learning which tends to have high variance during training. Zhang et al.; Kusner &amp; Hernndez-Lobato apply continuous approximations with only preliminary qualitative results. Bowman et al.; Tang et al. instead use VAEs without discriminators. All these text generation methods do not learn disentangled latent representations, resulting in randomized and uncontrollable samples. In contrast, disentangled generation in visual domain has made impressive progress. For instance, InfoGAN, which resembles the sleep procedure of our extended VAE/wake-sleep algorithm, disentangles latent representation in an unsupervised manner, while the semantic of each dimension is observed after training rather than designated by users in a controllable way. Siddharth et al.; Kulkarni et al.; Kingma et al. build in the context of VAEs and obtain disentangled image representations with semi-supervised learning. In contrast, our model combines VAEs with discriminators which provide a better, holistic metric compared to element-wise reconstruction, and thus boost effective imposition of semantic structures. Moreover, most of these approaches have only focused on the disentanglement of the structured part of latent representations, while ignoring potential dependence of the structured latent code with attributes not explicitly encoded. We address this by introducing an independency constraint, and show its effectiveness for improving interpretability.</p>
+</blockquote>
+<p>除了在原始数据空间中的重构之外，基于鉴别器的度量提供了不同的方式以学习生成器，鉴别器评估生成器的合成样例并反馈学习信号。例如，GANs使用一个鉴别器来反馈一个样本被识别为真实样本的概率。Larsen等人将VAE和GANs组合以增强图像生成。Dosovitskiy和Brox; Gatys等使用鉴别器网络来衡量高维感知相似性。由于离散样本的不可区分性，在文本生成中应用鉴别器是困难的。Yu等采用在训练过程中有很高差异的策略学习方法。Zhang等; Kusner和Hernndez-Lobato采用仅有初步定性结果的连续近似。Bowman等; Tang等则使用不带有鉴别器的VAE。这些文本生成方法都不能学习松散的潜在表示，进而导致随机和不可控制的采样。相比之下，视觉领域的分离生成取得了令人瞩目的进展。例如，InfoGAN类似于我们扩展VAE/睡眠-唤醒算法，以无监督的方式分解潜在表示，而每个维度的语义在训练后被观察到而不是由用户通过可控方式指定。Siddharth等; Kulkarni等; Kingma等在VAE的背景之下通过半监督学习获得分解的图像表示。相比之下，我们的模型结合了VAE和鉴别器，与元素级重构相比，提供了更好的整体度量，从而提高了语义结构的有效性。此外，这些方法中的大多数只集中于潜在表示的结构化部分的分解，而忽略了结构化潜在编码与未明确编码的属性的潜在依赖性。我们通过引入独立约束来解决这个问题，并展示它对提高可解释性的有效性。</p>
+<h2 id="3-A-Persona-Based-Neural-Conversation-Model"><a href="#3-A-Persona-Based-Neural-Conversation-Model" class="headerlink" title="3. A Persona-Based Neural Conversation Model"></a>3. A Persona-Based Neural Conversation Model</h2><blockquote>
+<p>This work follows the line of investigation initiated by Ritter et al. who treat genertion of conversational dialog as a statistical machine translation (SMT) problem. Ritter et al. represents a break with previous and contemporaneous dialog work that relies extensively on hand-coded rules, typically either cuilding statistical models on top of heuristic rules or templates or learning generation rules from a minimal set of authored rules or labels. More recently Wen et al. have used a Long Short-Term Memory to learn from unaligned data in order to reduce the heuristic space of sentence planning and surface realization.</p>
+</blockquote>
+<p>这项工作遵循Ritter等人的研究路线，将对话生辰看作统计机器翻译问题对待。Ritter等代表了与以前同时期的广泛依赖于手工编码规则的对话工作的一次突破，采用启发式规则或在模板上建立统计模型，或从最小的一组创作规则或标签中学习生成规则。近来Wen等使用LSTM模型学习非对齐数据以减少句子规划和表面实现的启发式空间。</p>
+<blockquote>
+<p>The SMT model proposed by Ritter et al., on the other hand, is end-to-end, purely data-driven, and contains no explicit model of dialog structure; the model learns to converse from human-to-human conversational corpora. Progress in SMT stemming from the use of neural language models has inspired efforts to extend thes neural techniques to SMT-based conversational response generation. Sordoni et al. augments Ritter et al. by rescoring outputs using a SEQ2SEQ model conditioned on conversation history. ther researchers have recently use SEQ2SEQ to directly generate responses in an end-to-end fashion without relying on SMT phrase tables. Serban et al. propose a hierarchical neural model aimed at capturing dependencies over an extended conversation history. Recent work by Li et al. measures mutual information between message and response in order to reduce the proportion of generic responses typical of SEQ2SEQ systems. Yao et al. employ an intention network to maintain the relevance of responses.</p>
+</blockquote>
+<p>另一方面，Ritter等人提出的SMT模型是端到端的、纯数据驱动的，并且不包含明确的对话结构模型。模型从人类和人类交流语料中学习交谈。SMT研究中神经语言模型的使用促进了基于SMT的对话应答生产技术的发展。Sordoni等采用以历史对话记录为条件的Seq2Seq模型对Ritter的工作进行补充。研究人员使用Seq2Seq直接生成端到端的响应，而不依赖于SMT短语表。Serban等提出一个层次化的神经模型旨在捕获扩展的对话历史中的依赖。Li等近期的工作通过测量消息和相应之间的互信息以减少典型的Seq2Seq系统通用响应的比例。Yao等采用意向网络来维持应答的相关性。</p>
+<blockquote>
+<p>Modeling of users and speakers has been extensively studied within the standard dialog modeling framework. Since generating meaningful responses in an open-domain scenario is intrinsically difficult in conventional dialog systems, existing models often focus on generalizing character style on the basis of qualitative statistical analysis. The present work, by contrast, is in the vein of the SEQ2SEQ models of Vinyals and Le and Li et al., enriching these models by training persona vectors directly from conversational data and relevant side-information, and incorporating these directly into the decoder.</p>
+</blockquote>
+<p>对用户和演讲者的建模已经在标准的对话模型框架中得到广泛研究。由于在开放领域场景中产生有意义的反应在传统的对话系统中本质上是困难的，所以现有模型主要集中在定性统计分析的基础上。本工作通过直接从会话数据和相关副信息训练人物矢量，并将这些模型并入解码器以丰富模型。</p>
+
+      
+    </div>
+
+    
+      
+
+    
+
+    <footer class="article-footer">
+      <a data-url="http://ruizhang1993.github.io/2018/04/23/OPAD-000-对话生成Related-Works/" data-id="cjgg7fznj000883up7qo2s3ad" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OPAD/">OPAD</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+    
+<ul id="article-nav" class="nav nav-pills nav-justified">
+  
+  <li role="presentation">
+    <a href="/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/" id="article-nav-older" class="article-nav-link-wrap">
+      <i class="fa fa-chevron-left pull-left"></i>
+      <span class="article-nav-link-title">[SMP-SA2017] 终身机器学习LML</span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+
+  
+</article>
+
+
+
+
+        </div>
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          
+  <div class="sidebar-module sidebar-module-inset">
+  <h4>About</h4>
+  <font size="4"><b>张睿</b></font></br> - 华南理工大学 博士生 </br> - 研究方向： </br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自然语言处理、聊天机器人 </br> </br> <font size="4"><b>Rui Zhang</b></font></br> - Ph.D student @ SCUT </br> - Research domains: </br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NLP, chatbot
+
+</div>
+
+
+  
+
+
+  
+  <div class="sidebar-module">
+    <h4>Tags</h4>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/CNN/">CNN</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Lex/">Lex</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Mac/">Mac</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/NLP/">NLP</a><span class="sidebar-module-list-count">4</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/OPAD/">OPAD</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/PLY/">PLY</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Python/">Python</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/SMPSA2017/">SMPSA2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Windows7/">Windows7</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Yacc/">Yacc</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/cuda/">cuda</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/deep-learning/">deep learning</a><span class="sidebar-module-list-count">6</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/numpy/">numpy</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/python/">python</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/tensorflow/">tensorflow</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/xgboost/">xgboost</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/会议笔记/">会议笔记</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/数据挖掘/">数据挖掘</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/编译原理/">编译原理</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/论文笔记/">论文笔记</a><span class="sidebar-module-list-count">2</span></li></ul>
+  </div>
+
+
+
+  
+  <div class="sidebar-module">
+    <h4>Tag Cloud</h4>
+    <p class="tagcloud">
+      <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/Lex/" style="font-size: 10px;">Lex</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/NLP/" style="font-size: 16.67px;">NLP</a> <a href="/tags/OPAD/" style="font-size: 10px;">OPAD</a> <a href="/tags/PLY/" style="font-size: 10px;">PLY</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SMPSA2017/" style="font-size: 10px;">SMPSA2017</a> <a href="/tags/Windows7/" style="font-size: 10px;">Windows7</a> <a href="/tags/Yacc/" style="font-size: 10px;">Yacc</a> <a href="/tags/cuda/" style="font-size: 10px;">cuda</a> <a href="/tags/deep-learning/" style="font-size: 20px;">deep learning</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/tensorflow/" style="font-size: 13.33px;">tensorflow</a> <a href="/tags/xgboost/" style="font-size: 10px;">xgboost</a> <a href="/tags/会议笔记/" style="font-size: 10px;">会议笔记</a> <a href="/tags/数据挖掘/" style="font-size: 10px;">数据挖掘</a> <a href="/tags/编译原理/" style="font-size: 10px;">编译原理</a> <a href="/tags/论文笔记/" style="font-size: 13.33px;">论文笔记</a>
+    </p>
+  </div>
+
+
+  
+  <div class="sidebar-module">
+    <h4>Archives</h4>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2018/04/">April 2018</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/06/">June 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/05/">May 2017</a><span class="sidebar-module-list-count">4</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/04/">April 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/01/">January 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/11/">November 2016</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/07/">July 2016</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/05/">May 2016</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/04/">April 2016</a><span class="sidebar-module-list-count">2</span></li></ul>
+  </div>
+
+
+
+  
+  <div class="sidebar-module">
+    <h4>Recents</h4>
+    <ul class="sidebar-module-list">
+      
+        <li>
+          <a href="/2018/04/23/OPAD-000-对话生成Related-Works/">对话生成Related Works（一）</a>
+        </li>
+      
+        <li>
+          <a href="/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/">[SMP-SA2017] 终身机器学习LML</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/27/论文浅析-神经网络语言模型NNLM/">神经网络语言模型NNLM</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/21/卷积操作的简单理解/">卷积操作的简单理解</a>
+        </li>
+      
+        <li>
+          <a href="/2017/05/19/论文浅析-构建简单的神经网络对话生成模型/">构建简单的神经网络对话生成模型</a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+
+        </div>
+    </div>
+  </div>
+  <footer class="blog-footer">
+  <div class="container">
+    <div id="footer-info" class="inner">
+      &copy; 2018 RuiZhang1993<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+  
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" integrity="sha384-8gBf6Y4YYq7Jx97PIqmTwLPin4hxIzQw5aDmUg/DDhul9fFpbbLcLh3nTIIDJKhx" crossorigin="anonymous"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+</body>
+</html>
