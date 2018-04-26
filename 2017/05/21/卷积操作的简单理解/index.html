@@ -5,23 +5,23 @@
   
   <title>卷积操作的简单理解 | Rui Zhang&#39;s Blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="什么是卷积神经网络简单来说，卷积神经网络是指那些至少在网络的一层中使用卷积运算来替代一般的矩阵乘法运算的神经网络。常用的卷积网络通常由很多层的卷积运算和池化运算堆叠起来组成。这篇文章就简单来讲讲什么是卷积运算、池化运算，以及为什么要使用卷积运算。">
+  <meta name="description" content="简单来说，卷积神经网络是指那些至少在网络的一层中使用卷积运算来替代一般的矩阵乘法运算的神经网络。常用的卷积网络通常由很多层的卷积运算和池化运算堆叠起来组成。这篇文章就简单来讲讲什么是卷积运算、池化运算，以及为什么要使用卷积运算。">
 <meta name="keywords" content="deep learning,CNN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="卷积操作的简单理解">
 <meta property="og:url" content="http://ruizhang1993.github.io/2017/05/21/卷积操作的简单理解/index.html">
 <meta property="og:site_name" content="Rui Zhang&#39;s Blogs">
-<meta property="og:description" content="什么是卷积神经网络简单来说，卷积神经网络是指那些至少在网络的一层中使用卷积运算来替代一般的矩阵乘法运算的神经网络。常用的卷积网络通常由很多层的卷积运算和池化运算堆叠起来组成。这篇文章就简单来讲讲什么是卷积运算、池化运算，以及为什么要使用卷积运算。">
+<meta property="og:description" content="简单来说，卷积神经网络是指那些至少在网络的一层中使用卷积运算来替代一般的矩阵乘法运算的神经网络。常用的卷积网络通常由很多层的卷积运算和池化运算堆叠起来组成。这篇文章就简单来讲讲什么是卷积运算、池化运算，以及为什么要使用卷积运算。">
 <meta property="og:image" content="http://i4.buimg.com/587765/2b822f6db03e5bbf.png">
 <meta property="og:image" content="http://i4.buimg.com/587765/f6e87267c7781cea.png">
 <meta property="og:image" content="http://i1.piimg.com/587765/11577f2b0c1e3c24.png">
 <meta property="og:image" content="http://i4.buimg.com/587765/3af6ad77e8d3200a.png">
 <meta property="og:image" content="http://i4.buimg.com/587765/080d0b01c8abda26.png">
 <meta property="og:image" content="http://i4.buimg.com/587765/5a09c3ffc11a2d38.png">
-<meta property="og:updated_time" content="2017-08-24T03:32:55.000Z">
+<meta property="og:updated_time" content="2018-04-26T07:32:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="卷积操作的简单理解">
-<meta name="twitter:description" content="什么是卷积神经网络简单来说，卷积神经网络是指那些至少在网络的一层中使用卷积运算来替代一般的矩阵乘法运算的神经网络。常用的卷积网络通常由很多层的卷积运算和池化运算堆叠起来组成。这篇文章就简单来讲讲什么是卷积运算、池化运算，以及为什么要使用卷积运算。">
+<meta name="twitter:description" content="简单来说，卷积神经网络是指那些至少在网络的一层中使用卷积运算来替代一般的矩阵乘法运算的神经网络。常用的卷积网络通常由很多层的卷积运算和池化运算堆叠起来组成。这篇文章就简单来讲讲什么是卷积运算、池化运算，以及为什么要使用卷积运算。">
 <meta name="twitter:image" content="http://i4.buimg.com/587765/2b822f6db03e5bbf.png">
   
     <link rel="alternate" href="/atom.xml" title="Rui Zhang&#39;s Blogs" type="application/atom+xml">
@@ -117,8 +117,11 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="什么是卷积神经网络"><a href="#什么是卷积神经网络" class="headerlink" title="什么是卷积神经网络"></a>什么是卷积神经网络</h4><p>简单来说，卷积神经网络是指那些至少在网络的一层中使用卷积运算来替代一般的矩阵乘法运算的神经网络。<br>常用的卷积网络通常由很多层的卷积运算和池化运算堆叠起来组成。这篇文章就简单来讲讲什么是卷积运算、池化运算，以及为什么要使用卷积运算。</p>
+        <blockquote>
+<p>简单来说，卷积神经网络是指那些至少在网络的一层中使用卷积运算来替代一般的矩阵乘法运算的神经网络。常用的卷积网络通常由很多层的卷积运算和池化运算堆叠起来组成。这篇文章就简单来讲讲什么是卷积运算、池化运算，以及为什么要使用卷积运算。</p>
+</blockquote>
 <a id="more"></a>
+<h4 id="什么是卷积神经网络"><a href="#什么是卷积神经网络" class="headerlink" title="什么是卷积神经网络"></a>什么是卷积神经网络</h4><p>简单来说，卷积神经网络是指那些至少在网络的一层中使用卷积运算来替代一般的矩阵乘法运算的神经网络。<br>常用的卷积网络通常由很多层的卷积运算和池化运算堆叠起来组成。这篇文章就简单来讲讲什么是卷积运算、池化运算，以及为什么要使用卷积运算。</p>
 <h4 id="卷积核与简单的卷积操作"><a href="#卷积核与简单的卷积操作" class="headerlink" title="卷积核与简单的卷积操作"></a>卷积核与简单的卷积操作</h4><p>假设我们用下面一条公式表示卷积运算：<br>y = w * x<br>其中，x是我们的输入，y是我们的输出（或者称为特征映射），w是卷积的核函数。卷积核的作用就相当于w在这条式子上的作用。  </p>
 <p>上面的公式看起来跟我们小学或者初中学习过的一元一次函数非常相似，只不过这里的x和y不再是一个简单的实数，而是一个网格状的数据（例如，矩阵）。</p>
 <p>让我们举一个彩色图像二维卷积的例子（例子和图片来自于台湾大学李宏毅老师2016年《深度学习》课程的课件）。我们知道计算机中的彩色图像是由红、绿、蓝三组颜色通道构成的，如果你熟悉Photoshop或者前端技术的话你会知道通常这三组颜色可以分别取值0~255。为了方便起见，假设对于每种颜色通道我们只有两种取值方案：0和1。那么一张彩色图像就可以被当作由3张颜色通道图像构成，每张图像的每个像素点取值为0或者1。<br><img src="http://i4.buimg.com/587765/2b822f6db03e5bbf.png" alt="图1"><br>现在我们定义两个不同的卷积核，这里我们称之为filter。卷积核同样是一个m行n列的二维结构，假定我们取m=n=3。那么我们将得到：<br><img src="http://i4.buimg.com/587765/f6e87267c7781cea.png" alt="图2"><br>这时你可能会问，卷积核上的这些数字是怎么确定的？实际上，在模型初始化的过程中，这些数字通常是一些比较小的随机数，为了方便演示这里我们将它随机为1或者-1两个值。  </p>
@@ -144,7 +147,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/05/21/卷积操作的简单理解/" data-id="cjgg7fzoh000m83upnky6h7yw" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2017/05/21/卷积操作的简单理解/" data-id="cjgg7n979000yc2upz99r1kxz" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -230,7 +233,7 @@
         </li>
       
         <li>
-          <a href="/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/">[SMP-SA2017] 终身机器学习LML</a>
+          <a href="/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/">终身机器学习LML</a>
         </li>
       
         <li>

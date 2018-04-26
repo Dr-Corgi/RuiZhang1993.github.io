@@ -5,13 +5,13 @@
   
   <title>RNN循环神经网络 | Rui Zhang&#39;s Blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="概述循环神经网络(Recurrent neural networks, RNNs)是处理序列型数据的主要工具。特别是针对输入和输出长度不能确定的数据。在RNN中最基本的一个思想是共享参数(sharing parameters)。共享参数贯穿了RNN的整个流程。相比于传统的多层神经网络，RNN的网络参数在多个时间步上共享，以允许网络处理不同长度的输入数据。换句话说，如果RNN为每一个时间步都设置了一">
+  <meta name="description" content="循环神经网络(Recurrent neural networks, RNNs)是处理序列型数据的主要工具。特别是针对输入和输出长度不能确定的数据。在RNN中最基本的一个思想是共享参数(sharing parameters)。共享参数贯穿了RNN的整个流程。相比于传统的多层神经网络，RNN的网络参数在多个时间步上共享，以允许网络处理不同长度的输入数据。换句话说，如果RNN为每一个时间步都设置了一系">
 <meta name="keywords" content="deep learning,NLP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RNN循环神经网络">
 <meta property="og:url" content="http://ruizhang1993.github.io/2016/04/24/Deep-Learning-RNN循环神经网络/index.html">
 <meta property="og:site_name" content="Rui Zhang&#39;s Blogs">
-<meta property="og:description" content="概述循环神经网络(Recurrent neural networks, RNNs)是处理序列型数据的主要工具。特别是针对输入和输出长度不能确定的数据。在RNN中最基本的一个思想是共享参数(sharing parameters)。共享参数贯穿了RNN的整个流程。相比于传统的多层神经网络，RNN的网络参数在多个时间步上共享，以允许网络处理不同长度的输入数据。换句话说，如果RNN为每一个时间步都设置了一">
+<meta property="og:description" content="循环神经网络(Recurrent neural networks, RNNs)是处理序列型数据的主要工具。特别是针对输入和输出长度不能确定的数据。在RNN中最基本的一个思想是共享参数(sharing parameters)。共享参数贯穿了RNN的整个流程。相比于传统的多层神经网络，RNN的网络参数在多个时间步上共享，以允许网络处理不同长度的输入数据。换句话说，如果RNN为每一个时间步都设置了一系">
 <meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160424/img02.png">
 <meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160424/img01.gif">
 <meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? \large s_t = f_\theta (s_{t-1}, x_t)">
@@ -77,10 +77,10 @@
 <meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160424/img13.png">
 <meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160424/img14.png">
 <meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160424/img15.png">
-<meta property="og:updated_time" content="2017-08-25T03:51:37.000Z">
+<meta property="og:updated_time" content="2018-04-26T07:30:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RNN循环神经网络">
-<meta name="twitter:description" content="概述循环神经网络(Recurrent neural networks, RNNs)是处理序列型数据的主要工具。特别是针对输入和输出长度不能确定的数据。在RNN中最基本的一个思想是共享参数(sharing parameters)。共享参数贯穿了RNN的整个流程。相比于传统的多层神经网络，RNN的网络参数在多个时间步上共享，以允许网络处理不同长度的输入数据。换句话说，如果RNN为每一个时间步都设置了一">
+<meta name="twitter:description" content="循环神经网络(Recurrent neural networks, RNNs)是处理序列型数据的主要工具。特别是针对输入和输出长度不能确定的数据。在RNN中最基本的一个思想是共享参数(sharing parameters)。共享参数贯穿了RNN的整个流程。相比于传统的多层神经网络，RNN的网络参数在多个时间步上共享，以允许网络处理不同长度的输入数据。换句话说，如果RNN为每一个时间步都设置了一系">
 <meta name="twitter:image" content="http://ruizhang1993.github.io/img/article_img/160424/img02.png">
   
     <link rel="alternate" href="/atom.xml" title="Rui Zhang&#39;s Blogs" type="application/atom+xml">
@@ -176,7 +176,12 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>循环神经网络(Recurrent neural networks, RNNs)是处理<strong>序列型数据</strong>的主要工具。特别是针对输入和输出长度不能确定的数据。在RNN中最基本的一个思想是<strong>共享参数(sharing parameters)</strong>。共享参数贯穿了RNN的整个流程。相比于传统的多层神经网络，RNN的网络参数在多个时间步上共享，以允许网络处理不同长度的输入数据。换句话说，如果RNN为每一个时间步都设置了一系列的参数，那么当RNN遇到一个输入样例，其长度在训练期间没有遇到过（即没有相同长度的训练样例）时，无法正确地处理。因此，循环神经网络共享参数的特性使得它能够处理不同长度的数据，特别是在语音识别的实际运用中。<br><a id="more"></a><br><img src="/img/article_img/160424/img02.png" alt="img02"></p>
+        <blockquote>
+<p>循环神经网络(Recurrent neural networks, RNNs)是处理<strong>序列型数据</strong>的主要工具。特别是针对输入和输出长度不能确定的数据。在RNN中最基本的一个思想是<strong>共享参数(sharing parameters)</strong>。共享参数贯穿了RNN的整个流程。相比于传统的多层神经网络，RNN的网络参数在多个时间步上共享，以允许网络处理不同长度的输入数据。换句话说，如果RNN为每一个时间步都设置了一系列的参数，那么当RNN遇到一个输入样例，其长度在训练期间没有遇到过（即没有相同长度的训练样例）时，无法正确地处理。因此，循环神经网络共享参数的特性使得它能够处理不同长度的数据，特别是在语音识别的实际运用中。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>循环神经网络(Recurrent neural networks, RNNs)是处理<strong>序列型数据</strong>的主要工具。特别是针对输入和输出长度不能确定的数据。在RNN中最基本的一个思想是<strong>共享参数(sharing parameters)</strong>。共享参数贯穿了RNN的整个流程。相比于传统的多层神经网络，RNN的网络参数在多个时间步上共享，以允许网络处理不同长度的输入数据。换句话说，如果RNN为每一个时间步都设置了一系列的参数，那么当RNN遇到一个输入样例，其长度在训练期间没有遇到过（即没有相同长度的训练样例）时，无法正确地处理。因此，循环神经网络共享参数的特性使得它能够处理不同长度的数据，特别是在语音识别的实际运用中。</p>
+<p><img src="/img/article_img/160424/img02.png" alt="img02"></p>
 <h2 id="循环神经网络的展开"><a href="#循环神经网络的展开" class="headerlink" title="循环神经网络的展开"></a>循环神经网络的展开</h2><p>在对循环神经网络的细节进行介绍之前，不妨首先通过展开循环神经网络来对它有个清晰的认识。在讨论循环神经网络之前，我们先简单的了解一下循环神经网络的意义。  </p>
 <p>事实上，人类的语言和记忆，往往是和一个特定的序列相关的。我们对一个事件B的记忆，往往与这一个事件B之前的另一个事件A相关联。举个例子，我们唱歌的时候，对于那些自己熟悉的歌曲，只要给出一句歌词，我们就能很自然而然的接着唱出下一句。然而，当给出一句歌词，然后要我们迅速想起这句歌词的前一句是什么时，对大多数人来说恐怕都是相当困难的。甚至，有不少人需要从这首歌的第一句重新唱起，才能想起来某一句特定歌词的前面一句究竟是什么。  </p>
 <p>上述的事实从某个角度上说明人类在处理语言或者说文本的时候，确实存在着某种“时序上的依赖”，而循环神经网络正是利用了这样一种依赖。这也就说明了为什么RNN在语音识别的实际运用中有着不错的效果。同样的道理，RNN的特性在NLP中也能得到很好的发挥。  </p>
@@ -229,7 +234,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2016/04/24/Deep-Learning-RNN循环神经网络/" data-id="cjgg7fzn8000483uphj5trw3r" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2016/04/24/Deep-Learning-RNN循环神经网络/" data-id="cjgg7n94y0001c2upt60dlv1a" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -315,7 +320,7 @@
         </li>
       
         <li>
-          <a href="/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/">[SMP-SA2017] 终身机器学习LML</a>
+          <a href="/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/">终身机器学习LML</a>
         </li>
       
         <li>

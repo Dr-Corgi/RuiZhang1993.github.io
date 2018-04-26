@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://ruizhang1993.github.io/2016/05/17/Python2-7注册表信息修复/index.html">
 <meta property="og:site_name" content="Rui Zhang&#39;s Blogs">
 <meta property="og:description" content="今天在Python2.7环境下安装MySQLdb的时候遇到了一个问题：由于我之前使用了Anaconda2作为Python环境，而没有使用原生Python2.7，导致在Win7系统注册表中不存在Python路径信息。而MySQLdb在安装时会自动通过注册表搜索Python路径，一旦不能在注册表中读取到Python路径，就不能成功安装MySQLdb。">
-<meta property="og:updated_time" content="2017-08-25T03:52:42.000Z">
+<meta property="og:updated_time" content="2018-04-26T07:29:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python2.7注册表信息修复">
 <meta name="twitter:description" content="今天在Python2.7环境下安装MySQLdb的时候遇到了一个问题：由于我之前使用了Anaconda2作为Python环境，而没有使用原生Python2.7，导致在Win7系统注册表中不存在Python路径信息。而MySQLdb在安装时会自动通过注册表搜索Python路径，一旦不能在注册表中读取到Python路径，就不能成功安装MySQLdb。">
@@ -110,7 +110,10 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <p>今天在Python2.7环境下安装MySQLdb的时候遇到了一个问题：由于我之前使用了Anaconda2作为Python环境，而没有使用原生Python2.7，导致在Win7系统注册表中不存在Python路径信息。而MySQLdb在安装时会自动通过注册表搜索Python路径，一旦不能在注册表中读取到Python路径，就不能成功安装MySQLdb。<br><a id="more"></a></p>
+        <blockquote>
+<p>今天在Python2.7环境下安装MySQLdb的时候遇到了一个问题：由于我之前使用了Anaconda2作为Python环境，而没有使用原生Python2.7，导致在Win7系统注册表中不存在Python路径信息。而MySQLdb在安装时会自动通过注册表搜索Python路径，一旦不能在注册表中读取到Python路径，就不能成功安装MySQLdb。  </p>
+</blockquote>
+<a id="more"></a>
 <p>因此，解决上述问题的方案即是要通过修改系统注册表。<br>首先，建立一个以.reg结尾的文件 python.reg。使用notepad等编辑工具打开，输入以下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">Windows Registry Editor Version 5.00</div><div class="line"></div><div class="line">[HKEY_LOCAL_MACHINE\SOFTWARE\Python]</div><div class="line"></div><div class="line">[HKEY_LOCAL_MACHINE\SOFTWARE\Python\PythonCore]</div><div class="line"></div><div class="line">[HKEY_LOCAL_MACHINE\SOFTWARE\Python\PythonCore\2.7]</div><div class="line"></div><div class="line">[HKEY_LOCAL_MACHINE\SOFTWARE\Python\PythonCore\2.7\Help]</div><div class="line"></div><div class="line">[HKEY_LOCAL_MACHINE\SOFTWARE\Python\PythonCore\2.7\Help\Main Python Documentation]</div><div class="line">@=&quot;C:\\Anaconda2\\Doc\\Python279.chm&quot;</div><div class="line"></div><div class="line">[HKEY_LOCAL_MACHINE\SOFTWARE\Python\PythonCore\2.7\InstallPath]</div><div class="line">@=&quot;C:\\Anaconda2\\&quot;</div><div class="line"></div><div class="line">[HKEY_LOCAL_MACHINE\SOFTWARE\Python\PythonCore\2.7\InstallPath\InstallGroup]</div><div class="line">@=&quot;Python 2.7&quot;</div><div class="line"></div><div class="line">[HKEY_LOCAL_MACHINE\SOFTWARE\Python\PythonCore\2.7\Modules]</div><div class="line"></div><div class="line">[HKEY_LOCAL_MACHINE\SOFTWARE\Python\PythonCore\2.7\PythonPath]</div><div class="line">@=&quot;C:\\Anaconda2\\Lib;C:\\Anaconda2\\DLLs;C:\\Anaconda2\\Lib\\lib-tk&quot;</div></pre></td></tr></table></figure></p>
 <p>其中，“C:\Anaconda2\”是我自己的Python路径。需要根据自己实际的Python路径来修改这个路径值。<br>最后，运行该.reg文件以修改注册表信息就可以了。</p>
 <h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><ul>
@@ -126,7 +129,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2016/05/17/Python2-7注册表信息修复/" data-id="cjgg7fznl000983upxtjpjyn8" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2016/05/17/Python2-7注册表信息修复/" data-id="cjgg7n96t000pc2up0ny78hnx" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -212,7 +215,7 @@
         </li>
       
         <li>
-          <a href="/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/">[SMP-SA2017] 终身机器学习LML</a>
+          <a href="/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/">终身机器学习LML</a>
         </li>
       
         <li>

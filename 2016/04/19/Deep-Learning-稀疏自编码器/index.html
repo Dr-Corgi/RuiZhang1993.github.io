@@ -5,13 +5,13 @@
   
   <title>稀疏自编码器 | Rui Zhang&#39;s Blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="自编码器 Autoencoders自编码器网络是一个应用了BP的无监督学习算法，其目标输出之等同于其输入值。也就是说，该算法试图学习一个f(x)=x的函数。   下图是一个自编码器：自编码器试图学习一个恒等函数，但是由于我们通常会限制隐藏层神经元的个数，因此我们的自编码器所学习到的通常是输入数据的一个压缩表示。">
+  <meta name="description" content="自编码器网络是一个应用了BP的无监督学习算法，其目标输出之等同于其输入值。也就是说，该算法试图学习一个f(x)=x的函数。">
 <meta name="keywords" content="deep learning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="稀疏自编码器">
 <meta property="og:url" content="http://ruizhang1993.github.io/2016/04/19/Deep-Learning-稀疏自编码器/index.html">
 <meta property="og:site_name" content="Rui Zhang&#39;s Blogs">
-<meta property="og:description" content="自编码器 Autoencoders自编码器网络是一个应用了BP的无监督学习算法，其目标输出之等同于其输入值。也就是说，该算法试图学习一个f(x)=x的函数。   下图是一个自编码器：自编码器试图学习一个恒等函数，但是由于我们通常会限制隐藏层神经元的个数，因此我们的自编码器所学习到的通常是输入数据的一个压缩表示。">
+<meta property="og:description" content="自编码器网络是一个应用了BP的无监督学习算法，其目标输出之等同于其输入值。也就是说，该算法试图学习一个f(x)=x的函数。">
 <meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160419/img01.png">
 <meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? a_j^{(2)}">
 <meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? a_j^{(2)}(x)">
@@ -37,10 +37,10 @@
 <meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160419/img12.png">
 <meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160419/img12.png">
 <meta property="og:image" content="http://ruizhang1993.github.io/img/article_img/160419/img12.png">
-<meta property="og:updated_time" content="2017-08-25T03:52:16.000Z">
+<meta property="og:updated_time" content="2018-04-26T07:30:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="稀疏自编码器">
-<meta name="twitter:description" content="自编码器 Autoencoders自编码器网络是一个应用了BP的无监督学习算法，其目标输出之等同于其输入值。也就是说，该算法试图学习一个f(x)=x的函数。   下图是一个自编码器：自编码器试图学习一个恒等函数，但是由于我们通常会限制隐藏层神经元的个数，因此我们的自编码器所学习到的通常是输入数据的一个压缩表示。">
+<meta name="twitter:description" content="自编码器网络是一个应用了BP的无监督学习算法，其目标输出之等同于其输入值。也就是说，该算法试图学习一个f(x)=x的函数。">
 <meta name="twitter:image" content="http://ruizhang1993.github.io/img/article_img/160419/img01.png">
   
     <link rel="alternate" href="/atom.xml" title="Rui Zhang&#39;s Blogs" type="application/atom+xml">
@@ -136,9 +136,12 @@
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="自编码器-Autoencoders"><a href="#自编码器-Autoencoders" class="headerlink" title="自编码器 Autoencoders"></a>自编码器 Autoencoders</h2><p><strong>自编码器网络</strong>是一个应用了BP的无监督学习算法，其目标输出之等同于其输入值。也就是说，该算法试图学习一个f(x)=x的函数。  </p>
-<p>下图是一个自编码器：<br><img src="/img/article_img/160419/img01.png" alt="autoencoder"><br>自编码器试图学习一个恒等函数，但是由于我们通常会限制隐藏层神经元的个数，因此我们的自编码器所学习到的通常是输入数据的一个压缩表示。  </p>
+        <blockquote>
+<p><strong>自编码器网络</strong>是一个应用了BP的无监督学习算法，其目标输出之等同于其输入值。也就是说，该算法试图学习一个f(x)=x的函数。</p>
+</blockquote>
 <a id="more"></a>
+<h2 id="自编码器-Autoencoders"><a href="#自编码器-Autoencoders" class="headerlink" title="自编码器 Autoencoders"></a>自编码器 Autoencoders</h2><p><strong>自编码器网络</strong>是一个应用了BP的无监督学习算法，其目标输出之等同于其输入值。也就是说，该算法试图学习一个f(x)=x的函数。  </p>
+<p>下图是一个自编码器：<br><img src="/img/article_img/160419/img01.png" alt="autoencoder"><br>自编码器试图学习一个恒等函数，但是由于我们通常会限制隐藏层神经元的个数，因此我们的自编码器所学习到的通常是输入数据的一个压缩表示。  </p>
 <p>举个例子。例如我们准备学习一个自编码网络以表示10x10像素，即包含100个像素点的图片。我们的输入x的长度为100。我们的输出y的长度与x长度相同，也为100.而我们决定使用容量为50个神经元的隐藏层。那么，在我们的自编码网络中，我们实际上强迫它学习了长度为100的输入的压缩表示。  </p>
 <p>可以预见到，如果我们的输入是完全随机的，数据的内部不包含任何的结构，那么我们的学习过程将会变得非常困难。然而，如果输入数据本身包含了某种结构，例如，输入一些相关性的特征，那么自编码网络将很容易学习到这些相关性。事实上，这个简单自编码器的最终学习到的低维表示结果将会和PCA非常相似。</p>
 <h2 id="稀疏-Sparsity"><a href="#稀疏-Sparsity" class="headerlink" title="稀疏 Sparsity"></a>稀疏 Sparsity</h2><p>关于自编码网络能够学习到数据内部结构的讨论，仅仅局限于隐藏层的神经元数量较小的前提下。对于神经元数量较大的情况，我们需要添加其他约束来达到这样一个目的。在实践中，我们通常对隐藏单元引入稀疏约束，使得自编码网络在隐藏层非常大的情况下同样也能发现数据的内部结构特性。  </p>
@@ -164,7 +167,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2016/04/19/Deep-Learning-稀疏自编码器/" data-id="cjgg7fzne000583up5arozcdm" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2016/04/19/Deep-Learning-稀疏自编码器/" data-id="cjgg7n9570003c2up6poq8pz3" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -243,7 +246,7 @@
         </li>
       
         <li>
-          <a href="/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/">[SMP-SA2017] 终身机器学习LML</a>
+          <a href="/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/">终身机器学习LML</a>
         </li>
       
         <li>
