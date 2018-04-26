@@ -3,14 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: Windows7 | Rui Zhang&#39;s Blogs</title>
+  <title>NLPCC2018评测Task4之规则匹配方法 | Rui Zhang&#39;s Blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Rui Zhang&#39;s Blogs">
-<meta property="og:url" content="http://ruizhang1993.github.io/tags/Windows7/index.html">
+  <meta name="description" content="今年的NLPCC 2018评测，和佩佩Pei445一起参加了Task4的评测，主要任务是从一系列人机对话语料中构建模型识别用户的意图领域(intent)，并针对其中音乐播放、导航和拨打电话三个意图抽取相应的槽值。本文介绍了我们模型中采用规则匹配方法识别用户意图的部分。">
+<meta name="keywords" content="NLPCC 2018">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NLPCC2018评测Task4之规则匹配方法">
+<meta property="og:url" content="http://ruizhang1993.github.io/2018/04/26/NLPCC2018评测Task4之规则匹配方法/index.html">
 <meta property="og:site_name" content="Rui Zhang&#39;s Blogs">
+<meta property="og:description" content="今年的NLPCC 2018评测，和佩佩Pei445一起参加了Task4的评测，主要任务是从一系列人机对话语料中构建模型识别用户的意图领域(intent)，并针对其中音乐播放、导航和拨打电话三个意图抽取相应的槽值。本文介绍了我们模型中采用规则匹配方法识别用户意图的部分。">
+<meta property="og:updated_time" content="2018-04-26T08:16:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Rui Zhang&#39;s Blogs">
+<meta name="twitter:title" content="NLPCC2018评测Task4之规则匹配方法">
+<meta name="twitter:description" content="今年的NLPCC 2018评测，和佩佩Pei445一起参加了Task4的评测，主要任务是从一系列人机对话语料中构建模型识别用户的意图领域(intent)，并针对其中音乐播放、导航和拨打电话三个意图抽取相应的槽值。本文介绍了我们模型中采用规则匹配方法识别用户意图的部分。">
   
     <link rel="alternate" href="/atom.xml" title="Rui Zhang&#39;s Blogs" type="application/atom+xml">
   
@@ -79,40 +84,106 @@
 
     <div class="row">
         <div class="col-sm-8 blog-main">
-          
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <header class="archive-article-header">
+          <article id="post-NLPCC2018评测Task4之规则匹配方法" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
     
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/17/Python2-7注册表信息修复/">Python2.7注册表信息修复</a>
+    <h1 class="article-title" itemprop="name">
+      NLPCC2018评测Task4之规则匹配方法
     </h1>
   
 
 
+  </header>
+
+  <div class="article-meta">
     <div class="article-datetime">
-  <a href="/2016/05/17/Python2-7注册表信息修复/" class="archive-article-date"><time datetime="2016-05-17T11:49:15.000Z" itemprop="datePublished">May 17th</time></a>
+  <a href="/2018/04/26/NLPCC2018评测Task4之规则匹配方法/" class="article-date"><time datetime="2018-04-26T07:38:23.000Z" itemprop="datePublished">2018-04-26</time></a>
 </div>
 
-  </header>
-</article>
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>今年的NLPCC 2018评测，和佩佩<a href="https://github.com/Pei445" target="_blank" rel="external">Pei445</a>一起参加了Task4的评测，主要任务是从一系列人机对话语料中构建模型识别用户的意图领域(intent)，并针对其中音乐播放、导航和拨打电话三个意图抽取相应的槽值。本文介绍了我们模型中采用规则匹配方法识别用户意图的部分。</p>
+</blockquote>
+<a id="more"></a>
+<p><strong>模型代码：</strong> <a href="https://github.com/RuiZhang1993/NLPCC2018-SMIPG-Final" target="_blank" rel="external">https://github.com/RuiZhang1993/NLPCC2018-SMIPG-Final</a>（注：私有仓库尚未开放）</p>
+<p>根据当前任务，我们提出了一个流水线Pipeline结构的规则匹配模块，目前共包含6个识别组件，分别是：  </p>
+<ol>
+<li>命令匹配  </li>
+<li>ngram匹配  </li>
+<li>歌曲匹配  </li>
+<li>数字匹配  </li>
+<li>取消匹配  </li>
+<li>关键词匹配  </li>
+</ol>
+<p>下面介绍各个模块的具体方法。</p>
+<h2 id="命令匹配"><a href="#命令匹配" class="headerlink" title="命令匹配"></a>命令匹配</h2><p>命令匹配采用了完全匹配模式，即由开发者设定一系列的命令语句，当输入文本与命令语句完全一致时，根据匹配规则直接判定输入文本的意图。<br>这种模式适用于当前语料的应用情景（个人猜测：车载设备），根据我们对语料的观察，用户在启动某一功能时通常会使用简短的命令对设备进行唤醒。例如针对music.play领域，通常是”打开音乐”、”播放音乐”等等。<br>我们的方法是通过搜索训练语料中的高频语句来从中挑选这些命令语句。从数据结果来看，在训练语料中反反复复出现的语句基本都属于这种类别。同时，我们通过联想人工扩展了少量唤醒命令。  </p>
+<h2 id="数字匹配"><a href="#数字匹配" class="headerlink" title="数字匹配"></a>数字匹配</h2><p>数字匹配用于解决语料中的数字输入问题。这类输入通常是用户需要拨通的电话号码。<br>考虑到评测方所给出的标准，数字匹配通过判断：  </p>
+<ol>
+<li>数字串是否出现在一段对话的第一句   </li>
+<li>数字串是否一个合法的手机号码  </li>
+</ol>
+<p>来判断是否将该句子标注为拨打电话意图。</p>
+<h2 id="歌曲匹配"><a href="#歌曲匹配" class="headerlink" title="歌曲匹配"></a>歌曲匹配</h2><p>由于测评方提出音乐匹配的优先程度最高，我们使用一个全匹配组件来识别对话中的歌曲名，并标注为音乐播放意图。</p>
+<h2 id="ngram匹配"><a href="#ngram匹配" class="headerlink" title="ngram匹配"></a>ngram匹配</h2><p>由于命令匹配只能够匹配到非常少量的句子，我们使用高频n-gram来辅助模型自动提取分类特征。<br>我们使用2-gram、3-gram和4-gram对训练语料进行遍历，从中抽取具备以下特征的n-gram项：  </p>
+<ol>
+<li>仅出现在一种意图中的n-gram (确定唯一)  </li>
+<li>出现次数在5次及以上 (频繁模式)  </li>
+</ol>
+<p>在运行过程中，当句子中出现上述的ngram，就判定为该ngram所对应的意图。注意到可能会出现两个不同意图的ngram出现在同一个句子中的情况，但根据我们对训练集中切分出来的小规模测试集的划分效果来看影响不大，所以没有做进一步的判断处理，直接采用谁先匹配到就算谁的策略。</p>
+<h2 id="取消匹配"><a href="#取消匹配" class="headerlink" title="取消匹配"></a>取消匹配</h2><p>“取消”命令是语料中常见而特殊的命令，根据不同的上下文语境可能是取消导航、取消音乐播放、取消打电话或者其他意图。<br>由于我们的模型是对输入文本进行顺序处理，因此进行取消匹配时我们考虑了上文的用户意图。根据上文用户意图来决定当前的“取消”命令对应哪种意图。</p>
+<h2 id="关键词匹配"><a href="#关键词匹配" class="headerlink" title="关键词匹配"></a>关键词匹配</h2><p>关键词匹配主要是对评测方提供的字典进行有效利用。在歌曲匹配阶段我们采用了完全匹配的模式，但我们还希望匹配到包含歌曲名的文本，将其判定为音乐播放。<br>但是由于歌曲名本身具有非常大的迷惑性，例如有些歌曲名为“小学”、“80000”等，如果直接将所有歌曲名丢进来匹配的话，可能会导致大量的错误判断。<br>针对这个问题我们构建了自动化方法对乐曲词典进行筛选，选出具备以下特征的歌曲名作为关键词：  </p>
+<ol>
+<li>仅出现在训练集中一种意图中的歌曲名 （确定唯一）  </li>
+<li>在训练集单种意图中出现次数超过设定阈值 (频繁模式，调整了好几次忘了最终数值= =)  </li>
+</ol>
+<p>具备上述特征的歌曲名被加入关键词词典。此外，在关键词匹配过程中我们使用jieba分词对文本进行分词处理，而在其他5种匹配模式中均不进行分词。</p>
+<p>以上就是我们的模型在规则匹配部分的一些具体内容，在规则匹配不能解决的文本我们会使用一个Bi-LSTM模型进行分类和标注。后续我再更新和Bi-LSTM模型相关的内容。</p>
+
+      
+    </div>
+
+    
+      
+
+    
+
+    <footer class="article-footer">
+      <a data-url="http://ruizhang1993.github.io/2018/04/26/NLPCC2018评测Task4之规则匹配方法/" data-id="cjgg98v8d000rhqupj54a220g" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NLPCC-2018/">NLPCC 2018</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+    
+<ul id="article-nav" class="nav nav-pills nav-justified">
+  
+  <li role="presentation">
+    <a href="/2018/04/23/OPAD-000-对话生成Related-Works/" id="article-nav-older" class="article-nav-link-wrap">
+      <i class="fa fa-chevron-left pull-left"></i>
+      <span class="article-nav-link-title">对话生成Related Works（一）</span>
+    </a>
+  </li>
+  
+  
+</ul>
+
 
   
-  
-    </div></section>
-  
+</article>
 
 
 
