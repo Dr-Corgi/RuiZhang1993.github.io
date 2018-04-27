@@ -5,17 +5,17 @@
   
   <title>基于模板&amp;Seq2Seq的大规模问句生成 | Rui Zhang&#39;s Blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[ONE PAPER A DAY 第1期] 基于模板&amp;amp;Seq2Seq的大规模问句生成Title: Large-scale Simple Question Generation by Template-based Seq2Seq LearningAuthor: Tianyu Liu, Bingzhen Wei, Baobao Chang, Zhifang Sui  动机这篇文章的主要贡献是">
+  <meta name="description" content="[ONE PAPER A DAY 第1期] 基于模板&amp;amp;Seq2Seq的大规模问句生成Title: Large-scale Simple Question Generation by Template-based Seq2Seq LearningAuthor: Tianyu Liu, Bingzhen Wei, Baobao Chang, Zhifang Sui">
 <meta name="keywords" content="OPAD">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于模板&amp;Seq2Seq的大规模问句生成">
 <meta property="og:url" content="http://ruizhang1993.github.io/2018/04/27/基于模板-Seq2Seq的大规模问句生成/index.html">
 <meta property="og:site_name" content="Rui Zhang&#39;s Blogs">
-<meta property="og:description" content="[ONE PAPER A DAY 第1期] 基于模板&amp;amp;Seq2Seq的大规模问句生成Title: Large-scale Simple Question Generation by Template-based Seq2Seq LearningAuthor: Tianyu Liu, Bingzhen Wei, Baobao Chang, Zhifang Sui  动机这篇文章的主要贡献是">
-<meta property="og:updated_time" content="2018-04-27T07:48:04.000Z">
+<meta property="og:description" content="[ONE PAPER A DAY 第1期] 基于模板&amp;amp;Seq2Seq的大规模问句生成Title: Large-scale Simple Question Generation by Template-based Seq2Seq LearningAuthor: Tianyu Liu, Bingzhen Wei, Baobao Chang, Zhifang Sui">
+<meta property="og:updated_time" content="2018-04-27T07:50:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于模板&amp;Seq2Seq的大规模问句生成">
-<meta name="twitter:description" content="[ONE PAPER A DAY 第1期] 基于模板&amp;amp;Seq2Seq的大规模问句生成Title: Large-scale Simple Question Generation by Template-based Seq2Seq LearningAuthor: Tianyu Liu, Bingzhen Wei, Baobao Chang, Zhifang Sui  动机这篇文章的主要贡献是">
+<meta name="twitter:description" content="[ONE PAPER A DAY 第1期] 基于模板&amp;amp;Seq2Seq的大规模问句生成Title: Large-scale Simple Question Generation by Template-based Seq2Seq LearningAuthor: Tianyu Liu, Bingzhen Wei, Baobao Chang, Zhifang Sui">
   
     <link rel="alternate" href="/atom.xml" title="Rui Zhang&#39;s Blogs" type="application/atom+xml">
   
@@ -113,6 +113,7 @@
         <blockquote>
 <p>[ONE PAPER A DAY 第1期] 基于模板&amp;Seq2Seq的大规模问句生成<br>Title: Large-scale Simple Question Generation by Template-based Seq2Seq Learning<br>Author: Tianyu Liu, Bingzhen Wei, Baobao Chang, Zhifang Sui</p>
 </blockquote>
+<a id="more"></a>
 <h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>这篇文章的主要贡献是在已有知识图谱的情况下，通过构建Template-based Seq2Seq模型自动生成大量问句，用于生成大规模问答语料。文章比较了传统的基于模板的方法、基于Seq2Seq的方法和融合Seq2Seq方法。实验表明采用融合的方法具备较好的多样性和主题相关性。  </p>
 <h2 id="任务定义"><a href="#任务定义" class="headerlink" title="任务定义"></a>任务定义</h2><p>给定一个事实三元组F=(Subject, Relationship, Object)，期望产生一个包含Subject及关系Relationship的问题，该问题的答案是Object。<br>在纯模板的方式中，通常包括模板集合与选择生成两个阶段，利用从训练集中抽取的模板，通过将特定模板和实体主题匹配以生成问题。文章指出基于纯模板的方法的生成结果缺乏文本多样性。<br>在纯Seq2Seq方式中，文章指出可能会生成具有错误实体或关系的样本。</p>
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本文采用的方法基本上可以看作是一个比较经典的带Attention机制的Encoder-Decoder框架，编码器和解码器采用LSTM网络，但在数据输入和输出上作了一定的创新。<br>以（于海，相关人物，吴冠中）这一三元组为例。<br>文章将编码器称为“三元组编码器”，首先Encoder的输入文本为“于 海 SEP 相 关 人 物”，其中文本是按照字进行分割，没有采用额外的分词。在解码器阶段，为了解决实体错误的问题，直接把生成目标中的实体抠掉，替换为SUB，即“请 问 与 SUB 有 关 的 人 有 谁 ？”。（最后应该是将实体还原回问句中，文中未提及。）通过这样一个Seq2Seq框架来训练问句生成模型。</p>
@@ -131,7 +132,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2018/04/27/基于模板-Seq2Seq的大规模问句生成/" data-id="cjghno3fu000focupjyjndbuw" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2018/04/27/基于模板-Seq2Seq的大规模问句生成/" data-id="cjghnqj85000pp8upwpwfwuhl" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
