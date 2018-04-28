@@ -5,17 +5,17 @@
   
   <title>开源语言理解和对话管理系统RASA | Rui Zhang&#39;s Blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[ONE PAPER A DAY 第2期] 开源语言理解和对话管理系统RASATitle: RASA: Open Source Language Undestanding and Dialogue ManagementAuthor: Tom Bocklisch, Joey Faulkner, Nick Pawlowski, Alan Nichol  &amp;lt; !– more –&amp;gt; 动机本文">
+  <meta name="description" content="[ONE PAPER A DAY 第2期] 开源语言理解和对话管理系统RASATitle: RASA: Open Source Language Undestanding and Dialogue ManagementAuthor: Tom Bocklisch, Joey Faulkner, Nick Pawlowski, Alan Nichol">
 <meta name="keywords" content="OPAD">
 <meta property="og:type" content="article">
 <meta property="og:title" content="开源语言理解和对话管理系统RASA">
 <meta property="og:url" content="http://ruizhang1993.github.io/2018/04/28/开源语言理解和对话管理系统RASA/index.html">
 <meta property="og:site_name" content="Rui Zhang&#39;s Blogs">
-<meta property="og:description" content="[ONE PAPER A DAY 第2期] 开源语言理解和对话管理系统RASATitle: RASA: Open Source Language Undestanding and Dialogue ManagementAuthor: Tom Bocklisch, Joey Faulkner, Nick Pawlowski, Alan Nichol  &amp;lt; !– more –&amp;gt; 动机本文">
-<meta property="og:updated_time" content="2018-04-28T03:34:06.000Z">
+<meta property="og:description" content="[ONE PAPER A DAY 第2期] 开源语言理解和对话管理系统RASATitle: RASA: Open Source Language Undestanding and Dialogue ManagementAuthor: Tom Bocklisch, Joey Faulkner, Nick Pawlowski, Alan Nichol">
+<meta property="og:updated_time" content="2018-04-28T03:36:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="开源语言理解和对话管理系统RASA">
-<meta name="twitter:description" content="[ONE PAPER A DAY 第2期] 开源语言理解和对话管理系统RASATitle: RASA: Open Source Language Undestanding and Dialogue ManagementAuthor: Tom Bocklisch, Joey Faulkner, Nick Pawlowski, Alan Nichol  &amp;lt; !– more –&amp;gt; 动机本文">
+<meta name="twitter:description" content="[ONE PAPER A DAY 第2期] 开源语言理解和对话管理系统RASATitle: RASA: Open Source Language Undestanding and Dialogue ManagementAuthor: Tom Bocklisch, Joey Faulkner, Nick Pawlowski, Alan Nichol">
   
     <link rel="alternate" href="/atom.xml" title="Rui Zhang&#39;s Blogs" type="application/atom+xml">
   
@@ -113,7 +113,7 @@
         <blockquote>
 <p>[ONE PAPER A DAY 第2期] 开源语言理解和对话管理系统RASA<br>Title: RASA: Open Source Language Undestanding and Dialogue Management<br>Author: Tom Bocklisch, Joey Faulkner, Nick Pawlowski, Alan Nichol</p>
 </blockquote>
-<p>&lt; !– more –&gt;</p>
+<a id="more"></a>
 <h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>本文主要介绍了开源自然语言理解框架Rasa NLU（<a href="https://nlu.rasa.com/" target="_blank" rel="external">Link</a>）和开源对话管理框架Rasa Core（<a href="https://core.rasa.com/" target="_blank" rel="external">Link</a>）。<br>（注：目前访问上述两个网站需要自备梯子。）</p>
 <h2 id="框架细节"><a href="#框架细节" class="headerlink" title="框架细节"></a>框架细节</h2><p>框架的整体流程见论文图1。对于一个输入文本，首先调用解释器Interpreter（即Rasa NLU模块）从输入文本中抽取用户意图intent和相应的实体entities。随后消息被送入跟踪器Tracker。策略Policy根据Tracker中的信息选择合适的Action，生成响应输出并将信息回传到Tracker中。<br>每个session对应一个Tracker，用于存储slot和相关的已经发生和当前发生的事件。Tracker是上述组件中唯一有状态的组件。</p>
 <h2 id="模块细节"><a href="#模块细节" class="headerlink" title="模块细节"></a>模块细节</h2><p>在Action选择部分，将其看作一个分类问题来解决。  </p>
@@ -135,7 +135,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2018/04/28/开源语言理解和对话管理系统RASA/" data-id="cjgiu1mwn000l9vuphm5l9nhy" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2018/04/28/开源语言理解和对话管理系统RASA/" data-id="cjgiu3tf4000vajup6owvko68" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       

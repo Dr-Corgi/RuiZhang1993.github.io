@@ -110,29 +110,18 @@
         <blockquote>
 <p>[ONE PAPER A DAY 第2期] 开源语言理解和对话管理系统RASA<br>Title: RASA: Open Source Language Undestanding and Dialogue Management<br>Author: Tom Bocklisch, Joey Faulkner, Nick Pawlowski, Alan Nichol</p>
 </blockquote>
-<p>&lt; !– more –&gt;</p>
-<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>本文主要介绍了开源自然语言理解框架Rasa NLU（<a href="https://nlu.rasa.com/" target="_blank" rel="external">Link</a>）和开源对话管理框架Rasa Core（<a href="https://core.rasa.com/" target="_blank" rel="external">Link</a>）。<br>（注：目前访问上述两个网站需要自备梯子。）</p>
-<h2 id="框架细节"><a href="#框架细节" class="headerlink" title="框架细节"></a>框架细节</h2><p>框架的整体流程见论文图1。对于一个输入文本，首先调用解释器Interpreter（即Rasa NLU模块）从输入文本中抽取用户意图intent和相应的实体entities。随后消息被送入跟踪器Tracker。策略Policy根据Tracker中的信息选择合适的Action，生成响应输出并将信息回传到Tracker中。<br>每个session对应一个Tracker，用于存储slot和相关的已经发生和当前发生的事件。Tracker是上述组件中唯一有状态的组件。</p>
-<h2 id="模块细节"><a href="#模块细节" class="headerlink" title="模块细节"></a>模块细节</h2><p>在Action选择部分，将其看作一个分类问题来解决。  </p>
-<p>在NLU部分，采用一个流水线pipeline的框架。在默认的设置中，首先使用spaCy进行词性标注，并引入Glove词向量，从词向量出发构建句子的向量表示，随后使用sklearn中的标准多类SVM通过五折交叉训练intent分类模型，最后使用词和词性标注作为特征训练CRF进行实体标注。这一块做词向量的部分应该使用了MITIE，且默认的框架不适用于中文化。@crownpku 提供了一个<a href="https://github.com/crownpku/Rasa_NLU_Chi" target="_blank" rel="external">适用于中文的本地化版本</a>。而构建Rasa NLU部分的训练集可以使用<a href="https://rodrigopivi.github.io/Chatito/" target="_blank" rel="external">Chatito</a>工具，在此过程中可能也需要使用<a href="https://github.com/RuiZhang1993/Chatito_Chn_Tools" target="_blank" rel="external">我写的脚本</a>进行本地化预处理。  </p>
-<p>策略模块是在给定一个Tracker对象的前提下选择下一个Action。一个策略和相应的特征被同时实例化，其中特征是一个给定Tracker的当前对话状态的矢量表示。包含在其中的特征有：  </p>
-<ol>
-<li>最后一个行为是什么  </li>
-<li>最近用户消息中的意图和实体  </li>
-<li>当前定义了哪些插槽等等<br>框架允许回溯到多个过去的历史对话记录中，实践证明在3-6个对话轮次中的历史信息能够对模型效果有提升。</li>
-</ol>
-<p>此外，框架提供了交互模块允许开发人员指导模型选择行为。同时提供了对话图的可视化功能，通过有向图来展示对话流程。</p>
-
+        
+          <p class="article-more-link">
+            <a class="btn btn-primary" href="/2018/04/28/开源语言理解和对话管理系统RASA/#more">Read More</a>
+          </p>
+        
       
     </div>
 
     
-      
-
-    
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2018/04/28/开源语言理解和对话管理系统RASA/" data-id="cjgiu1mwn000l9vuphm5l9nhy" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2018/04/28/开源语言理解和对话管理系统RASA/" data-id="cjgiu3tf4000vajup6owvko68" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -188,7 +177,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2018/04/27/基于模板-Seq2Seq的大规模问句生成/" data-id="cjgiu1mwk000j9vupw0o81vaa" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2018/04/27/基于模板-Seq2Seq的大规模问句生成/" data-id="cjgiu3teq000najupggkmz536" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -244,7 +233,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2018/04/26/NLPCC2018评测Task4之规则匹配方法/" data-id="cjgiu1mvi00089vupby01dud2" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2018/04/26/NLPCC2018评测Task4之规则匹配方法/" data-id="cjgiu3tdh0005ajup97pwspx7" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -305,7 +294,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2018/04/23/OPAD-000-对话生成Related-Works/" data-id="cjgiu1mw000099vupae8peev5" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2018/04/23/OPAD-000-对话生成Related-Works/" data-id="cjgiu3tdp0008ajuprxlbugv4" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -360,7 +349,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/" data-id="cjgiu1mwg000h9vuptkg7pr66" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/" data-id="cjgiu3te2000fajupdou9dpi4" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -416,7 +405,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/05/27/论文浅析-神经网络语言模型NNLM/" data-id="cjgiu1mxe000v9vupfiedk8gu" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2017/05/27/论文浅析-神经网络语言模型NNLM/" data-id="cjgiu3tf2000uajupdugdel8u" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -472,7 +461,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/05/21/卷积操作的简单理解/" data-id="cjgiu1mx7000t9vupgov188wo" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2017/05/21/卷积操作的简单理解/" data-id="cjgiu3ten000kajup3hn8zndv" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -528,7 +517,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/05/19/论文浅析-构建简单的神经网络对话生成模型/" data-id="cjgiu1mx2000q9vup3r2p4cko" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2017/05/19/论文浅析-构建简单的神经网络对话生成模型/" data-id="cjgiu3tez000rajup23l4mjd0" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -584,7 +573,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/05/01/Tensorflow之legacy-seq2seq模块初探-Tensorflow-r1-0-1/" data-id="cjgiu1mwy000p9vupqo1jaayu" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2017/05/01/Tensorflow之legacy-seq2seq模块初探-Tensorflow-r1-0-1/" data-id="cjgiu3te4000gajupmg57zs16" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -640,7 +629,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/04/21/CentOS-7-下-Cuda-Tensorflow-环境搭建实践/" data-id="cjgiu1muk00009vupb5tocgcb" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2017/04/21/CentOS-7-下-Cuda-Tensorflow-环境搭建实践/" data-id="cjgiu3tcv0000ajup7lgpi505" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
