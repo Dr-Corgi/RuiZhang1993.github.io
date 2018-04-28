@@ -81,6 +81,73 @@
         <div class="col-sm-8 blog-main">
           
   
+    <article id="post-开源语言理解和对话管理系统RASA" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/28/开源语言理解和对话管理系统RASA/">开源语言理解和对话管理系统RASA</a>
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/2018/04/28/开源语言理解和对话管理系统RASA/" class="article-date"><time datetime="2018-04-28T02:50:11.000Z" itemprop="datePublished">2018-04-28</time></a>
+</div>
+
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>[ONE PAPER A DAY 第2期] 开源语言理解和对话管理系统RASA<br>Title: RASA: Open Source Language Undestanding and Dialogue Management<br>Author: Tom Bocklisch, Joey Faulkner, Nick Pawlowski, Alan Nichol</p>
+</blockquote>
+<p>&lt; !– more –&gt;</p>
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>本文主要介绍了开源自然语言理解框架Rasa NLU（<a href="https://nlu.rasa.com/" target="_blank" rel="external">Link</a>）和开源对话管理框架Rasa Core（<a href="https://core.rasa.com/" target="_blank" rel="external">Link</a>）。<br>（注：目前访问上述两个网站需要自备梯子。）</p>
+<h2 id="框架细节"><a href="#框架细节" class="headerlink" title="框架细节"></a>框架细节</h2><p>框架的整体流程见论文图1。对于一个输入文本，首先调用解释器Interpreter（即Rasa NLU模块）从输入文本中抽取用户意图intent和相应的实体entities。随后消息被送入跟踪器Tracker。策略Policy根据Tracker中的信息选择合适的Action，生成响应输出并将信息回传到Tracker中。<br>每个session对应一个Tracker，用于存储slot和相关的已经发生和当前发生的事件。Tracker是上述组件中唯一有状态的组件。</p>
+<h2 id="模块细节"><a href="#模块细节" class="headerlink" title="模块细节"></a>模块细节</h2><p>在Action选择部分，将其看作一个分类问题来解决。  </p>
+<p>在NLU部分，采用一个流水线pipeline的框架。在默认的设置中，首先使用spaCy进行词性标注，并引入Glove词向量，从词向量出发构建句子的向量表示，随后使用sklearn中的标准多类SVM通过五折交叉训练intent分类模型，最后使用词和词性标注作为特征训练CRF进行实体标注。这一块做词向量的部分应该使用了MITIE，且默认的框架不适用于中文化。@crownpku 提供了一个<a href="https://github.com/crownpku/Rasa_NLU_Chi" target="_blank" rel="external">适用于中文的本地化版本</a>。而构建Rasa NLU部分的训练集可以使用<a href="https://rodrigopivi.github.io/Chatito/" target="_blank" rel="external">Chatito</a>工具，在此过程中可能也需要使用<a href="https://github.com/RuiZhang1993/Chatito_Chn_Tools" target="_blank" rel="external">我写的脚本</a>进行本地化预处理。  </p>
+<p>策略模块是在给定一个Tracker对象的前提下选择下一个Action。一个策略和相应的特征被同时实例化，其中特征是一个给定Tracker的当前对话状态的矢量表示。包含在其中的特征有：  </p>
+<ol>
+<li>最后一个行为是什么  </li>
+<li>最近用户消息中的意图和实体  </li>
+<li>当前定义了哪些插槽等等<br>框架允许回溯到多个过去的历史对话记录中，实践证明在3-6个对话轮次中的历史信息能够对模型效果有提升。</li>
+</ol>
+<p>此外，框架提供了交互模块允许开发人员指导模型选择行为。同时提供了对话图的可视化功能，通过有向图来展示对话流程。</p>
+
+      
+    </div>
+
+    
+      
+
+    
+
+    <footer class="article-footer">
+      <a data-url="http://ruizhang1993.github.io/2018/04/28/开源语言理解和对话管理系统RASA/" data-id="cjgiu1mwn000l9vuphm5l9nhy" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OPAD/">OPAD</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-基于模板-Seq2Seq的大规模问句生成" class="article article-type-post" itemscope itemprop="blogPost">
 
   <header class="article-header">
@@ -121,7 +188,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2018/04/27/基于模板-Seq2Seq的大规模问句生成/" data-id="cjghnu67i000mpruppyb21nnx" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2018/04/27/基于模板-Seq2Seq的大规模问句生成/" data-id="cjgiu1mwk000j9vupw0o81vaa" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -177,7 +244,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2018/04/26/NLPCC2018评测Task4之规则匹配方法/" data-id="cjghnu66a0007prupyd8ul1os" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2018/04/26/NLPCC2018评测Task4之规则匹配方法/" data-id="cjgiu1mvi00089vupby01dud2" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -238,7 +305,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2018/04/23/OPAD-000-对话生成Related-Works/" data-id="cjghnu66d0008prup20bdzgbv" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2018/04/23/OPAD-000-对话生成Related-Works/" data-id="cjgiu1mw000099vupae8peev5" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -293,7 +360,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/" data-id="cjghnu66p000cprupbdyk5myl" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/" data-id="cjgiu1mwg000h9vuptkg7pr66" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -349,7 +416,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/05/27/论文浅析-神经网络语言模型NNLM/" data-id="cjghnu67o000qprup6a1wxvv3" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2017/05/27/论文浅析-神经网络语言模型NNLM/" data-id="cjgiu1mxe000v9vupfiedk8gu" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -405,7 +472,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/05/21/卷积操作的简单理解/" data-id="cjghnu67g000kprup854x7cr8" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2017/05/21/卷积操作的简单理解/" data-id="cjgiu1mx7000t9vupgov188wo" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -461,7 +528,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/05/19/论文浅析-构建简单的神经网络对话生成模型/" data-id="cjghnu67r000sprupbttaxjfq" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2017/05/19/论文浅析-构建简单的神经网络对话生成模型/" data-id="cjgiu1mx2000q9vup3r2p4cko" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -517,7 +584,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/05/01/Tensorflow之legacy-seq2seq模块初探-Tensorflow-r1-0-1/" data-id="cjghnu67e000jprupcrzwkz77" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2017/05/01/Tensorflow之legacy-seq2seq模块初探-Tensorflow-r1-0-1/" data-id="cjgiu1mwy000p9vupqo1jaayu" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -573,72 +640,12 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/04/21/CentOS-7-下-Cuda-Tensorflow-环境搭建实践/" data-id="cjghnu65k0000prupyrnc0scd" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2017/04/21/CentOS-7-下-Cuda-Tensorflow-环境搭建实践/" data-id="cjgiu1muk00009vupb5tocgcb" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cuda/">cuda</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow/">tensorflow</a></li></ul>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Mac下卸载-更新numpy" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <header class="article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/19/Mac下卸载-更新numpy/">Mac下卸载/更新numpy</a>
-    </h1>
-  
-
-
-  </header>
-
-  <div class="article-meta">
-    <div class="article-datetime">
-  <a href="/2017/01/19/Mac下卸载-更新numpy/" class="article-date"><time datetime="2017-01-19T07:01:05.000Z" itemprop="datePublished">2017-01-19</time></a>
-</div>
-
-    
-    
-
-  </div>
-  <div class="article-inner">
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天安装PyTorch的时候发现numpy模块需要更新，使用pip install -U numpy的时候发现有些操作被系统禁止了（不是sudo权限的原因）。百度了一下发现是系统的安全机制引起的。具体的解决方案如下：</p>
-<ol>
-<li>重启电脑，重启时按住command+R</li>
-<li>进入“OS X工具程式”界面，打开终端，输入csrutil，重启电脑即可。</li>
-</ol>
-<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><ol>
-<li>Mac环境下，numpy升级问题。<a href="http://blog.csdn.net/u010566350/article/details/50455480" target="_blank" rel="external">http://blog.csdn.net/u010566350/article/details/50455480</a></li>
-</ol>
-
-      
-    </div>
-
-    
-      
-
-    
-
-    <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2017/01/19/Mac下卸载-更新numpy/" data-id="cjghnu65x0003pruptqs2ui2o" class="article-share-link">
-        <i class="fa fa-share"></i> Share
-      </a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/numpy/">numpy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
 
 
     </footer>
@@ -673,7 +680,7 @@
   
   <div class="sidebar-module">
     <h4>Tags</h4>
-    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/CNN/">CNN</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Lex/">Lex</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Mac/">Mac</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/NLP/">NLP</a><span class="sidebar-module-list-count">4</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/NLPCC-2018/">NLPCC 2018</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/OPAD/">OPAD</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/PLY/">PLY</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Python/">Python</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/SMPSA2017/">SMPSA2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Windows7/">Windows7</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Yacc/">Yacc</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/cuda/">cuda</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/deep-learning/">deep learning</a><span class="sidebar-module-list-count">6</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/numpy/">numpy</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/python/">python</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/tensorflow/">tensorflow</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/xgboost/">xgboost</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/会议笔记/">会议笔记</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/数据挖掘/">数据挖掘</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/编译原理/">编译原理</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/论文笔记/">论文笔记</a><span class="sidebar-module-list-count">2</span></li></ul>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/CNN/">CNN</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Lex/">Lex</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Mac/">Mac</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/NLP/">NLP</a><span class="sidebar-module-list-count">4</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/NLPCC-2018/">NLPCC 2018</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/OPAD/">OPAD</a><span class="sidebar-module-list-count">3</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/PLY/">PLY</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Python/">Python</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/SMPSA2017/">SMPSA2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Windows7/">Windows7</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Yacc/">Yacc</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/cuda/">cuda</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/deep-learning/">deep learning</a><span class="sidebar-module-list-count">6</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/numpy/">numpy</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/python/">python</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/tensorflow/">tensorflow</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/xgboost/">xgboost</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/会议笔记/">会议笔记</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/数据挖掘/">数据挖掘</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/编译原理/">编译原理</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/论文笔记/">论文笔记</a><span class="sidebar-module-list-count">2</span></li></ul>
   </div>
 
 
@@ -682,7 +689,7 @@
   <div class="sidebar-module">
     <h4>Tag Cloud</h4>
     <p class="tagcloud">
-      <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/Lex/" style="font-size: 10px;">Lex</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/NLP/" style="font-size: 16.67px;">NLP</a> <a href="/tags/NLPCC-2018/" style="font-size: 10px;">NLPCC 2018</a> <a href="/tags/OPAD/" style="font-size: 13.33px;">OPAD</a> <a href="/tags/PLY/" style="font-size: 10px;">PLY</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SMPSA2017/" style="font-size: 10px;">SMPSA2017</a> <a href="/tags/Windows7/" style="font-size: 10px;">Windows7</a> <a href="/tags/Yacc/" style="font-size: 10px;">Yacc</a> <a href="/tags/cuda/" style="font-size: 10px;">cuda</a> <a href="/tags/deep-learning/" style="font-size: 20px;">deep learning</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/tensorflow/" style="font-size: 13.33px;">tensorflow</a> <a href="/tags/xgboost/" style="font-size: 10px;">xgboost</a> <a href="/tags/会议笔记/" style="font-size: 10px;">会议笔记</a> <a href="/tags/数据挖掘/" style="font-size: 10px;">数据挖掘</a> <a href="/tags/编译原理/" style="font-size: 10px;">编译原理</a> <a href="/tags/论文笔记/" style="font-size: 13.33px;">论文笔记</a>
+      <a href="/tags/CNN/" style="font-size: 10px;">CNN</a> <a href="/tags/Lex/" style="font-size: 10px;">Lex</a> <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/NLP/" style="font-size: 17.5px;">NLP</a> <a href="/tags/NLPCC-2018/" style="font-size: 10px;">NLPCC 2018</a> <a href="/tags/OPAD/" style="font-size: 15px;">OPAD</a> <a href="/tags/PLY/" style="font-size: 10px;">PLY</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/SMPSA2017/" style="font-size: 10px;">SMPSA2017</a> <a href="/tags/Windows7/" style="font-size: 10px;">Windows7</a> <a href="/tags/Yacc/" style="font-size: 10px;">Yacc</a> <a href="/tags/cuda/" style="font-size: 10px;">cuda</a> <a href="/tags/deep-learning/" style="font-size: 20px;">deep learning</a> <a href="/tags/numpy/" style="font-size: 10px;">numpy</a> <a href="/tags/python/" style="font-size: 12.5px;">python</a> <a href="/tags/tensorflow/" style="font-size: 12.5px;">tensorflow</a> <a href="/tags/xgboost/" style="font-size: 10px;">xgboost</a> <a href="/tags/会议笔记/" style="font-size: 10px;">会议笔记</a> <a href="/tags/数据挖掘/" style="font-size: 10px;">数据挖掘</a> <a href="/tags/编译原理/" style="font-size: 10px;">编译原理</a> <a href="/tags/论文笔记/" style="font-size: 12.5px;">论文笔记</a>
     </p>
   </div>
 
@@ -690,7 +697,7 @@
   
   <div class="sidebar-module">
     <h4>Archives</h4>
-    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2018/04/">April 2018</a><span class="sidebar-module-list-count">3</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/06/">June 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/05/">May 2017</a><span class="sidebar-module-list-count">4</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/04/">April 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/01/">January 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/11/">November 2016</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/07/">July 2016</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/05/">May 2016</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/04/">April 2016</a><span class="sidebar-module-list-count">2</span></li></ul>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2018/04/">April 2018</a><span class="sidebar-module-list-count">4</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/06/">June 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/05/">May 2017</a><span class="sidebar-module-list-count">4</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/04/">April 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/01/">January 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/11/">November 2016</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/07/">July 2016</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/05/">May 2016</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2016/04/">April 2016</a><span class="sidebar-module-list-count">2</span></li></ul>
   </div>
 
 
@@ -699,6 +706,10 @@
   <div class="sidebar-module">
     <h4>Recents</h4>
     <ul class="sidebar-module-list">
+      
+        <li>
+          <a href="/2018/04/28/开源语言理解和对话管理系统RASA/">开源语言理解和对话管理系统RASA</a>
+        </li>
       
         <li>
           <a href="/2018/04/27/基于模板-Seq2Seq的大规模问句生成/">基于模板&amp;Seq2Seq的大规模问句生成</a>
@@ -714,10 +725,6 @@
       
         <li>
           <a href="/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/">终身机器学习LML</a>
-        </li>
-      
-        <li>
-          <a href="/2017/05/27/论文浅析-神经网络语言模型NNLM/">神经网络语言模型NNLM</a>
         </li>
       
     </ul>
