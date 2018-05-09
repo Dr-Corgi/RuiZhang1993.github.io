@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>开源语言理解和对话管理系统RASA | Rui Zhang&#39;s Blogs</title>
+  <title>情绪敏感的人机交互接口 | Rui Zhang&#39;s Blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[ONE PAPER A DAY 第2期] 开源语言理解和对话管理系统RASATitle: RASA: Open Source Language Undestanding and Dialogue ManagementAuthor: Tom Bocklisch, Joey Faulkner, Nick Pawlowski, Alan Nichol">
-<meta name="keywords" content="OPAD">
+  <meta name="description" content="[ONE PAPER A DAY 第3期] 情绪敏感的人机交互接口Title: Emotion-Sensitive Human-Computer InterfaceAuthors: Thomas S. Polzin, Alexander Waibel">
+<meta name="keywords" content="OPADS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="开源语言理解和对话管理系统RASA">
-<meta property="og:url" content="http://ruizhang1993.github.io/2018/04/28/开源语言理解和对话管理系统RASA/index.html">
+<meta property="og:title" content="情绪敏感的人机交互接口">
+<meta property="og:url" content="http://ruizhang1993.github.io/2018/05/09/情绪敏感的人机交互/index.html">
 <meta property="og:site_name" content="Rui Zhang&#39;s Blogs">
-<meta property="og:description" content="[ONE PAPER A DAY 第2期] 开源语言理解和对话管理系统RASATitle: RASA: Open Source Language Undestanding and Dialogue ManagementAuthor: Tom Bocklisch, Joey Faulkner, Nick Pawlowski, Alan Nichol">
-<meta property="og:updated_time" content="2018-04-28T03:36:21.000Z">
+<meta property="og:description" content="[ONE PAPER A DAY 第3期] 情绪敏感的人机交互接口Title: Emotion-Sensitive Human-Computer InterfaceAuthors: Thomas S. Polzin, Alexander Waibel">
+<meta property="og:updated_time" content="2018-05-09T09:02:54.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="开源语言理解和对话管理系统RASA">
-<meta name="twitter:description" content="[ONE PAPER A DAY 第2期] 开源语言理解和对话管理系统RASATitle: RASA: Open Source Language Undestanding and Dialogue ManagementAuthor: Tom Bocklisch, Joey Faulkner, Nick Pawlowski, Alan Nichol">
+<meta name="twitter:title" content="情绪敏感的人机交互接口">
+<meta name="twitter:description" content="[ONE PAPER A DAY 第3期] 情绪敏感的人机交互接口Title: Emotion-Sensitive Human-Computer InterfaceAuthors: Thomas S. Polzin, Alexander Waibel">
   
     <link rel="alternate" href="/atom.xml" title="Rui Zhang&#39;s Blogs" type="application/atom+xml">
   
@@ -84,13 +84,13 @@
 
     <div class="row">
         <div class="col-sm-8 blog-main">
-          <article id="post-开源语言理解和对话管理系统RASA" class="article article-type-post" itemscope itemprop="blogPost">
+          <article id="post-情绪敏感的人机交互" class="article article-type-post" itemscope itemprop="blogPost">
 
   <header class="article-header">
     
   
     <h1 class="article-title" itemprop="name">
-      开源语言理解和对话管理系统RASA
+      情绪敏感的人机交互接口
     </h1>
   
 
@@ -99,7 +99,7 @@
 
   <div class="article-meta">
     <div class="article-datetime">
-  <a href="/2018/04/28/开源语言理解和对话管理系统RASA/" class="article-date"><time datetime="2018-04-28T02:50:11.000Z" itemprop="datePublished">2018-04-28</time></a>
+  <a href="/2018/05/09/情绪敏感的人机交互/" class="article-date"><time datetime="2018-05-09T08:09:16.000Z" itemprop="datePublished">2018-05-09</time></a>
 </div>
 
     
@@ -111,20 +111,28 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>[ONE PAPER A DAY 第2期] 开源语言理解和对话管理系统RASA<br>Title: RASA: Open Source Language Undestanding and Dialogue Management<br>Author: Tom Bocklisch, Joey Faulkner, Nick Pawlowski, Alan Nichol</p>
+<p>[ONE PAPER A DAY 第3期] 情绪敏感的人机交互接口<br>Title: Emotion-Sensitive Human-Computer Interface<br>Authors: Thomas S. Polzin, Alexander Waibel</p>
 </blockquote>
 <a id="more"></a>
-<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>本文主要介绍了开源自然语言理解框架Rasa NLU（<a href="https://nlu.rasa.com/" target="_blank" rel="external">Link</a>）和开源对话管理框架Rasa Core（<a href="https://core.rasa.com/" target="_blank" rel="external">Link</a>）。<br>（注：目前访问上述两个网站需要自备梯子。）</p>
-<h2 id="框架细节"><a href="#框架细节" class="headerlink" title="框架细节"></a>框架细节</h2><p>框架的整体流程见论文图1。对于一个输入文本，首先调用解释器Interpreter（即Rasa NLU模块）从输入文本中抽取用户意图intent和相应的实体entities。随后消息被送入跟踪器Tracker。策略Policy根据Tracker中的信息选择合适的Action，生成响应输出并将信息回传到Tracker中。<br>每个session对应一个Tracker，用于存储slot和相关的已经发生和当前发生的事件。Tracker是上述组件中唯一有状态的组件。</p>
-<h2 id="模块细节"><a href="#模块细节" class="headerlink" title="模块细节"></a>模块细节</h2><p>在Action选择部分，将其看作一个分类问题来解决。  </p>
-<p>在NLU部分，采用一个流水线pipeline的框架。在默认的设置中，首先使用spaCy进行词性标注，并引入Glove词向量，从词向量出发构建句子的向量表示，随后使用sklearn中的标准多类SVM通过五折交叉训练intent分类模型，最后使用词和词性标注作为特征训练CRF进行实体标注。这一块做词向量的部分应该使用了MITIE，且默认的框架不适用于中文化。@crownpku 提供了一个<a href="https://github.com/crownpku/Rasa_NLU_Chi" target="_blank" rel="external">适用于中文的本地化版本</a>。而构建Rasa NLU部分的训练集可以使用<a href="https://rodrigopivi.github.io/Chatito/" target="_blank" rel="external">Chatito</a>工具，在此过程中可能也需要使用<a href="https://github.com/RuiZhang1993/Chatito_Chn_Tools" target="_blank" rel="external">我写的脚本</a>进行本地化预处理。  </p>
-<p>策略模块是在给定一个Tracker对象的前提下选择下一个Action。一个策略和相应的特征被同时实例化，其中特征是一个给定Tracker的当前对话状态的矢量表示。包含在其中的特征有：  </p>
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>Reeves等人的研究表明，人类会将他们的人际行为模式强加到电脑上。人类对计算机有礼貌，甚至会与计算机进行情感互动。<br>当时已经逐渐出现了一些具备情感的人机交互相关研究，但主要集中在听觉和视觉上的情感表达合成。例如通常利用某些卡通形象来与人类用户进行情感交互。<br>然而，这些研究通常忽略了对用户情感的考虑，因此本文提出了一种从语言、韵律和频谱特征对用户情感进行检测的方法，构造了能够媲美人类的情感分类系统，根据用户的情感不同来采用不同的话语策略，以实现自然高效的人机对话。</p>
+<h2 id="任务定义"><a href="#任务定义" class="headerlink" title="任务定义"></a>任务定义</h2><p>可以将任务简单看作是情感分类任务，本文中采用的特征主要包括文本特征和音频特征。</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本文分别采用语言信息特征、韵律特征、频谱特征作为分类特征进行实验，在模型的预测阶段同时采用三种分类器进行预测，选择具有最高置信度的结果进行输出。  </p>
+<h4 id="1）语言信息特征"><a href="#1）语言信息特征" class="headerlink" title="1）语言信息特征"></a>1）语言信息特征</h4><p>本文采用了语言模型的方法来构建分类特征。具体地，通过计算说话者在特定的情绪表达和给定前一个词语的情况下特定词语被选择的概率，来构建带有情感特征的语言模型。作者认为特定的词汇组合更可能用来表达某种特定情绪。应该可以简单理解成是一个P(w_{i+1} | w_{i}, e)的语言模型。</p>
+<h4 id="2-韵律特征"><a href="#2-韵律特征" class="headerlink" title="2) 韵律特征"></a>2) 韵律特征</h4><p>韵律信息在情感交流中的作用在心理学和心理语言学中得到了广泛研究。本文主要基于以下的韵律特征构建分类模型：1)话语中基频的均值和方差特征 2)基频中的微小扰动特征 3)韵律强度的均值和方差特征 4)强度中的微小扰动特征。最终使用上述特征的高斯混合来训练特定情绪的韵律模型，并根据上下文和性别进行了归一化。</p>
+<h4 id="3-频谱特征"><a href="#3-频谱特征" class="headerlink" title="3) 频谱特征"></a>3) 频谱特征</h4><p>文章指出频谱能量的特定分布能够反映不同的情感。模型采用倒谱系数建模频谱信息，并引入系数的一阶和二阶导数。文章在已有的频谱分析模型上融入了特定的情感信息，利用最大似然线性回归训练模型。</p>
+<h2 id="实验评估和实现"><a href="#实验评估和实现" class="headerlink" title="实验评估和实现"></a>实验评估和实现</h2><p>文章从电影视频中截取片段并由标注人员进行情感标注，最终使用自然、愤怒、悲伤三种情绪进行情感分类。这些标注结果先由人工进行分类测试。实验表明，当人类通过声音来判别时，平均准确率能够达到0.7左右。而当人类只利用文本进行判别时，准确率仅在0.55左右。  </p>
+<p>在情感对话模型的实现中，文章主要考虑以下三点：  </p>
 <ol>
-<li>最后一个行为是什么  </li>
-<li>最近用户消息中的意图和实体  </li>
-<li>当前定义了哪些插槽等等<br>框架允许回溯到多个过去的历史对话记录中，实践证明在3-6个对话轮次中的历史信息能够对模型效果有提升。</li>
+<li>暗示：根据所推断的用户情绪，模型会在与用户交互过程中采用不同的暗示。例如，当用户看起来烦躁时，表达时会更加委婉或抱歉；当用户表现得很匆忙时，回应需要变得简洁。  </li>
+<li>反馈：和提示类似，对用户的反馈取决于推断的用户情绪状态。  </li>
+<li>对话流：根据用户的情绪改变暗示和反馈，调整与用户的具体交互。要求对话管理模块允许指定不同的会话流程以适应不同的用户情感。</li>
 </ol>
-<p>此外，框架提供了交互模块允许开发人员指导模型选择行为。同时提供了对话图的可视化功能，通过有向图来展示对话流程。</p>
+<h2 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h2><ol>
+<li>实验评估中人类在仅文本和文本+音频的数据下所表现出的巨大准确率差异是一个非常重要的实验结果，表明了对话文本中情感识别的困难度。</li>
+<li>文章中还包含了一些有用/重要的说法，包括：1) 理解用户表达的情感是情感对话的第一步，在确定了对话者的情感状态之后，我们可能会在交谈中避免特定的关键词、提问问题、讨论话题，从而将情感整合为对话过程中的重要部分。2)情感对话不局限于状态接口，并且可能对身份不同的人要有所区分。</li>
+<li>文章希望对话系统在确定了用户的情感状态之后，能够在后续的交互作出相应的反应。换句话说，情感对剩余的谈话范围有影响。但由于文中提出的模型不能够模拟用户的情感变化，因此尚不能够实现。</li>
+<li>综合前2点，在任务型情感对话的研究范围中，除了情感的理解和表达，还存在诸如个性化、情感跟踪等研究内容。</li>
+</ol>
 
       
     </div>
@@ -135,12 +143,12 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2018/04/28/开源语言理解和对话管理系统RASA/" data-id="cjgyvm8vv000vrgupe2sflok8" class="article-share-link">
+      <a data-url="http://ruizhang1993.github.io/2018/05/09/情绪敏感的人机交互/" data-id="cjgyvm8vo000srgupplzrrh1v" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OPAD/">OPAD</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OPADS/">OPADS</a></li></ul>
 
 
     </footer>
@@ -150,19 +158,12 @@
 <ul id="article-nav" class="nav nav-pills nav-justified">
   
   <li role="presentation">
-    <a href="/2018/04/27/基于模板-Seq2Seq的大规模问句生成/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/04/28/开源语言理解和对话管理系统RASA/" id="article-nav-older" class="article-nav-link-wrap">
       <i class="fa fa-chevron-left pull-left"></i>
-      <span class="article-nav-link-title">基于模板&amp;Seq2Seq的大规模问句生成</span>
+      <span class="article-nav-link-title">开源语言理解和对话管理系统RASA</span>
     </a>
   </li>
   
-  
-  <li role="presentation">
-    <a href="/2018/05/09/情绪敏感的人机交互/" id="article-nav-newer" class="article-nav-link-wrap">
-      <span class="article-nav-link-title">情绪敏感的人机交互接口</span>
-      <i class="fa fa-chevron-right pull-right"></i>
-    </a>
-  </li>
   
 </ul>
 

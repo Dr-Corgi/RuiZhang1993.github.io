@@ -3,19 +3,14 @@
 <head>
   <meta charset="utf-8">
   
-  <title>开源语言理解和对话管理系统RASA | Rui Zhang&#39;s Blogs</title>
+  <title>Tag: OPADS | Rui Zhang&#39;s Blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[ONE PAPER A DAY 第2期] 开源语言理解和对话管理系统RASATitle: RASA: Open Source Language Undestanding and Dialogue ManagementAuthor: Tom Bocklisch, Joey Faulkner, Nick Pawlowski, Alan Nichol">
-<meta name="keywords" content="OPAD">
-<meta property="og:type" content="article">
-<meta property="og:title" content="开源语言理解和对话管理系统RASA">
-<meta property="og:url" content="http://ruizhang1993.github.io/2018/04/28/开源语言理解和对话管理系统RASA/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Rui Zhang&#39;s Blogs">
+<meta property="og:url" content="http://ruizhang1993.github.io/tags/OPADS/index.html">
 <meta property="og:site_name" content="Rui Zhang&#39;s Blogs">
-<meta property="og:description" content="[ONE PAPER A DAY 第2期] 开源语言理解和对话管理系统RASATitle: RASA: Open Source Language Undestanding and Dialogue ManagementAuthor: Tom Bocklisch, Joey Faulkner, Nick Pawlowski, Alan Nichol">
-<meta property="og:updated_time" content="2018-04-28T03:36:21.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="开源语言理解和对话管理系统RASA">
-<meta name="twitter:description" content="[ONE PAPER A DAY 第2期] 开源语言理解和对话管理系统RASATitle: RASA: Open Source Language Undestanding and Dialogue ManagementAuthor: Tom Bocklisch, Joey Faulkner, Nick Pawlowski, Alan Nichol">
+<meta name="twitter:title" content="Rui Zhang&#39;s Blogs">
   
     <link rel="alternate" href="/atom.xml" title="Rui Zhang&#39;s Blogs" type="application/atom+xml">
   
@@ -84,91 +79,40 @@
 
     <div class="row">
         <div class="col-sm-8 blog-main">
-          <article id="post-开源语言理解和对话管理系统RASA" class="article article-type-post" itemscope itemprop="blogPost">
-
-  <header class="article-header">
+          
+  
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <header class="archive-article-header">
     
   
-    <h1 class="article-title" itemprop="name">
-      开源语言理解和对话管理系统RASA
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/05/09/情绪敏感的人机交互/">情绪敏感的人机交互接口</a>
     </h1>
   
 
 
-  </header>
-
-  <div class="article-meta">
     <div class="article-datetime">
-  <a href="/2018/04/28/开源语言理解和对话管理系统RASA/" class="article-date"><time datetime="2018-04-28T02:50:11.000Z" itemprop="datePublished">2018-04-28</time></a>
+  <a href="/2018/05/09/情绪敏感的人机交互/" class="archive-article-date"><time datetime="2018-05-09T08:09:16.000Z" itemprop="datePublished">May 9th</time></a>
 </div>
 
-    
-    
-
-  </div>
-  <div class="article-inner">
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>[ONE PAPER A DAY 第2期] 开源语言理解和对话管理系统RASA<br>Title: RASA: Open Source Language Undestanding and Dialogue Management<br>Author: Tom Bocklisch, Joey Faulkner, Nick Pawlowski, Alan Nichol</p>
-</blockquote>
-<a id="more"></a>
-<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>本文主要介绍了开源自然语言理解框架Rasa NLU（<a href="https://nlu.rasa.com/" target="_blank" rel="external">Link</a>）和开源对话管理框架Rasa Core（<a href="https://core.rasa.com/" target="_blank" rel="external">Link</a>）。<br>（注：目前访问上述两个网站需要自备梯子。）</p>
-<h2 id="框架细节"><a href="#框架细节" class="headerlink" title="框架细节"></a>框架细节</h2><p>框架的整体流程见论文图1。对于一个输入文本，首先调用解释器Interpreter（即Rasa NLU模块）从输入文本中抽取用户意图intent和相应的实体entities。随后消息被送入跟踪器Tracker。策略Policy根据Tracker中的信息选择合适的Action，生成响应输出并将信息回传到Tracker中。<br>每个session对应一个Tracker，用于存储slot和相关的已经发生和当前发生的事件。Tracker是上述组件中唯一有状态的组件。</p>
-<h2 id="模块细节"><a href="#模块细节" class="headerlink" title="模块细节"></a>模块细节</h2><p>在Action选择部分，将其看作一个分类问题来解决。  </p>
-<p>在NLU部分，采用一个流水线pipeline的框架。在默认的设置中，首先使用spaCy进行词性标注，并引入Glove词向量，从词向量出发构建句子的向量表示，随后使用sklearn中的标准多类SVM通过五折交叉训练intent分类模型，最后使用词和词性标注作为特征训练CRF进行实体标注。这一块做词向量的部分应该使用了MITIE，且默认的框架不适用于中文化。@crownpku 提供了一个<a href="https://github.com/crownpku/Rasa_NLU_Chi" target="_blank" rel="external">适用于中文的本地化版本</a>。而构建Rasa NLU部分的训练集可以使用<a href="https://rodrigopivi.github.io/Chatito/" target="_blank" rel="external">Chatito</a>工具，在此过程中可能也需要使用<a href="https://github.com/RuiZhang1993/Chatito_Chn_Tools" target="_blank" rel="external">我写的脚本</a>进行本地化预处理。  </p>
-<p>策略模块是在给定一个Tracker对象的前提下选择下一个Action。一个策略和相应的特征被同时实例化，其中特征是一个给定Tracker的当前对话状态的矢量表示。包含在其中的特征有：  </p>
-<ol>
-<li>最后一个行为是什么  </li>
-<li>最近用户消息中的意图和实体  </li>
-<li>当前定义了哪些插槽等等<br>框架允许回溯到多个过去的历史对话记录中，实践证明在3-6个对话轮次中的历史信息能够对模型效果有提升。</li>
-</ol>
-<p>此外，框架提供了交互模块允许开发人员指导模型选择行为。同时提供了对话图的可视化功能，通过有向图来展示对话流程。</p>
-
-      
-    </div>
-
-    
-      
-
-    
-
-    <footer class="article-footer">
-      <a data-url="http://ruizhang1993.github.io/2018/04/28/开源语言理解和对话管理系统RASA/" data-id="cjgyvm8vv000vrgupe2sflok8" class="article-share-link">
-        <i class="fa fa-share"></i> Share
-      </a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OPAD/">OPAD</a></li></ul>
-
-
-    </footer>
-  </div>
-  
-    
-<ul id="article-nav" class="nav nav-pills nav-justified">
-  
-  <li role="presentation">
-    <a href="/2018/04/27/基于模板-Seq2Seq的大规模问句生成/" id="article-nav-older" class="article-nav-link-wrap">
-      <i class="fa fa-chevron-left pull-left"></i>
-      <span class="article-nav-link-title">基于模板&amp;Seq2Seq的大规模问句生成</span>
-    </a>
-  </li>
-  
-  
-  <li role="presentation">
-    <a href="/2018/05/09/情绪敏感的人机交互/" id="article-nav-newer" class="article-nav-link-wrap">
-      <span class="article-nav-link-title">情绪敏感的人机交互接口</span>
-      <i class="fa fa-chevron-right pull-right"></i>
-    </a>
-  </li>
-  
-</ul>
-
-
-  
+  </header>
 </article>
+
+  
+  
+    </div></section>
+  
 
 
 
