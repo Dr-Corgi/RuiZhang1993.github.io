@@ -3,14 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2018/5 | Rui Zhang&#39;s Blogs</title>
+  <title>在口语对话系统中融入情感智能 | Rui Zhang&#39;s Blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Rui Zhang&#39;s Blogs">
-<meta property="og:url" content="http://ruizhang1993.github.io/archives/2018/05/index.html">
+  <meta name="description" content="[ONE PAPER A DAY 第4期] 在口语对话系统中融入情感智能Title: Endowing Spoken Language Dialogue Systems with Emotional IntelligenceAuthors: Elisabeth Andre, Matthias Rehm, Wolfgang Minker, and Dirk Buhler">
+<meta name="keywords" content="OPAD">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在口语对话系统中融入情感智能">
+<meta property="og:url" content="http://ruizhang1993.github.io/2018/05/10/在口语对话系统中融入情感智能/index.html">
 <meta property="og:site_name" content="Rui Zhang&#39;s Blogs">
+<meta property="og:description" content="[ONE PAPER A DAY 第4期] 在口语对话系统中融入情感智能Title: Endowing Spoken Language Dialogue Systems with Emotional IntelligenceAuthors: Elisabeth Andre, Matthias Rehm, Wolfgang Minker, and Dirk Buhler">
+<meta property="og:updated_time" content="2018-05-10T07:16:53.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Rui Zhang&#39;s Blogs">
+<meta name="twitter:title" content="在口语对话系统中融入情感智能">
+<meta name="twitter:description" content="[ONE PAPER A DAY 第4期] 在口语对话系统中融入情感智能Title: Endowing Spoken Language Dialogue Systems with Emotional IntelligenceAuthors: Elisabeth Andre, Matthias Rehm, Wolfgang Minker, and Dirk Buhler">
   
     <link rel="alternate" href="/atom.xml" title="Rui Zhang&#39;s Blogs" type="application/atom+xml">
   
@@ -49,7 +54,7 @@
           <li><a class=""
                  href="/index.html">Home</a></li>
         
-          <li><a class="active"
+          <li><a class=""
                  href="/archives/">Archives</a></li>
         
           <li><a class=""
@@ -79,60 +84,89 @@
 
     <div class="row">
         <div class="col-sm-8 blog-main">
-          
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <header class="archive-article-header">
+          <article id="post-在口语对话系统中融入情感智能" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
     
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/10/在口语对话系统中融入情感智能/">在口语对话系统中融入情感智能</a>
+    <h1 class="article-title" itemprop="name">
+      在口语对话系统中融入情感智能
     </h1>
   
 
 
+  </header>
+
+  <div class="article-meta">
     <div class="article-datetime">
-  <a href="/2018/05/10/在口语对话系统中融入情感智能/" class="archive-article-date"><time datetime="2018-05-10T06:38:39.000Z" itemprop="datePublished">May 10th</time></a>
+  <a href="/2018/05/10/在口语对话系统中融入情感智能/" class="article-date"><time datetime="2018-05-10T06:38:39.000Z" itemprop="datePublished">2018-05-10</time></a>
 </div>
 
-  </header>
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>[ONE PAPER A DAY 第4期] 在口语对话系统中融入情感智能<br>Title: Endowing Spoken Language Dialogue Systems with Emotional Intelligence<br>Authors: Elisabeth Andre, Matthias Rehm, Wolfgang Minker, and Dirk Buhler</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>Nass等的研究表明用户倾向于将社会规范应用于计算机中。Martinovsky的研究表明识别用户的情绪状态有助于减少会话中止的情况。Predinger等的研究表明具备共情能力的对话代理能够使用户对交互过程的认知更为积极。<br>当时的情感对话研究侧重于对所要表现的内容进行修改，不注重问题变化，缺乏对社会和心理学层面的关注。Walker等研究社会因素（如社会地位）如何影响对话中的语义内容和句法形式。  </p>
+<p>在本文之前，Prendinger等利用社交过滤规则来确定要表达的情感强度，其强度的选取取决于智能代理之间的个性和社交距离。根据Brown等人的研究，礼貌策略是纠正语言和非语言内在威胁的交际手段。基于此，Walker等人将上述理论应用于对话代理之间的模拟对话实现中，基于对用户基本需求的预期威胁，从以下四种不同的对话风格中选择合适的对话策略：  </p>
+<ol>
+<li>直接进行对话  </li>
+<li>积极礼貌 － 以用户审批的交谈风格为导向  </li>
+<li>消极礼貌 － 以用户自主选择的交谈风格为导向  </li>
+<li>拒绝并中止会话  </li>
+</ol>
+<p>本文认为Walker的方法直接采用了从0-150的纯假设值，没有考虑值的来源。（由于是通过阈值来实现）因此本文从线性分布的阈值开始，根据经验证据来检验这些假设以达到更现实的分布。并且提出了三种相关子策略。</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>Walker指出威胁度的计算主要通过对以下变量进行考察：系统与用户之间的距离D(S,H)，用户的权力P(H,S)和对话中涉及的事件主题R。而本文作者提出这样的假设：言语行为导致的感知威胁在很大程度上取决于用户的情感状态。此外，对用户情感原因的感知有助于指导礼貌策略的选择。Brown在其论述中提到情境会对威胁度产生影响，但没有具体讨论是如何影响的。因此本文将用户的情感状态作为情境因素进一步细化威胁度计算公式。  </p>
+<p>文章首先使用二维模型对情感进行表示，根据不同的情感效价和激活度制定不同的威胁度权重E(\theta)，根据权重修正用户威胁度。<br>此外，文章还提到不同的情感可能会对威胁度的不同组成部分产生影响，但本文没有再对此进行细化。</p>
+<h2 id="其他细节"><a href="#其他细节" class="headerlink" title="其他细节"></a>其他细节</h2><ol>
+<li>根据Walker的工作，关闭记录是最难实现的。一种可行的方法是提供一个回避的答案并通过提及其优点来分散用户的注意力。</li>
+<li>文中也提到不仅要考虑用户的情绪状态，还需要考虑用户的人格模型，特定类型的事件、行为和引起这些行为事件的对象，例如引入OCC模型（当然本文没有做）。</li>
+<li>当用户需要对任务失败负责时，通常考虑面向批准的风格；当系统对失败负责时，采用面向审批风格。因此本模型也可以扩展为知识驱动+阈值驱动。</li>
+</ol>
+
+      
+    </div>
+
+    
+      
+
+    
+
+    <footer class="article-footer">
+      <a data-url="http://ruizhang1993.github.io/2018/05/10/在口语对话系统中融入情感智能/" data-id="cjh07a80e000iccup0xqql4b9" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OPAD/">OPAD</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+    
+<ul id="article-nav" class="nav nav-pills nav-justified">
+  
+  <li role="presentation">
+    <a href="/2018/05/09/情绪敏感的人机交互/" id="article-nav-older" class="article-nav-link-wrap">
+      <i class="fa fa-chevron-left pull-left"></i>
+      <span class="article-nav-link-title">情绪敏感的人机交互接口</span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+
+  
 </article>
-
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <header class="archive-article-header">
-    
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/05/09/情绪敏感的人机交互/">情绪敏感的人机交互接口</a>
-    </h1>
-  
-
-
-    <div class="article-datetime">
-  <a href="/2018/05/09/情绪敏感的人机交互/" class="archive-article-date"><time datetime="2018-05-09T08:09:16.000Z" itemprop="datePublished">May 9th</time></a>
-</div>
-
-  </header>
-</article>
-
-  
-  
-    </div></section>
-  
 
 
 
