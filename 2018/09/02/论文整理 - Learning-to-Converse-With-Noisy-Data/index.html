@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="One Paper A Day," />
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Rui Zhang&#39;s Blogs">
-<meta property="og:url" content="http://ruizhang1993.github.io/tags/tensorflow/index.html">
+<meta name="description" content="这是一篇发表在IJCAI2018的论文。本文提出了一种具有校准框架的对话生成方法，允许高质量数据对模型产生更多影响并降低噪声数据的影响。具体而言，对于训练集中的每个实例，首先是用校准网络生成质量分数，在进行反向传播权重更新的时候引入质量分数，使得高质量的对话-应答对能够对模型产生更大的影响。">
+<meta name="keywords" content="One Paper A Day">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论文整理 - Learning to Converse With Noisy Data">
+<meta property="og:url" content="http://ruizhang1993.github.io/2018/09/02/论文整理 - Learning-to-Converse-With-Noisy-Data/index.html">
 <meta property="og:site_name" content="Rui Zhang&#39;s Blogs">
+<meta property="og:description" content="这是一篇发表在IJCAI2018的论文。本文提出了一种具有校准框架的对话生成方法，允许高质量数据对模型产生更多影响并降低噪声数据的影响。具体而言，对于训练集中的每个实例，首先是用校准网络生成质量分数，在进行反向传播权重更新的时候引入质量分数，使得高质量的对话-应答对能够对模型产生更大的影响。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-03T08:05:56.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Rui Zhang&#39;s Blogs">
+<meta name="twitter:title" content="论文整理 - Learning to Converse With Noisy Data">
+<meta name="twitter:description" content="这是一篇发表在IJCAI2018的论文。本文提出了一种具有校准框架的对话生成方法，允许高质量数据对模型产生更多影响并降低噪声数据的影响。具体而言，对于训练集中的每个实例，首先是用校准网络生成质量分数，在进行反向传播权重更新的时候引入质量分数，使得高质量的对话-应答对能够对模型产生更大的影响。">
 
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://ruizhang1993.github.io/tags/tensorflow/"/>
+  <link rel="canonical" href="http://ruizhang1993.github.io/2018/09/02/论文整理 - Learning-to-Converse-With-Noisy-Data/"/>
 
 
 
 
 
-  <title>标签: tensorflow | Rui Zhang's Blogs</title>
+  <title>论文整理 - Learning to Converse With Noisy Data | Rui Zhang's Blogs</title>
   
 
 
@@ -140,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -224,82 +229,157 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>tensorflow<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ruizhang1993.github.io/2018/09/02/论文整理 - Learning-to-Converse-With-Noisy-Data/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="RuiZhang1993">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rui Zhang's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2017/05/01/Tensorflow之legacy-seq2seq模块初探-Tensorflow-r1-0-1/" itemprop="url">
-              
-                <span itemprop="name">Tensorflow之legacy_seq2seq模块初探(Tensorflow==r1.0.1)</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">论文整理 - Learning to Converse With Noisy Data</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-01T16:43:26+08:00"
-              content="2017-05-01" >
-          05-01
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-02T20:06:13+08:00">
+                2018-09-02
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
+      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/04/21/CentOS-7-下-Cuda-Tensorflow-环境搭建实践/" itemprop="url">
-              
-                <span itemprop="name">CentOS 7 下 Cuda & Tensorflow 环境搭建实践</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-04-21T11:36:26+08:00"
-              content="2017-04-21" >
-          04-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
+        <blockquote>
+<p>这是一篇发表在IJCAI2018的论文。本文提出了一种具有校准框架的对话生成方法，允许高质量数据对模型产生更多影响并降低噪声数据的影响。具体而言，对于训练集中的每个实例，首先是用校准网络生成质量分数，在进行反向传播权重更新的时候引入质量分数，使得高质量的对话-应答对能够对模型产生更大的影响。</p>
+</blockquote>
+<a id="more"></a>
+<p>在构建具有校准框架的对话生成方法过程中，首要解决两个问题：1）如何衡量数据质量？2）如何根据数据质量来实现校准生成网络？文章提及到了两篇自动衡量对话生成质量的工作（Lowe2017和Tao2017，事实上后者也是本文部分作者的工作），这篇文章采用了Tao2017的方法。</p>
+<p>模型的整体结构比较简单，如论文Figure 1所示，共包含Calibrator和Sequence2Sequence两个模块的内容。其中，Calibrator负责自动衡量话语对的质量，也是本模型的核心组件。其模型过程是：给定查询Q和响应R，首先使用两个单层的Bi-GRU网络将Q和R编码成句子响亮，然后使用公式5的MLP网络进行评分，采用tanh层进行非线性变换和sigmoid层将权重压缩在[0,1]之间。网络通过负采样方法进行训练，对于查询Q和回复R，从训练集中的其他回答随机采样R-，训练目标是使得S(Q,R)比S(Q,R-)至少高出阈值。</p>
+<p>Calibrator首先要进行预训练，随后采用经过训练的Calibrator指导Seq2Seq模块的训练。对于每个Q-R对，进行反向传播权重更新的时候需要将更新程度按照公式10进行加权，从而使的高质量的数据对能够对模型产生更大的影响。</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/One-Paper-A-Day/" rel="tag"># One Paper A Day</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/10/论文整理 - Generic Personality and Emotion Simulation for Conversational Agents/" rel="next" title="论文整理 - Generic Personality and Emotion Simulation for Conversational Agents">
+                <i class="fa fa-chevron-left"></i> 论文整理 - Generic Personality and Emotion Simulation for Conversational Agents
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/03/论文整理 - Sequential-Matching-Network-A-New-Architecture-for-Multi-turn-Response-Selection-in-Retrieval-Based-Chatbots/" rel="prev" title="论文整理 - Sequential Matching Network A New Architecture for Multi-turn Response Selection in Retrieval-Based Chatbots">
+                论文整理 - Sequential Matching Network A New Architecture for Multi-turn Response Selection in Retrieval-Based Chatbots <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -307,6 +387,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -512,6 +596,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

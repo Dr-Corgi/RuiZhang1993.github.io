@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="数据挖掘," />
+  <meta name="keywords" content="One Paper A Day," />
 
 
 
@@ -79,22 +79,18 @@
 
 
 
-<meta name="description" content="在数据挖掘任务中，我们往往要先对数据进行预处理。本文介绍了数据处理的常见任务和常见方法。">
-<meta name="keywords" content="数据挖掘">
+<meta name="description" content="本文主要介绍了开源自然语言理解框架Rasa NLU（Link）和开源对话管理框架Rasa Core（Link）。">
+<meta name="keywords" content="One Paper A Day">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据挖掘之数据预处理">
-<meta property="og:url" content="http://ruizhang1993.github.io/2016/11/21/数据挖掘之数据预处理/index.html">
+<meta property="og:title" content="论文整理 - RASA Open Source Language Undestanding and Dialogue Management">
+<meta property="og:url" content="http://ruizhang1993.github.io/2018/04/28/论文整理 - Open Source Language Undestanding and Dialogue Management/index.html">
 <meta property="og:site_name" content="Rui Zhang&#39;s Blogs">
-<meta property="og:description" content="在数据挖掘任务中，我们往往要先对数据进行预处理。本文介绍了数据处理的常见任务和常见方法。">
+<meta property="og:description" content="本文主要介绍了开源自然语言理解框架Rasa NLU（Link）和开源对话管理框架Rasa Core（Link）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ruizhang1993.github.io/img/articles/20161121/01.png">
-<meta property="og:image" content="http://ruizhang1993.github.io/img/articles/20161121/02.jpg">
-<meta property="og:image" content="http://ruizhang1993.github.io/img/articles/20161121/03.png">
-<meta property="og:updated_time" content="2018-04-26T07:31:21.000Z">
+<meta property="og:updated_time" content="2018-09-03T08:21:21.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据挖掘之数据预处理">
-<meta name="twitter:description" content="在数据挖掘任务中，我们往往要先对数据进行预处理。本文介绍了数据处理的常见任务和常见方法。">
-<meta name="twitter:image" content="http://ruizhang1993.github.io/img/articles/20161121/01.png">
+<meta name="twitter:title" content="论文整理 - RASA Open Source Language Undestanding and Dialogue Management">
+<meta name="twitter:description" content="本文主要介绍了开源自然语言理解框架Rasa NLU（Link）和开源对话管理框架Rasa Core（Link）。">
 
 
 
@@ -124,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://ruizhang1993.github.io/2016/11/21/数据挖掘之数据预处理/"/>
+  <link rel="canonical" href="http://ruizhang1993.github.io/2018/04/28/论文整理 - Open Source Language Undestanding and Dialogue Management/"/>
 
 
 
 
 
-  <title>数据挖掘之数据预处理 | Rui Zhang's Blogs</title>
+  <title>论文整理 - RASA Open Source Language Undestanding and Dialogue Management | Rui Zhang's Blogs</title>
   
 
 
@@ -247,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ruizhang1993.github.io/2016/11/21/数据挖掘之数据预处理/">
+    <link itemprop="mainEntityOfPage" href="http://ruizhang1993.github.io/2018/04/28/论文整理 - Open Source Language Undestanding and Dialogue Management/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="RuiZhang1993">
@@ -264,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">数据挖掘之数据预处理</h1>
+          <h1 class="post-title" itemprop="name headline">论文整理 - RASA Open Source Language Undestanding and Dialogue Management</h1>
         
 
         <div class="post-meta">
@@ -276,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-21T14:42:11+08:00">
-                2016-11-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-28T10:50:11+08:00">
+                2018-04-28
               </time>
             
 
@@ -315,43 +311,20 @@
 
       
         <blockquote>
-<p>在数据挖掘任务中，我们往往要先对数据进行预处理。本文介绍了数据处理的常见任务和常见方法。</p>
+<p>本文主要介绍了开源自然语言理解框架Rasa NLU（<a href="https://nlu.rasa.com/" target="_blank" rel="external">Link</a>）和开源对话管理框架Rasa Core（<a href="https://core.rasa.com/" target="_blank" rel="external">Link</a>）。</p>
 </blockquote>
 <a id="more"></a>
-<h4 id="数据预处理的主要任务"><a href="#数据预处理的主要任务" class="headerlink" title="数据预处理的主要任务"></a>数据预处理的主要任务</h4><p>数据预处理的主要任务包括以下几个：</p>
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>本文主要介绍了开源自然语言理解框架Rasa NLU（<a href="https://nlu.rasa.com/" target="_blank" rel="external">Link</a>）和开源对话管理框架Rasa Core（<a href="https://core.rasa.com/" target="_blank" rel="external">Link</a>）。<br>（注：目前访问上述两个网站需要自备梯子。）</p>
+<h2 id="框架细节"><a href="#框架细节" class="headerlink" title="框架细节"></a>框架细节</h2><p>框架的整体流程见论文图1。对于一个输入文本，首先调用解释器Interpreter（即Rasa NLU模块）从输入文本中抽取用户意图intent和相应的实体entities。随后消息被送入跟踪器Tracker。策略Policy根据Tracker中的信息选择合适的Action，生成响应输出并将信息回传到Tracker中。<br>每个session对应一个Tracker，用于存储slot和相关的已经发生和当前发生的事件。Tracker是上述组件中唯一有状态的组件。</p>
+<h2 id="模块细节"><a href="#模块细节" class="headerlink" title="模块细节"></a>模块细节</h2><p>在Action选择部分，将其看作一个分类问题来解决。  </p>
+<p>在NLU部分，采用一个流水线pipeline的框架。在默认的设置中，首先使用spaCy进行词性标注，并引入Glove词向量，从词向量出发构建句子的向量表示，随后使用sklearn中的标准多类SVM通过五折交叉训练intent分类模型，最后使用词和词性标注作为特征训练CRF进行实体标注。这一块做词向量的部分应该使用了MITIE，且默认的框架不适用于中文化。@crownpku 提供了一个<a href="https://github.com/crownpku/Rasa_NLU_Chi" target="_blank" rel="external">适用于中文的本地化版本</a>。而构建Rasa NLU部分的训练集可以使用<a href="https://rodrigopivi.github.io/Chatito/" target="_blank" rel="external">Chatito</a>工具，在此过程中可能也需要使用<a href="https://github.com/RuiZhang1993/Chatito_Chn_Tools" target="_blank" rel="external">我写的脚本</a>进行本地化预处理。  </p>
+<p>策略模块是在给定一个Tracker对象的前提下选择下一个Action。一个策略和相应的特征被同时实例化，其中特征是一个给定Tracker的当前对话状态的矢量表示。包含在其中的特征有：  </p>
 <ol>
-<li>数据清洗：包括填入缺失值、平滑噪声数据、识别或移除离群点、解决数据不一致的状况</li>
-<li>数据集成：集成来自不同数据源的数据，如文件、数据库等等</li>
-<li>数据简化：如降维、数据块聚合（比如用聚类结果来替代原有数据）、数据压缩（比如利用编码减少数据长度等）</li>
-<li>数据转换：包括归一化和泛化等等</li>
+<li>最后一个行为是什么  </li>
+<li>最近用户消息中的意图和实体  </li>
+<li>当前定义了哪些插槽等等<br>框架允许回溯到多个过去的历史对话记录中，实践证明在3-6个对话轮次中的历史信息能够对模型效果有提升。</li>
 </ol>
-<h4 id="数据清洗-缺失值处理的四种方法"><a href="#数据清洗-缺失值处理的四种方法" class="headerlink" title="数据清洗 - 缺失值处理的四种方法"></a>数据清洗 - 缺失值处理的四种方法</h4><ul>
-<li>填入Unknown</li>
-<li>属性的平均值</li>
-<li>同一类别下数据在该属性的平均值</li>
-<li>最有可能的值（如利用贝叶斯或者决策树）</li>
-</ul>
-<h4 id="数据清洗-噪声值处理的四种方法"><a href="#数据清洗-噪声值处理的四种方法" class="headerlink" title="数据清洗 - 噪声值处理的四种方法"></a>数据清洗 - 噪声值处理的四种方法</h4><ul>
-<li>装箱平滑：首先对数据进行排序，然后装入箱中，利用箱中数值的平均数/中位数/边界值进行平滑等</li>
-</ul>
-<p>（等距离分割）<br>假设将数据分成N个箱，属性的最大和最小值分别为B和A，则每个箱的容量覆盖的范围大小为W=(B-A)/N<br>（等频数分割）<br>假设将K个数据分成N个箱，则每个箱容量为K/N</p>
-<p>例如，对于数据K={4,8,9,15,21,21,24,25,26,28,29,34}，假设分割为3个箱<br>若为等距离分割，则W＝(34+4)/3=12，则第一个箱覆盖范围是[4,15]，第二个是[16,27]，第三个是[28,39]。则可以分箱为Box_a={4,8,9,15}，Box_b={21,21,24,25,26}，Box_c={28,29,34}<br>若等频数分割，则每个箱容量大小相同，Box_a={4,8,9,15}，Box_b={21,21,24,25}，Box_c={26,28,29,34}</p>
-<p>在装箱之后可以采用三种方法进行平滑。这里以等频数分割的结果为例：<br>（利用平均数平滑）<br>Box_a={9,9,9,9}，Box_b={23,23,23,23}，Box_c={29,29,29,29}<br>（利用边界值平滑）<br>Box_a={4,4,4,15}，Box_b={21,21,25,25}，Box_c={26,26,26,34}</p>
-<ul>
-<li>回归：通过回归函数平滑数据</li>
-<li>聚类：检测并移除离群点</li>
-<li>检测有噪声嫌疑的值并由人类做出决策</li>
-</ul>
-<h4 id="数据集成-冗余数据处理"><a href="#数据集成-冗余数据处理" class="headerlink" title="数据集成 - 冗余数据处理"></a>数据集成 - 冗余数据处理</h4><p>如果我们从多个不同的数据源进行数据集成，往往会面临数据冗余的问题。引起数据冗余的原因非常多，例如有时候同样的属性在不同的数据库中可能会有不同的名称，等等。<br>冗余值可以通过关联分析或协方差分析检测出来。</p>
-<ul>
-<li>关联分析</li>
-</ul>
-<p>（卡方检验）<br><img src="/img/articles/20161121/01.png" alt="卡方检验"><br>其中，f_i是观测值，np_i是期望值。卡方检验就是统计样本的实际观测值与理论推断值之间的偏离程度，实际观测值与理论推断值之间的偏离程度就决定卡方值的大小，卡方值越大，越不符合；卡方值越小，偏差越小，越趋于符合，若两个值完全相等时，卡方值就为0，表明理论值完全符合。</p>
-<p>（皮尔逊相关系数）<br><img src="/img/articles/20161121/02.jpg" alt="皮尔逊相关系数"><br>当皮尔逊相关系数的值为0时，说明变量独立；大于0说明正相关；小于0说明负相关。</p>
-<ul>
-<li>协方差分析</li>
-</ul>
-<p><img src="/img/articles/20161121/03.png" alt="协方差分析"><br>当两个变量的变化趋势一致时，协方差分析的值大于0；当两个变量的变化趋势相反时，协方差分析的值小于0；而当两个变量统计独立时，协方差的值为0.但反之则不成立，协方差的值为0并不意味着两个变量统计独立。</p>
+<p>此外，框架提供了交互模块允许开发人员指导模型选择行为。同时提供了对话图的可视化功能，通过有向图来展示对话流程。</p>
 
       
     </div>
@@ -369,7 +342,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/数据挖掘/" rel="tag"># 数据挖掘</a>
+            <a href="/tags/One-Paper-A-Day/" rel="tag"># One Paper A Day</a>
           
         </div>
       
@@ -382,8 +355,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/17/Python中文文本处理/" rel="next" title="Python中文文本处理">
-                <i class="fa fa-chevron-left"></i> Python中文文本处理
+              <a href="/2018/04/27/论文整理 - Large-scale Simple Question Generation by Template-based Seq2Seq Learning/" rel="next" title="论文整理 - Large-scale Simple Question Generation by Template-based Seq2Seq Learning">
+                <i class="fa fa-chevron-left"></i> 论文整理 - Large-scale Simple Question Generation by Template-based Seq2Seq Learning
               </a>
             
           </div>
@@ -392,8 +365,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/01/19/Mac下卸载-更新numpy/" rel="prev" title="Mac下卸载/更新numpy">
-                Mac下卸载/更新numpy <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/09/论文整理 - Emotion-Sensitive Human-Computer Interface /" rel="prev" title="论文整理 - Emotion-Sensitive Human-Computer Interface">
+                论文整理 - Emotion-Sensitive Human-Computer Interface <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -517,7 +490,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据预处理的主要任务"><span class="nav-number">1.</span> <span class="nav-text">数据预处理的主要任务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据清洗-缺失值处理的四种方法"><span class="nav-number">2.</span> <span class="nav-text">数据清洗 - 缺失值处理的四种方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据清洗-噪声值处理的四种方法"><span class="nav-number">3.</span> <span class="nav-text">数据清洗 - 噪声值处理的四种方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据集成-冗余数据处理"><span class="nav-number">4.</span> <span class="nav-text">数据集成 - 冗余数据处理</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#动机"><span class="nav-number">1.</span> <span class="nav-text">动机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#框架细节"><span class="nav-number">2.</span> <span class="nav-text">框架细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块细节"><span class="nav-number">3.</span> <span class="nav-text">模块细节</span></a></li></ol></div>
             
 
           </div>
