@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="动机Reeves等人的研究表明，人类会将他们的人际行为模式强加到电脑上。人类对计算机有礼貌，甚至会与计算机进行情感互动。当时已经逐渐出现了一些具备情感的人机交互相关研究，但主要集中在听觉和视觉上的情感表达合成。例如通常利用某些卡通形象来与人类用户进行情感交互。然而，这些研究通常忽略了对用户情感的考虑，因此本文提出了一种从语言、韵律和频谱特征对用户情感进行检测的方法，构造了能够媲美人类的情感分类系统">
+<meta name="description" content="本文提出了一种从语言、韵律和频谱特征对用户情感进行检测的方法，构造了能够媲美人类的情感分类系统，根据用户的情感不同来采用不同的话语策略，以实现自然高效的人机对话。">
 <meta name="keywords" content="One Paper A Day">
 <meta property="og:type" content="article">
 <meta property="og:title" content="论文整理 - Emotion-Sensitive Human-Computer Interface">
 <meta property="og:url" content="http://ruizhang1993.github.io/2018/05/09/论文整理 - Emotion-Sensitive Human-Computer Interface /index.html">
 <meta property="og:site_name" content="Rui Zhang&#39;s Blogs">
-<meta property="og:description" content="动机Reeves等人的研究表明，人类会将他们的人际行为模式强加到电脑上。人类对计算机有礼貌，甚至会与计算机进行情感互动。当时已经逐渐出现了一些具备情感的人机交互相关研究，但主要集中在听觉和视觉上的情感表达合成。例如通常利用某些卡通形象来与人类用户进行情感交互。然而，这些研究通常忽略了对用户情感的考虑，因此本文提出了一种从语言、韵律和频谱特征对用户情感进行检测的方法，构造了能够媲美人类的情感分类系统">
+<meta property="og:description" content="本文提出了一种从语言、韵律和频谱特征对用户情感进行检测的方法，构造了能够媲美人类的情感分类系统，根据用户的情感不同来采用不同的话语策略，以实现自然高效的人机对话。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-02T12:29:46.000Z">
+<meta property="og:updated_time" content="2018-09-03T08:03:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="论文整理 - Emotion-Sensitive Human-Computer Interface">
-<meta name="twitter:description" content="动机Reeves等人的研究表明，人类会将他们的人际行为模式强加到电脑上。人类对计算机有礼貌，甚至会与计算机进行情感互动。当时已经逐渐出现了一些具备情感的人机交互相关研究，但主要集中在听觉和视觉上的情感表达合成。例如通常利用某些卡通形象来与人类用户进行情感交互。然而，这些研究通常忽略了对用户情感的考虑，因此本文提出了一种从语言、韵律和频谱特征对用户情感进行检测的方法，构造了能够媲美人类的情感分类系统">
+<meta name="twitter:description" content="本文提出了一种从语言、韵律和频谱特征对用户情感进行检测的方法，构造了能够媲美人类的情感分类系统，根据用户的情感不同来采用不同的话语策略，以实现自然高效的人机对话。">
 
 
 
@@ -310,7 +310,11 @@
       
 
       
-        <h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>Reeves等人的研究表明，人类会将他们的人际行为模式强加到电脑上。人类对计算机有礼貌，甚至会与计算机进行情感互动。<br>当时已经逐渐出现了一些具备情感的人机交互相关研究，但主要集中在听觉和视觉上的情感表达合成。例如通常利用某些卡通形象来与人类用户进行情感交互。<br>然而，这些研究通常忽略了对用户情感的考虑，因此本文提出了一种从语言、韵律和频谱特征对用户情感进行检测的方法，构造了能够媲美人类的情感分类系统，根据用户的情感不同来采用不同的话语策略，以实现自然高效的人机对话。</p>
+        <blockquote>
+<p>本文提出了一种从语言、韵律和频谱特征对用户情感进行检测的方法，构造了能够媲美人类的情感分类系统，根据用户的情感不同来采用不同的话语策略，以实现自然高效的人机对话。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>Reeves等人的研究表明，人类会将他们的人际行为模式强加到电脑上。人类对计算机有礼貌，甚至会与计算机进行情感互动。<br>当时已经逐渐出现了一些具备情感的人机交互相关研究，但主要集中在听觉和视觉上的情感表达合成。例如通常利用某些卡通形象来与人类用户进行情感交互。<br>然而，这些研究通常忽略了对用户情感的考虑，因此本文提出了一种从语言、韵律和频谱特征对用户情感进行检测的方法，构造了能够媲美人类的情感分类系统，根据用户的情感不同来采用不同的话语策略，以实现自然高效的人机对话。</p>
 <h2 id="任务定义"><a href="#任务定义" class="headerlink" title="任务定义"></a>任务定义</h2><p>可以将任务简单看作是情感分类任务，本文中采用的特征主要包括文本特征和音频特征。</p>
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本文分别采用语言信息特征、韵律特征、频谱特征作为分类特征进行实验，在模型的预测阶段同时采用三种分类器进行预测，选择具有最高置信度的结果进行输出。  </p>
 <h4 id="1）语言信息特征"><a href="#1）语言信息特征" class="headerlink" title="1）语言信息特征"></a>1）语言信息特征</h4><p>本文采用了语言模型的方法来构建分类特征。具体地，通过计算说话者在特定的情绪表达和给定前一个词语的情况下特定词语被选择的概率，来构建带有情感特征的语言模型。作者认为特定的词汇组合更可能用来表达某种特定情绪。应该可以简单理解成是一个P(w_{i+1} | w_{i}, e)的语言模型。</p>
@@ -359,8 +363,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/28/开源语言理解和对话管理系统RASA/" rel="next" title="开源语言理解和对话管理系统RASA">
-                <i class="fa fa-chevron-left"></i> 开源语言理解和对话管理系统RASA
+              <a href="/2018/04/27/论文整理 - Large-scale Simple Question Generation by Template-based Seq2Seq Learning/" rel="next" title="论文整理 - Large-scale Simple Question Generation by Template-based Seq2Seq Learning">
+                <i class="fa fa-chevron-left"></i> 论文整理 - Large-scale Simple Question Generation by Template-based Seq2Seq Learning
               </a>
             
           </div>
@@ -369,8 +373,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/10/在口语对话系统中融入情感智能/" rel="prev" title="在口语对话系统中融入情感智能">
-                在口语对话系统中融入情感智能 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/10/论文整理 - Endowing Spoken Language Dialogue Systems with Emotional Intelligence/" rel="prev" title="论文整理 - Endowing Spoken Language Dialogue Systems with Emotional Intelligence">
+                论文整理 - Endowing Spoken Language Dialogue Systems with Emotional Intelligence <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -448,7 +452,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -461,7 +465,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

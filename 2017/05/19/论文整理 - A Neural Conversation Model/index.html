@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="OPAD," />
+  <meta name="keywords" content="One Paper A Day," />
 
 
 
@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="[ONE PAPER A DAY 第2期] 开源语言理解和对话管理系统RASATitle: RASA: Open Source Language Undestanding and Dialogue ManagementAuthor: Tom Bocklisch, Joey Faulkner, Nick Pawlowski, Alan Nichol">
-<meta name="keywords" content="OPAD">
+<meta name="description" content="论文《A Neural Conversation Model》整理。">
+<meta name="keywords" content="One Paper A Day">
 <meta property="og:type" content="article">
-<meta property="og:title" content="开源语言理解和对话管理系统RASA">
-<meta property="og:url" content="http://ruizhang1993.github.io/2018/04/28/开源语言理解和对话管理系统RASA/index.html">
+<meta property="og:title" content="论文整理 - A Neural Conversation Model">
+<meta property="og:url" content="http://ruizhang1993.github.io/2017/05/19/论文整理 - A Neural Conversation Model/index.html">
 <meta property="og:site_name" content="Rui Zhang&#39;s Blogs">
-<meta property="og:description" content="[ONE PAPER A DAY 第2期] 开源语言理解和对话管理系统RASATitle: RASA: Open Source Language Undestanding and Dialogue ManagementAuthor: Tom Bocklisch, Joey Faulkner, Nick Pawlowski, Alan Nichol">
+<meta property="og:description" content="论文《A Neural Conversation Model》整理。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-28T03:36:21.000Z">
+<meta property="og:image" content="http://i4.buimg.com/587765/43d28cf9bc85a222.png">
+<meta property="og:updated_time" content="2018-09-03T08:06:43.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="开源语言理解和对话管理系统RASA">
-<meta name="twitter:description" content="[ONE PAPER A DAY 第2期] 开源语言理解和对话管理系统RASATitle: RASA: Open Source Language Undestanding and Dialogue ManagementAuthor: Tom Bocklisch, Joey Faulkner, Nick Pawlowski, Alan Nichol">
+<meta name="twitter:title" content="论文整理 - A Neural Conversation Model">
+<meta name="twitter:description" content="论文《A Neural Conversation Model》整理。">
+<meta name="twitter:image" content="http://i4.buimg.com/587765/43d28cf9bc85a222.png">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://ruizhang1993.github.io/2018/04/28/开源语言理解和对话管理系统RASA/"/>
+  <link rel="canonical" href="http://ruizhang1993.github.io/2017/05/19/论文整理 - A Neural Conversation Model/"/>
 
 
 
 
 
-  <title>开源语言理解和对话管理系统RASA | Rui Zhang's Blogs</title>
+  <title>论文整理 - A Neural Conversation Model | Rui Zhang's Blogs</title>
   
 
 
@@ -243,7 +245,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ruizhang1993.github.io/2018/04/28/开源语言理解和对话管理系统RASA/">
+    <link itemprop="mainEntityOfPage" href="http://ruizhang1993.github.io/2017/05/19/论文整理 - A Neural Conversation Model/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="RuiZhang1993">
@@ -260,7 +262,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">开源语言理解和对话管理系统RASA</h1>
+          <h1 class="post-title" itemprop="name headline">论文整理 - A Neural Conversation Model</h1>
         
 
         <div class="post-meta">
@@ -272,8 +274,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-28T10:50:11+08:00">
-                2018-04-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-19T21:22:51+08:00">
+                2017-05-19
               </time>
             
 
@@ -311,20 +313,23 @@
 
       
         <blockquote>
-<p>[ONE PAPER A DAY 第2期] 开源语言理解和对话管理系统RASA<br>Title: RASA: Open Source Language Undestanding and Dialogue Management<br>Author: Tom Bocklisch, Joey Faulkner, Nick Pawlowski, Alan Nichol</p>
+<p>论文《A Neural Conversation Model》整理。</p>
 </blockquote>
 <a id="more"></a>
-<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>本文主要介绍了开源自然语言理解框架Rasa NLU（<a href="https://nlu.rasa.com/" target="_blank" rel="external">Link</a>）和开源对话管理框架Rasa Core（<a href="https://core.rasa.com/" target="_blank" rel="external">Link</a>）。<br>（注：目前访问上述两个网站需要自备梯子。）</p>
-<h2 id="框架细节"><a href="#框架细节" class="headerlink" title="框架细节"></a>框架细节</h2><p>框架的整体流程见论文图1。对于一个输入文本，首先调用解释器Interpreter（即Rasa NLU模块）从输入文本中抽取用户意图intent和相应的实体entities。随后消息被送入跟踪器Tracker。策略Policy根据Tracker中的信息选择合适的Action，生成响应输出并将信息回传到Tracker中。<br>每个session对应一个Tracker，用于存储slot和相关的已经发生和当前发生的事件。Tracker是上述组件中唯一有状态的组件。</p>
-<h2 id="模块细节"><a href="#模块细节" class="headerlink" title="模块细节"></a>模块细节</h2><p>在Action选择部分，将其看作一个分类问题来解决。  </p>
-<p>在NLU部分，采用一个流水线pipeline的框架。在默认的设置中，首先使用spaCy进行词性标注，并引入Glove词向量，从词向量出发构建句子的向量表示，随后使用sklearn中的标准多类SVM通过五折交叉训练intent分类模型，最后使用词和词性标注作为特征训练CRF进行实体标注。这一块做词向量的部分应该使用了MITIE，且默认的框架不适用于中文化。@crownpku 提供了一个<a href="https://github.com/crownpku/Rasa_NLU_Chi" target="_blank" rel="external">适用于中文的本地化版本</a>。而构建Rasa NLU部分的训练集可以使用<a href="https://rodrigopivi.github.io/Chatito/" target="_blank" rel="external">Chatito</a>工具，在此过程中可能也需要使用<a href="https://github.com/RuiZhang1993/Chatito_Chn_Tools" target="_blank" rel="external">我写的脚本</a>进行本地化预处理。  </p>
-<p>策略模块是在给定一个Tracker对象的前提下选择下一个Action。一个策略和相应的特征被同时实例化，其中特征是一个给定Tracker的当前对话状态的矢量表示。包含在其中的特征有：  </p>
-<ol>
-<li>最后一个行为是什么  </li>
-<li>最近用户消息中的意图和实体  </li>
-<li>当前定义了哪些插槽等等<br>框架允许回溯到多个过去的历史对话记录中，实践证明在3-6个对话轮次中的历史信息能够对模型效果有提升。</li>
-</ol>
-<p>此外，框架提供了交互模块允许开发人员指导模型选择行为。同时提供了对话图的可视化功能，通过有向图来展示对话流程。</p>
+<p>标题：A Neural Conversation Model<br>作者：Oriol Vinyals, Quoc Le<br>来源：ICML Deep Learning Workshop 2015<br>论文地址：<a href="https://arxiv.org/abs/1506.05869" target="_blank" rel="external">https://arxiv.org/abs/1506.05869</a></p>
+<p>这篇文章是最早将神经机器翻译中的seq2seq生成技术应用到人机对话任务的工作之一。文章提出了一个端到端(end-to-end)的对话生成模型，这里的端到端可以理解为：模型的输入是一个问答对中的问句，而输出则是问答对中相应的回答。模型摒弃了对答句的复杂组织过程，而是利用语言模型不断预测下一个输出词语，直到输出句子终止符的方式来生成回答。  </p>
+<p>这一模型的优势是可以极大地减少对手工规则的需求。然而同时要注意的是，该模型的目标函数是一个“错误的”，或者说不完全正确的。现实是，在对话任务，特别是开放领域问答任务中，问答对往往不是唯一的，一个问题可以对应多个不同的答案。然而使用简单的Encoder-Decoder框架训练对话模型，几乎很难避免答案单一的缺陷。  </p>
+<p>此外，该模型不能够很好地解决一致性问题。</p>
+<h4 id="Encoder、Decoder和对话生成"><a href="#Encoder、Decoder和对话生成" class="headerlink" title="Encoder、Decoder和对话生成"></a>Encoder、Decoder和对话生成</h4><p>基于Seq2seq的对话系统一般使用RNN来对问答对进行编码和解码。由于基本的RNN网络不能够很好地建模远距离文本，在实践中通常会使用LSTM或者GRU等RNN变种网络来对文本进行建模。  </p>
+<p>Seq2seq可以用下图简单的描述：<br><img src="http://i4.buimg.com/587765/43d28cf9bc85a222.png" alt="seq2seq模型"></p>
+<p>假设存在一个问答对：｛问句：’A，B，C’；答句：’W，X，Y，Z’｝。图片中的矩形表示RNN网络（或者LSTM/GRU网络），图中模型包括Encoder和Decoder两个部分：RNN网络首先作为Encoder在每个时间步一次读取问句中的一个单词，直到接收到一个终止标志<eos>；在接收到终止标志之后，该RNN开始作为Decoder预测答句中的第一个单词，在下一个时间步中预测第二个单词，以此类推。  </eos></p>
+<p>在实践中，Encoder和Decoder可以是同一个RNN网络，也可以是两个分开的RNN网络。如果使用第二种方案，则需要在Decoder预测之前将Encoder的内部状态复制给Decoder。</p>
+<h4 id="损失函数与模型缺陷"><a href="#损失函数与模型缺陷" class="headerlink" title="损失函数与模型缺陷"></a>损失函数与模型缺陷</h4><p>由于在seq2seq中我们将对话生成转化成了单词预测的问题，因此我们通常采用交叉熵来计算模型损失。模型的预测结果是RNN输出经过softmax之后概率最高的词语，模型的目标则是答句中对应位置的实际词语。  </p>
+<p>值得注意的是，这种训练方法不能够很好的满足开放领域对话的需求，因为开放对话中合理答案并不是唯一的。使用seq2seq训练对话模型就会受到这样的限制。此外，由于我们是通过预测词语出现的概率来生成答句，最后我们往往会得到一些通用的回答，比如“我不知道。”“哈哈！”，不管你输入什么内容给Encoder，最后经常蹦出来这两个句子。当然我只是举个例子，实际上会出现的通用句取决于具体训练的语料。出现这一问题的原因跟我们的训练目标有关，语料的实际情况造成这些词语的对应概率高，而这些词语的概率又直接影响了文本生成的结果。</p>
+<h4 id="答案一致性问题"><a href="#答案一致性问题" class="headerlink" title="答案一致性问题"></a>答案一致性问题</h4><p>一致性问题也是对话系统中的常见问题，通常需要引入额外的知识库来解决。最简单的一致性问题如：  </p>
+<p>问：你今年几岁了？<br>答：我30岁了。<br>问：你是哪一年出生的？<br>答：2009年。  </p>
+<p>由于模型学习的是词语出现的概率，应付这类问答时就很容易出现一致性问题。因为seq2seq模型是某种程度上通过学习语言模型来生成答案，但对答案的一致性不能够形成约束，因此会出现上述的一致性问题。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>利用seq2seq模型训练机器对话生成，其模型非常简单，通过一定轮数的迭代之后可以看到效果，得到的文本相对比较流畅。但受到训练目标的约束，模型结果的多样性非常局限，问答对的主题往往很不相关，答案也不具备一致性。在利用seq2seq训练（开放领域）对话生成还有很长的路要走。</p>
 
       
     </div>
@@ -342,7 +347,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/OPAD/" rel="tag"># OPAD</a>
+            <a href="/tags/One-Paper-A-Day/" rel="tag"># One Paper A Day</a>
           
         </div>
       
@@ -355,8 +360,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/27/基于模板-Seq2Seq的大规模问句生成/" rel="next" title="基于模板&Seq2Seq的大规模问句生成">
-                <i class="fa fa-chevron-left"></i> 基于模板&Seq2Seq的大规模问句生成
+              <a href="/2017/05/01/Tensorflow之legacy-seq2seq模块初探-Tensorflow-r1-0-1/" rel="next" title="Tensorflow之legacy_seq2seq模块初探(Tensorflow==r1.0.1)">
+                <i class="fa fa-chevron-left"></i> Tensorflow之legacy_seq2seq模块初探(Tensorflow==r1.0.1)
               </a>
             
           </div>
@@ -365,8 +370,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/09/论文整理 - Emotion-Sensitive Human-Computer Interface /" rel="prev" title="论文整理 - Emotion-Sensitive Human-Computer Interface">
-                论文整理 - Emotion-Sensitive Human-Computer Interface <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/21/卷积操作的简单理解/" rel="prev" title="卷积操作的简单理解">
+                卷积操作的简单理解 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -444,7 +449,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -457,7 +462,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -490,7 +495,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#动机"><span class="nav-number">1.</span> <span class="nav-text">动机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#框架细节"><span class="nav-number">2.</span> <span class="nav-text">框架细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块细节"><span class="nav-number">3.</span> <span class="nav-text">模块细节</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Encoder、Decoder和对话生成"><span class="nav-number">1.</span> <span class="nav-text">Encoder、Decoder和对话生成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#损失函数与模型缺陷"><span class="nav-number">2.</span> <span class="nav-text">损失函数与模型缺陷</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#答案一致性问题"><span class="nav-number">3.</span> <span class="nav-text">答案一致性问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>

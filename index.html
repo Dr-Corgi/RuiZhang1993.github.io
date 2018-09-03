@@ -309,15 +309,16 @@
 
       
         
-          
-            <blockquote>
+          <blockquote>
 <p>这是一篇发表在IJCAI2018的论文。本文提出了一种具有校准框架的对话生成方法，允许高质量数据对模型产生更多影响并降低噪声数据的影响。具体而言，对于训练集中的每个实例，首先是用校准网络生成质量分数，在进行反向传播权重更新的时候引入质量分数，使得高质量的对话-应答对能够对模型产生更大的影响。</p>
 </blockquote>
-<p>在构建具有校准框架的对话生成方法过程中，首要解决两个问题：1）如何衡量数据质量？2）如何根据数据质量来实现校准生成网络？文章提及到了两篇自动衡量对话生成质量的工作（Lowe2017和Tao2017，事实上后者也是本文部分作者的工作），这篇文章采用了Tao2017的方法。</p>
-<p>模型的整体结构比较简单，如论文Figure 1所示，共包含Calibrator和Sequence2Sequence两个模块的内容。其中，Calibrator负责自动衡量话语对的质量，也是本模型的核心组件。其模型过程是：给定查询Q和响应R，首先使用两个单层的Bi-GRU网络将Q和R编码成句子响亮，然后使用公式5的MLP网络进行评分，采用tanh层进行非线性变换和sigmoid层将权重压缩在[0,1]之间。网络通过负采样方法进行训练，对于查询Q和回复R，从训练集中的其他回答随机采样R-，训练目标是使得S(Q,R)比S(Q,R-)至少高出阈值。</p>
-<p>Calibrator首先要进行预训练，随后采用经过训练的Calibrator指导Seq2Seq模块的训练。对于每个Q-R对，进行反向传播权重更新的时候需要将更新程度按照公式10进行加权，从而使的高质量的数据对能够对模型产生更大的影响。</p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/02/论文整理-Learning-to-Converse-With-Noisy-Data/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -364,7 +365,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ruizhang1993.github.io/2018/05/10/会话代理的通用个性和情感模拟/">
+    <link itemprop="mainEntityOfPage" href="http://ruizhang1993.github.io/2018/05/10/论文整理 - Generic Personality and Emotion Simulation for Conversational Agents/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="RuiZhang1993">
@@ -383,7 +384,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/10/会话代理的通用个性和情感模拟/" itemprop="url">会话代理的通用个性和情感模拟</a></h1>
+                <a class="post-title-link" href="/2018/05/10/论文整理 - Generic Personality and Emotion Simulation for Conversational Agents/" itemprop="url">论文整理 - Generic Personality and Emotion Simulation for Conversational Agents</a></h1>
         
 
         <div class="post-meta">
@@ -435,11 +436,11 @@
       
         
           <blockquote>
-<p>[ONE PAPER A DAY 第5期] 会话代理的通用个性和情感模拟<br>Title: Generic Personality and Emotion Simulation for Conversational Agents<br>Authors: Arjan Egges, Sumedha Kshirsagar  </p>
+<p>本文描述了一种用于会话代理的个性化、心情和情绪模拟的通用框架。通过参数矩阵将大五人格模型OCEAN和OCC情感评价模型相结合。</p>
 </blockquote>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/05/10/会话代理的通用个性和情感模拟/#more" rel="contents">
+            <a class="btn" href="/2018/05/10/论文整理 - Generic Personality and Emotion Simulation for Conversational Agents/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -490,7 +491,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ruizhang1993.github.io/2018/05/10/在口语对话系统中融入情感智能/">
+    <link itemprop="mainEntityOfPage" href="http://ruizhang1993.github.io/2018/05/10/论文整理 - Endowing Spoken Language Dialogue Systems with Emotional Intelligence/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="RuiZhang1993">
@@ -509,7 +510,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/10/在口语对话系统中融入情感智能/" itemprop="url">在口语对话系统中融入情感智能</a></h1>
+                <a class="post-title-link" href="/2018/05/10/论文整理 - Endowing Spoken Language Dialogue Systems with Emotional Intelligence/" itemprop="url">论文整理 - Endowing Spoken Language Dialogue Systems with Emotional Intelligence</a></h1>
         
 
         <div class="post-meta">
@@ -561,11 +562,11 @@
       
         
           <blockquote>
-<p>[ONE PAPER A DAY 第4期] 在口语对话系统中融入情感智能<br>Title: Endowing Spoken Language Dialogue Systems with Emotional Intelligence<br>Authors: Elisabeth Andre, Matthias Rehm, Wolfgang Minker, and Dirk Buhler</p>
+<p>本文提出一种基于社交礼貌准则的情感对话框架。</p>
 </blockquote>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/05/10/在口语对话系统中融入情感智能/#more" rel="contents">
+            <a class="btn" href="/2018/05/10/论文整理 - Endowing Spoken Language Dialogue Systems with Emotional Intelligence/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -686,150 +687,12 @@
 
       
         
-          
-            <h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>Reeves等人的研究表明，人类会将他们的人际行为模式强加到电脑上。人类对计算机有礼貌，甚至会与计算机进行情感互动。<br>当时已经逐渐出现了一些具备情感的人机交互相关研究，但主要集中在听觉和视觉上的情感表达合成。例如通常利用某些卡通形象来与人类用户进行情感交互。<br>然而，这些研究通常忽略了对用户情感的考虑，因此本文提出了一种从语言、韵律和频谱特征对用户情感进行检测的方法，构造了能够媲美人类的情感分类系统，根据用户的情感不同来采用不同的话语策略，以实现自然高效的人机对话。</p>
-<h2 id="任务定义"><a href="#任务定义" class="headerlink" title="任务定义"></a>任务定义</h2><p>可以将任务简单看作是情感分类任务，本文中采用的特征主要包括文本特征和音频特征。</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本文分别采用语言信息特征、韵律特征、频谱特征作为分类特征进行实验，在模型的预测阶段同时采用三种分类器进行预测，选择具有最高置信度的结果进行输出。  </p>
-<h4 id="1）语言信息特征"><a href="#1）语言信息特征" class="headerlink" title="1）语言信息特征"></a>1）语言信息特征</h4><p>本文采用了语言模型的方法来构建分类特征。具体地，通过计算说话者在特定的情绪表达和给定前一个词语的情况下特定词语被选择的概率，来构建带有情感特征的语言模型。作者认为特定的词汇组合更可能用来表达某种特定情绪。应该可以简单理解成是一个P(w_{i+1} | w_{i}, e)的语言模型。</p>
-<h4 id="2-韵律特征"><a href="#2-韵律特征" class="headerlink" title="2) 韵律特征"></a>2) 韵律特征</h4><p>韵律信息在情感交流中的作用在心理学和心理语言学中得到了广泛研究。本文主要基于以下的韵律特征构建分类模型：1)话语中基频的均值和方差特征 2)基频中的微小扰动特征 3)韵律强度的均值和方差特征 4)强度中的微小扰动特征。最终使用上述特征的高斯混合来训练特定情绪的韵律模型，并根据上下文和性别进行了归一化。</p>
-<h4 id="3-频谱特征"><a href="#3-频谱特征" class="headerlink" title="3) 频谱特征"></a>3) 频谱特征</h4><p>文章指出频谱能量的特定分布能够反映不同的情感。模型采用倒谱系数建模频谱信息，并引入系数的一阶和二阶导数。文章在已有的频谱分析模型上融入了特定的情感信息，利用最大似然线性回归训练模型。</p>
-<h2 id="实验评估和实现"><a href="#实验评估和实现" class="headerlink" title="实验评估和实现"></a>实验评估和实现</h2><p>文章从电影视频中截取片段并由标注人员进行情感标注，最终使用自然、愤怒、悲伤三种情绪进行情感分类。这些标注结果先由人工进行分类测试。实验表明，当人类通过声音来判别时，平均准确率能够达到0.7左右。而当人类只利用文本进行判别时，准确率仅在0.55左右。  </p>
-<p>在情感对话模型的实现中，文章主要考虑以下三点：  </p>
-<ol>
-<li>暗示：根据所推断的用户情绪，模型会在与用户交互过程中采用不同的暗示。例如，当用户看起来烦躁时，表达时会更加委婉或抱歉；当用户表现得很匆忙时，回应需要变得简洁。  </li>
-<li>反馈：和提示类似，对用户的反馈取决于推断的用户情绪状态。  </li>
-<li>对话流：根据用户的情绪改变暗示和反馈，调整与用户的具体交互。要求对话管理模块允许指定不同的会话流程以适应不同的用户情感。</li>
-</ol>
-<h2 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h2><ol>
-<li>实验评估中人类在仅文本和文本+音频的数据下所表现出的巨大准确率差异是一个非常重要的实验结果，表明了对话文本中情感识别的困难度。</li>
-<li>文章中还包含了一些有用/重要的说法，包括：1) 理解用户表达的情感是情感对话的第一步，在确定了对话者的情感状态之后，我们可能会在交谈中避免特定的关键词、提问问题、讨论话题，从而将情感整合为对话过程中的重要部分。2)情感对话不局限于状态接口，并且可能对身份不同的人要有所区分。</li>
-<li>文章希望对话系统在确定了用户的情感状态之后，能够在后续的交互作出相应的反应。换句话说，情感对剩余的谈话范围有影响。但由于文中提出的模型不能够模拟用户的情感变化，因此尚不能够实现。</li>
-<li>综合前2点，在任务型情感对话的研究范围中，除了情感的理解和表达，还存在诸如个性化、情感跟踪等研究内容。</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ruizhang1993.github.io/2018/04/28/开源语言理解和对话管理系统RASA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="RuiZhang1993">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rui Zhang's Blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/28/开源语言理解和对话管理系统RASA/" itemprop="url">开源语言理解和对话管理系统RASA</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-28T10:50:11+08:00">
-                2018-04-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
           <blockquote>
-<p>[ONE PAPER A DAY 第2期] 开源语言理解和对话管理系统RASA<br>Title: RASA: Open Source Language Undestanding and Dialogue Management<br>Author: Tom Bocklisch, Joey Faulkner, Nick Pawlowski, Alan Nichol</p>
+<p>本文提出了一种从语言、韵律和频谱特征对用户情感进行检测的方法，构造了能够媲美人类的情感分类系统，根据用户的情感不同来采用不同的话语策略，以实现自然高效的人机对话。</p>
 </blockquote>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/04/28/开源语言理解和对话管理系统RASA/#more" rel="contents">
+            <a class="btn" href="/2018/05/09/论文整理 - Emotion-Sensitive Human-Computer Interface /#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -880,7 +743,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ruizhang1993.github.io/2018/04/27/基于模板-Seq2Seq的大规模问句生成/">
+    <link itemprop="mainEntityOfPage" href="http://ruizhang1993.github.io/2018/04/27/论文整理 - Large-scale Simple Question Generation by Template-based Seq2Seq Learning/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="RuiZhang1993">
@@ -899,7 +762,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/27/基于模板-Seq2Seq的大规模问句生成/" itemprop="url">基于模板&Seq2Seq的大规模问句生成</a></h1>
+                <a class="post-title-link" href="/2018/04/27/论文整理 - Large-scale Simple Question Generation by Template-based Seq2Seq Learning/" itemprop="url">论文整理 - Large-scale Simple Question Generation by Template-based Seq2Seq Learning</a></h1>
         
 
         <div class="post-meta">
@@ -951,11 +814,11 @@
       
         
           <blockquote>
-<p>[ONE PAPER A DAY 第1期] 基于模板&amp;Seq2Seq的大规模问句生成<br>Title: Large-scale Simple Question Generation by Template-based Seq2Seq Learning<br>Author: Tianyu Liu, Bingzhen Wei, Baobao Chang, Zhifang Sui</p>
+<p>这篇文章的主要贡献是在已有知识图谱的情况下，通过构建Template-based Seq2Seq模型自动生成大量问句，用于生成大规模问答语料。文章比较了传统的基于模板的方法、基于Seq2Seq的方法和融合Seq2Seq方法。实验表明采用融合的方法具备较好的多样性和主题相关性。</p>
 </blockquote>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/04/27/基于模板-Seq2Seq的大规模问句生成/#more" rel="contents">
+            <a class="btn" href="/2018/04/27/论文整理 - Large-scale Simple Question Generation by Template-based Seq2Seq Learning/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1388,7 +1251,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ruizhang1993.github.io/2017/05/27/论文浅析-神经网络语言模型NNLM/">
+    <link itemprop="mainEntityOfPage" href="http://ruizhang1993.github.io/2017/05/27/论文整理 - A neural probabilistic language model/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="RuiZhang1993">
@@ -1407,7 +1270,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/05/27/论文浅析-神经网络语言模型NNLM/" itemprop="url">神经网络语言模型NNLM</a></h1>
+                <a class="post-title-link" href="/2017/05/27/论文整理 - A neural probabilistic language model/" itemprop="url">论文整理 - A neural probabilistic language model</a></h1>
         
 
         <div class="post-meta">
@@ -1459,11 +1322,137 @@
       
         
           <blockquote>
-<p>论文《A neural probabilistic language model 》整理。</p>
+<p>论文《A neural probabilistic language model》整理。</p>
 </blockquote>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/05/27/论文浅析-神经网络语言模型NNLM/#more" rel="contents">
+            <a class="btn" href="/2017/05/27/论文整理 - A neural probabilistic language model/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ruizhang1993.github.io/2017/05/21/卷积操作的简单理解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="RuiZhang1993">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rui Zhang's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/21/卷积操作的简单理解/" itemprop="url">卷积操作的简单理解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-21T22:20:52+08:00">
+                2017-05-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>简单来说，卷积神经网络是指那些至少在网络的一层中使用卷积运算来替代一般的矩阵乘法运算的神经网络。常用的卷积网络通常由很多层的卷积运算和池化运算堆叠起来组成。这篇文章就简单来讲讲什么是卷积运算、池化运算，以及为什么要使用卷积运算。</p>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/21/卷积操作的简单理解/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1551,7 +1540,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1564,7 +1553,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

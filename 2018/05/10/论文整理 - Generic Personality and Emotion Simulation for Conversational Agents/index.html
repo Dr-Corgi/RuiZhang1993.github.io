@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="OPAD," />
+  <meta name="keywords" content="One Paper A Day," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="[ONE PAPER A DAY 第1期] 基于模板&amp;amp;Seq2Seq的大规模问句生成Title: Large-scale Simple Question Generation by Template-based Seq2Seq LearningAuthor: Tianyu Liu, Bingzhen Wei, Baobao Chang, Zhifang Sui">
-<meta name="keywords" content="OPAD">
+<meta name="description" content="本文描述了一种用于会话代理的个性化、心情和情绪模拟的通用框架。通过参数矩阵将大五人格模型OCEAN和OCC情感评价模型相结合。">
+<meta name="keywords" content="One Paper A Day">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基于模板&amp;Seq2Seq的大规模问句生成">
-<meta property="og:url" content="http://ruizhang1993.github.io/2018/04/27/基于模板-Seq2Seq的大规模问句生成/index.html">
+<meta property="og:title" content="论文整理 - Generic Personality and Emotion Simulation for Conversational Agents">
+<meta property="og:url" content="http://ruizhang1993.github.io/2018/05/10/论文整理 - Generic Personality and Emotion Simulation for Conversational Agents/index.html">
 <meta property="og:site_name" content="Rui Zhang&#39;s Blogs">
-<meta property="og:description" content="[ONE PAPER A DAY 第1期] 基于模板&amp;amp;Seq2Seq的大规模问句生成Title: Large-scale Simple Question Generation by Template-based Seq2Seq LearningAuthor: Tianyu Liu, Bingzhen Wei, Baobao Chang, Zhifang Sui">
+<meta property="og:description" content="本文描述了一种用于会话代理的个性化、心情和情绪模拟的通用框架。通过参数矩阵将大五人格模型OCEAN和OCC情感评价模型相结合。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-27T07:50:17.000Z">
+<meta property="og:updated_time" content="2018-09-03T08:03:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="基于模板&amp;Seq2Seq的大规模问句生成">
-<meta name="twitter:description" content="[ONE PAPER A DAY 第1期] 基于模板&amp;amp;Seq2Seq的大规模问句生成Title: Large-scale Simple Question Generation by Template-based Seq2Seq LearningAuthor: Tianyu Liu, Bingzhen Wei, Baobao Chang, Zhifang Sui">
+<meta name="twitter:title" content="论文整理 - Generic Personality and Emotion Simulation for Conversational Agents">
+<meta name="twitter:description" content="本文描述了一种用于会话代理的个性化、心情和情绪模拟的通用框架。通过参数矩阵将大五人格模型OCEAN和OCC情感评价模型相结合。">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://ruizhang1993.github.io/2018/04/27/基于模板-Seq2Seq的大规模问句生成/"/>
+  <link rel="canonical" href="http://ruizhang1993.github.io/2018/05/10/论文整理 - Generic Personality and Emotion Simulation for Conversational Agents/"/>
 
 
 
 
 
-  <title>基于模板&Seq2Seq的大规模问句生成 | Rui Zhang's Blogs</title>
+  <title>论文整理 - Generic Personality and Emotion Simulation for Conversational Agents | Rui Zhang's Blogs</title>
   
 
 
@@ -243,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ruizhang1993.github.io/2018/04/27/基于模板-Seq2Seq的大规模问句生成/">
+    <link itemprop="mainEntityOfPage" href="http://ruizhang1993.github.io/2018/05/10/论文整理 - Generic Personality and Emotion Simulation for Conversational Agents/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="RuiZhang1993">
@@ -260,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">基于模板&Seq2Seq的大规模问句生成</h1>
+          <h1 class="post-title" itemprop="name headline">论文整理 - Generic Personality and Emotion Simulation for Conversational Agents</h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-27T14:58:12+08:00">
-                2018-04-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-10T20:34:27+08:00">
+                2018-05-10
               </time>
             
 
@@ -311,16 +311,17 @@
 
       
         <blockquote>
-<p>[ONE PAPER A DAY 第1期] 基于模板&amp;Seq2Seq的大规模问句生成<br>Title: Large-scale Simple Question Generation by Template-based Seq2Seq Learning<br>Author: Tianyu Liu, Bingzhen Wei, Baobao Chang, Zhifang Sui</p>
+<p>本文描述了一种用于会话代理的个性化、心情和情绪模拟的通用框架。通过参数矩阵将大五人格模型OCEAN和OCC情感评价模型相结合。</p>
 </blockquote>
 <a id="more"></a>
-<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>这篇文章的主要贡献是在已有知识图谱的情况下，通过构建Template-based Seq2Seq模型自动生成大量问句，用于生成大规模问答语料。文章比较了传统的基于模板的方法、基于Seq2Seq的方法和融合Seq2Seq方法。实验表明采用融合的方法具备较好的多样性和主题相关性。  </p>
-<h2 id="任务定义"><a href="#任务定义" class="headerlink" title="任务定义"></a>任务定义</h2><p>给定一个事实三元组F=(Subject, Relationship, Object)，期望产生一个包含Subject及关系Relationship的问题，该问题的答案是Object。<br>在纯模板的方式中，通常包括模板集合与选择生成两个阶段，利用从训练集中抽取的模板，通过将特定模板和实体主题匹配以生成问题。文章指出基于纯模板的方法的生成结果缺乏文本多样性。<br>在纯Seq2Seq方式中，文章指出可能会生成具有错误实体或关系的样本。</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本文采用的方法基本上可以看作是一个比较经典的带Attention机制的Encoder-Decoder框架，编码器和解码器采用LSTM网络，但在数据输入和输出上作了一定的创新。<br>以（于海，相关人物，吴冠中）这一三元组为例。<br>文章将编码器称为“三元组编码器”，首先Encoder的输入文本为“于 海 SEP 相 关 人 物”，其中文本是按照字进行分割，没有采用额外的分词。在解码器阶段，为了解决实体错误的问题，直接把生成目标中的实体抠掉，替换为SUB，即“请 问 与 SUB 有 关 的 人 有 谁 ？”。（最后应该是将实体还原回问句中，文中未提及。）通过这样一个Seq2Seq框架来训练问句生成模型。</p>
-<h2 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h2><ol>
-<li>关于基于纯模板的方式，生成结果可能缺乏文本多样性是能够理解的，毕竟纯粹基于模板的方法受限于训练数据中问答模板的规模。但是并不是很能够理解基于模板提取的方法在人工评价中的指标也不高的原因，文章中似乎也没有提及。直观理解来说，利用纯模板匹配的方法应该能够获得非常高质量的问句。  </li>
-<li>一定程度上解决了文本的单一问题（通过对语言模型的学习，能够扩展出训练数据中不具备的问法句式）；但从另一方面似乎也在一定程度上增加了文本的单一问题（对于一个已经训练好的模型，给定一个特定输入只会有一种输出，而采用基于模板的方法可能会因为有多个可用模板而产生多个输出），文章提出的指标（ROUGE/BLEU/HUMAN/DIVERSE）似乎都不能说明清楚这个问题。</li>
-<li>训练数据比较规整，一定程度上有利于训练出高质量的模型。</li>
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>本文描述了一种用于会话代理的个性化、心情和情绪模拟的通用框架。通过参数矩阵将大五人格模型OCEAN和OCC情感评价模型相结合。</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本文将情感模型划分为人格-心情-情绪三层模型，其中情绪是最频繁出现转换的，而人格则具有持久性的特点。文章通过将人格、心情和情绪表示成一维向量，利用二维关联矩阵实现人格－心情和心情－情绪之间的关联影响。  </p>
+<p>对于每一个对话输入，首先采用OCC模型根据目标(G)、准则(S)和态度(A)进行情感评价，产生情感影响a。情感影响a对情绪和心情产生影响，与此同时情绪和心情出现内部衰减，进而得到新的情感状态。最终，对话系统根据新的情感状态和对话的主题产生情感应答。  </p>
+<p>文章认为，每个人个因素都会影响目标的准则和态度，而性格分量的强度决定了最终的影响。分别如下：</p>
+<ol>
+<li>对于目标(G): 责任心C影响目标被放弃的时间以及对新目标的采纳；宜人性A定义了是否会采取/放弃有利于他人的目标；神经质N通常经历消极的想法并导致更少的野心  </li>
+<li>对于准则(S): 开放性O影响准则的变化速度；宜人性A影响一个人是否会妥协准则；神经质N不影响</li>
+<li>对于态度(A): 外向性E和宜人性A对某个人是否会喜欢其他人产生影响；开放性O影响对环境中新元素的态度</li>
 </ol>
 
       
@@ -339,7 +340,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/OPAD/" rel="tag"># OPAD</a>
+            <a href="/tags/One-Paper-A-Day/" rel="tag"># One Paper A Day</a>
           
         </div>
       
@@ -352,8 +353,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/26/NLPCC2018评测Task4之规则匹配方法/" rel="next" title="NLPCC2018评测Task4之规则匹配方法">
-                <i class="fa fa-chevron-left"></i> NLPCC2018评测Task4之规则匹配方法
+              <a href="/2018/05/10/论文整理 - Endowing Spoken Language Dialogue Systems with Emotional Intelligence/" rel="next" title="论文整理 - Endowing Spoken Language Dialogue Systems with Emotional Intelligence">
+                <i class="fa fa-chevron-left"></i> 论文整理 - Endowing Spoken Language Dialogue Systems with Emotional Intelligence
               </a>
             
           </div>
@@ -362,8 +363,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/04/28/开源语言理解和对话管理系统RASA/" rel="prev" title="开源语言理解和对话管理系统RASA">
-                开源语言理解和对话管理系统RASA <i class="fa fa-chevron-right"></i>
+              <a href="/2018/09/02/论文整理-Learning-to-Converse-With-Noisy-Data/" rel="prev" title="论文整理 - Learning to Converse With Noisy Data">
+                论文整理 - Learning to Converse With Noisy Data <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -441,7 +442,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -454,7 +455,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -487,7 +488,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#动机"><span class="nav-number">1.</span> <span class="nav-text">动机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任务定义"><span class="nav-number">2.</span> <span class="nav-text">任务定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法"><span class="nav-number">3.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#讨论"><span class="nav-number">4.</span> <span class="nav-text">讨论</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#动机"><span class="nav-number">1.</span> <span class="nav-text">动机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法"><span class="nav-number">2.</span> <span class="nav-text">方法</span></a></li></ol></div>
             
 
           </div>
