@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="会议笔记,SMPSA2017," />
+  <meta name="keywords" content="［One Paper A Day]," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="SMP-SA 2017所见所闻整理。">
-<meta name="keywords" content="会议笔记,SMPSA2017">
+<meta name="description" content="这篇文章最早发表在AAAI2014，这篇是2016年的版本，增加了一些2014-2016期间的相关研究进展。">
+<meta name="keywords" content="［One Paper A Day]">
 <meta property="og:type" content="article">
-<meta property="og:title" content="终身机器学习LML">
-<meta property="og:url" content="http://ruizhang1993.github.io/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/index.html">
+<meta property="og:title" content="论文整理 - The Dialog State Trcking Challenge Series: A Review">
+<meta property="og:url" content="http://ruizhang1993.github.io/2018/09/10/论文整理 - The-Dialog-State-Trcking-Challenge-Series-A-Review/index.html">
 <meta property="og:site_name" content="Rui Zhang&#39;s Blogs">
-<meta property="og:description" content="SMP-SA 2017所见所闻整理。">
+<meta property="og:description" content="这篇文章最早发表在AAAI2014，这篇是2016年的版本，增加了一些2014-2016期间的相关研究进展。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-26T07:29:24.000Z">
+<meta property="og:updated_time" content="2018-09-11T01:31:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="终身机器学习LML">
-<meta name="twitter:description" content="SMP-SA 2017所见所闻整理。">
+<meta name="twitter:title" content="论文整理 - The Dialog State Trcking Challenge Series: A Review">
+<meta name="twitter:description" content="这篇文章最早发表在AAAI2014，这篇是2016年的版本，增加了一些2014-2016期间的相关研究进展。">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://ruizhang1993.github.io/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/"/>
+  <link rel="canonical" href="http://ruizhang1993.github.io/2018/09/10/论文整理 - The-Dialog-State-Trcking-Challenge-Series-A-Review/"/>
 
 
 
 
 
-  <title>终身机器学习LML | Rui Zhang's Blogs</title>
+  <title>论文整理 - The Dialog State Trcking Challenge Series: A Review | Rui Zhang's Blogs</title>
   
 
 
@@ -243,7 +243,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ruizhang1993.github.io/2017/06/11/SMP-SA2017-终身机器学习-Lifelong-Machine-Learning/">
+    <link itemprop="mainEntityOfPage" href="http://ruizhang1993.github.io/2018/09/10/论文整理 - The-Dialog-State-Trcking-Challenge-Series-A-Review/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="RuiZhang1993">
@@ -260,7 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">终身机器学习LML</h1>
+          <h1 class="post-title" itemprop="name headline">论文整理 - The Dialog State Trcking Challenge Series: A Review</h1>
         
 
         <div class="post-meta">
@@ -272,8 +272,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-11T11:34:12+08:00">
-                2017-06-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-10T15:08:55+08:00">
+                2018-09-10
               </time>
             
 
@@ -311,25 +311,34 @@
 
       
         <blockquote>
-<p>SMP-SA 2017所见所闻整理。<br><a id="more"></a></p>
+<p>这篇文章最早发表在AAAI2014，这篇是2016年的版本，增加了一些2014-2016期间的相关研究进展。</p>
 </blockquote>
-<h3 id="什么是终身机器学习-LML-？"><a href="#什么是终身机器学习-LML-？" class="headerlink" title="什么是终身机器学习(LML)？"></a>什么是终身机器学习(LML)？</h3><p>传统的机器学习通常是孤立的单任务机器学习算法：针对某个特定任务，给定一份数据集，运行某些机器学习算法，训练得到一个模型。<br>这种传统的机器学习方法通常不会考虑到过去的知识。也就是说，每次遇到新的问题，传统机器学习方法都是从零开始训练一个新模型。这种方式被称为“机器学习1.0”。<br>“机器学习1.0”存在着一些明显的缺点，例如每次构建模型都是一次孤立学习过程，过往学习到的知识既没有被存储，也不能被重新获取。同时，也正因为知识不能够被存储，每次训练新模型时我们总是需要大量的新的训练数据。  </p>
-<p>相比于机器，人类的学习方式就不是孤立的。人类能够获取过往学习到的知识，并使用这些知识来得到一些新的知识。受此启发，人们希望通过构建一些新的机器学习算法，使得过往的知识能够被“记忆”起来，使得模型在完成每个任务后都会变得更加智能，并且在新的领域任务中发挥出指导作用。于是便有了“机器学习2.0”——终身机器学习（Lifelong Machine Learning)。</p>
-<p>终身机器学习（LML)的定义如下：假定一个学习器(Learner)由1到N依次处理过了N个任务，当它面临第N+1个任务时，它会使用在过去N个任务中习得的知识背景(Knowledge Base, KB)来协助第N+1个任务；并且，在完成第N+1个任务后，其知识背景(KB)将会从该第N+1个任务中习得新知识。  </p>
-<p>如果觉得有点绕，想象一个商品评论的褒贬分类器。首先我们训练一个分类器用于分类家用电器的商品评论。此时学习器将习得有关家用电器的分类知识，我们将这些知识存储起来。接着我们基于这些已知的知识再训练一个用于分类手机商品评论的分类器，扩充分类知识并存储起来。以此类推，每一次学习之后我们都将得到一个更加强大的知识背景，因而学习器也将变得更加“智能”。</p>
-<h3 id="迁移学习、多任务学习与LML"><a href="#迁移学习、多任务学习与LML" class="headerlink" title="迁移学习、多任务学习与LML"></a>迁移学习、多任务学习与LML</h3><p>鉴于LML在不同领域任务上进行学习的特点，我们难免要将LML于迁移学习还有多任务学习进行比较。那么这三者之间有什么关系呢？  </p>
-<p>1）迁移学习与LML。首先，迁移学习是一个不连续的过程，他并不是一个Lifelong的模型，同时也没有对知识进行存储。迁移学习是单向的，它只期望在特定目标领域获得更好的结果。</p>
-<p>2）多任务学习与LML。多任务学习并不保存相应的知识，而且当任务的数量非常多时，要对各个任务重学习非常困难。可以这么理解：一个长期在线、永不停止的多任务学习，就是LML。</p>
-<h3 id="LML与自然语言处理"><a href="#LML与自然语言处理" class="headerlink" title="LML与自然语言处理"></a>LML与自然语言处理</h3><p>显然，终身机器学习的思想非常适用与自然语言处理领域，主要原因有二：  </p>
-<p>1）自然语言知识在不同领域中往往可以共享。由于单词和短语在绝大多数不同的领域或任务中，其含义是相同的；而句子在不同领域中都具有相似的语法规则。这就使得在语法层面的自然语言处理知识可以在不同领域或任务之间共享。  </p>
-<p>2）自然语言知识在不同类型任务中都是非常有用的。自然语言处理中的问题往往相互关联，例如词性标注（POS）、指代消解、命名实体识别等等。这些都是自然语言处理中的基本任务，做好了这些基础工作，就能够在很多不同的个任务上提高效果。</p>
-<h3 id="Lifelong-情感分类"><a href="#Lifelong-情感分类" class="headerlink" title="Lifelong: 情感分类"></a>Lifelong: 情感分类</h3><p>在报告中刘兵教授介绍了终身机器学习的一个应用场景：情感分类。情感分类是自然语言处理中一个非常常见的任务，在Lifelong学习过程中，我们期望的是，能不能构建一个Lifelong的模型，使得我们不再需要为每个新的领域/任务都标注大量的数据？  </p>
-<p>报告中介绍了一个简单的模型：假定我们已经在过去进行过很多个不同情感分类任务，将这些任务的数据记录为D。使用数据D训练一个新的分类器用于目标领域，并加入一些相应的惩罚项，在大多数情况下预测准确率都可以得到平均19%的提升。（具体方法可参见其论文或在文末获取完整报告ppt）</p>
-<h3 id="Lifelong：Aspect抽取"><a href="#Lifelong：Aspect抽取" class="headerlink" title="Lifelong：Aspect抽取"></a>Lifelong：Aspect抽取</h3><p>Aspect可以理解为“主题”，例如{price, cost,…}等词汇都属于同一个aspect。Aspect抽取通常包含两个任务：主题项抽取和主题项聚类。  </p>
-<p>由于在过往的经历中观察到很多aspect也是在不同领域共享的，例如很多电子产品都包含“battery”和“screen”，因此LML也适用于aspect抽取的任务。</p>
-<p>在Aspect抽取的过程中，知识被归结为Must-link和Cannot-link的形式。应当存在于同一个主题的aspect项将形成Must-link关系，例如“picture”和“photo”；而不应存在同一主题下的aspect项将形成Cannot-link关系，例如“battery”和“picture”。</p>
-<p>针对具有大量数据的Aspect抽取任务，刘兵教授的团队提出了Lifelong Topic Modeling(LTM)模型，而针对只有少量可用数据的抽取任务，则提出了AMC模型。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>刘兵教授的报告给出了终身机器学习在情感分析领域上的一些应用。当前的LML研究仍在初步阶段，人们对LML的理解还存在一定的局限性，且当前的研究通常只聚焦与某一类特定任务上（例如，都是分类或者都是主题抽取）。此外，LML需要非常大量的数据，小数据集不能够很好的满足任务要求。</p>
+<a id="more"></a>
+<p>对话状态跟踪(DST)是给定所有对话历史，正确推断对话状态（如用户目标）的任务。</p>
+<p>对话状态s_t是从集合S中获取的数据结构，它将直到t时刻的对话历史归结起来，并为选择下一个系统动作提供足够的信息。在实践中，对话状态通常编码了用户目标和对话中的相关历史。</p>
+<p>对话状态跟踪器(DS Tracker)将直到t时刻的所有可观测元素和外部知识源作为输入。给定这些输入，DS Tracker输出对当前对话状态s的估计，目标是正确识别对话中的状态s*。一个鲁棒的DS Tracker应产生多个可能的对话状态的分布。</p>
+<p>文章将对话状态看作是由人类可解释的元素组成，进一步假设DS Tracker能够产生对话策略(DP)模块的关键输入。DP则基于当前的对话状态产生行为或者响应。</p>
+<p>这篇文章主要涉及了三种对话状态跟踪的方法，分别是：基于手工规则的方法、基于生成式模型的方法和基于判别式模型的方法。下面分别介绍。</p>
+<h2 id="基于手工规则-Hand-crafted-Rules"><a href="#基于手工规则-Hand-crafted-Rules" class="headerlink" title="基于手工规则 Hand-crafted Rules"></a>基于手工规则 Hand-crafted Rules</h2><p>基于手工规则的方法通常只考虑一个SLU结果，并跟踪单个对话状态假设。这种设计将对话状态跟踪问题简化为一个更新规则————根据上一个存在的对话状态s和一个SLU结果u来推导一个新的对话状态s’。</p>
+<p>基于手工规则的方法的好处是他们不需要任何数据来实现，因此也易于做bootstrap。规则也使得开发者能够很好的将领域知识进行结合。</p>
+<p>跟踪单个对话状态的基于手工规则的方法的一个缺点是他不能够使用完整的ASR/NLU的N-Best列表。因此近年来的基于手工规则方法的DS Tracker会根据整个ASR/SLU的N-Best列表计算所有对话状态的分数。这些方法使用手工设计的公式，根据ASR和SLU给出的置信度分数和先验估计，计算对话状态s的后验估计b(s)。</p>
+<p>这种方法的主要缺陷是：计算公式的参数不是直接从真实对话数据中直接推导出来的，因此他们需要仔细调整并且不能够从对话数据中学习或获益。因此我们需要采用数据驱动的技术来自动设置参数以最大化准确率。因此就有了基于生成和基于判别的方法。</p>
+<h2 id="生成式模型-Generative-Models"><a href="#生成式模型-Generative-Models" class="headerlink" title="生成式模型 Generative Models"></a>生成式模型 Generative Models</h2><p>生成式的方法假定对话能够建模为一个贝野斯网络，该网络将系统行为a、用户行为u及ASR/SLU结果与对话状态s进行关联。当系统行为和ASR/SLU结果被观测到时，可能的对话状态的分布就能够通过贝叶斯网络推导得到。</p>
+<p>公式1提供了其中的一种思路，此外还存在多种变体。这些方法的关键假设是可能的对话状态的分布能够使用一个贝叶斯网络进行推导，这个网络编码了对话的知识。模型的参数必须被估计，能够通过标注数据进行训练或利用未标注的对话数据通过最大期望或期望传播进行推导。</p>
+<p>在端到端评估中，生成式模型比手工规则表现出更好的结果。但生成式模型不能轻易将ASR/SLU及对话历史中的潜在信息特征进行合并。所有的依赖关系需要被明确建模。而这一过程需要大量数据。因此，为了方便处理，生成模型通常采用一些无效的独立假设，或者违反了马尔科夫假设从而忽略对话历史中的某些重要特征。</p>
+<p>这些缺陷又促使人们研究训练直接进行判别的模型方法。</p>
+<h2 id="判别式模型-Discriminative-Models"><a href="#判别式模型-Discriminative-Models" class="headerlink" title="判别式模型 Discriminative Models"></a>判别式模型 Discriminative Models</h2><p>判别式模型的主要优点是他们可以包含大量特征，并能够直接根据预测准确率进行优化。</p>
+<p>常见的方法通过将对话历史编码为特征以学习一个简单的分类器。此外，还存在一些可以将对话建模为顺序过程的方法。包括：判别式马尔可夫模型、条件随机场或循环神经网络。</p>
+<p>同样也存在基于循环神经网络的工作，直接使用ASR的输出而跳过了SLU模块。这些方法使得对话模型不需要进行特征设计，去除了忽略重要特征的风险，但与此同时可能会降低性能。</p>
+<p>基于判别式模型的方法都需要用于训练的领域内的对话数据。当目标领域只存在少量标记数据时，需要采用跨领域迁移学习的方法。如果不存在标记数据，则可以使用基本模型对相关域进行无监督调整。</p>
+<h1 id="研究前沿-State-of-the-art"><a href="#研究前沿-State-of-the-art" class="headerlink" title="研究前沿 State-of-the-art"></a>研究前沿 State-of-the-art</h1><p>文章对DSTC1/DSTC2/DSTC3的结果进行比较，总结出当前（当时）最前沿的一些研究结果：</p>
+<ul>
+<li>判别模型 Discriminative models：判别式模型在几个测试中的性能都高于基于规则/基于生成的模型；</li>
+<li>使用ASR特征 Use ASR Feature：最好的DS Tracker总是包含低级别的ASR特征。ASR结果如N-best分数和单词困惑网络分数有利于提高精确度，且结合ASR结果会产生额外的对话状态假设进而提高召回率。</li>
+<li>序列化 Sequential：最好的DS Tracker要么讲对话直接建模为序列，要么集成了众多对话历史中的特征。像规则方法或基于生成的方法那样只考虑单一轮次的对话状态，效果不佳。</li>
+<li>捕获特征交互 Capture feature interactions：最好的DS Tracker直接建模特征之间的交互，如采用神经网络或决策树集合。</li>
+<li>联合后验：最好的系统是在所有槽值上计算联合后验，而不是将后验计算为每个槽值上margin的乘积。</li>
+</ul>
 
       
     </div>
@@ -347,9 +356,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/会议笔记/" rel="tag"># 会议笔记</a>
-          
-            <a href="/tags/SMPSA2017/" rel="tag"># SMPSA2017</a>
+            <a href="/tags/［One-Paper-A-Day/" rel="tag"># ［One Paper A Day]</a>
           
         </div>
       
@@ -362,8 +369,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/27/论文整理 - A neural probabilistic language model/" rel="next" title="论文整理 - A neural probabilistic language model">
-                <i class="fa fa-chevron-left"></i> 论文整理 - A neural probabilistic language model
+              <a href="/2018/09/07/论文整理 - Pretraining-Sentiment-Classifiers-with-Unlabeled-Dialog-Data/" rel="next" title="论文整理 - Pretraining Sentiment Classifiers with Unlabeled Dialog Data">
+                <i class="fa fa-chevron-left"></i> 论文整理 - Pretraining Sentiment Classifiers with Unlabeled Dialog Data
               </a>
             
           </div>
@@ -371,10 +378,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/23/OPAD-000-对话生成Related-Works/" rel="prev" title="对话生成Related Works（一）">
-                对话生成Related Works（一） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -497,7 +500,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是终身机器学习-LML-？"><span class="nav-number">1.</span> <span class="nav-text">什么是终身机器学习(LML)？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迁移学习、多任务学习与LML"><span class="nav-number">2.</span> <span class="nav-text">迁移学习、多任务学习与LML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LML与自然语言处理"><span class="nav-number">3.</span> <span class="nav-text">LML与自然语言处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lifelong-情感分类"><span class="nav-number">4.</span> <span class="nav-text">Lifelong: 情感分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lifelong：Aspect抽取"><span class="nav-number">5.</span> <span class="nav-text">Lifelong：Aspect抽取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基于手工规则-Hand-crafted-Rules"><span class="nav-number">1.</span> <span class="nav-text">基于手工规则 Hand-crafted Rules</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成式模型-Generative-Models"><span class="nav-number">2.</span> <span class="nav-text">生成式模型 Generative Models</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判别式模型-Discriminative-Models"><span class="nav-number">3.</span> <span class="nav-text">判别式模型 Discriminative Models</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#研究前沿-State-of-the-art"><span class="nav-number"></span> <span class="nav-text">研究前沿 State-of-the-art</span></a></div>
             
 
           </div>
