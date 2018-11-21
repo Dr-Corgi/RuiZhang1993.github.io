@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Rui Zhang&#39;s Blogs">
 <meta property="og:description" content="本文发表于IJCAI 2018，提出了一种将基于检索和基于生成方式进行结合的对话模型。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-03T14:06:58.000Z">
+<meta property="og:updated_time" content="2018-09-19T06:25:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="论文整理 - An Ensemble of Retrieval-based and Generation-based Human-computer Conversation Systems">
 <meta name="twitter:description" content="本文发表于IJCAI 2018，提出了一种将基于检索和基于生成方式进行结合的对话模型。">
@@ -314,12 +314,12 @@
 <p>本文发表于IJCAI 2018，提出了一种将基于检索和基于生成方式进行结合的对话模型。</p>
 </blockquote>
 <a id="more"></a>
-<p>本文的基本思路是，对于一个给定的查询，首先使用检索模块选取k哥候选回复，然后采用多对一的Seq2Seq模型，结合Attention和Copy机制生成回复，然后构造Reranker对生成和检索结果进行重排序，选取得分最高的结果进行输出。</p>
+<p>本文的基本思路是，对于一个给定的查询，首先使用检索模块选取k个候选回复，然后采用多对一的Seq2Seq模型，结合Attention和Copy机制生成回复，然后构造Reranker对生成和检索结果进行重排序，选取得分最高的结果进行输出。</p>
 <p>模型大体上可以划分为检索、生成和重排序三个阶段：</p>
 <ul>
 <li>检索：首先在离线阶段为所有的query-response对构建倒排索引。对于任一输入候选q，利用tf-idf特征，通过检索得到多个候选的相似输入q*，选取其所对应的应答r*作为检索结果，并根据语义匹配度对检索结果进行评分。</li>
 <li>生成：使用一个多对一的seq2seq模型，将原始查询q和多个候选应答r*均作为模型的输入。采用了两层Attention和Copy机制提高模型的性能。双层Attention包括句子级和词汇级。句子级Attention直接将k+1个向量拼接后进行线性变换，得到一个向量作为解码器的初始状态。词汇级的attention可以看作是对q的词汇级attention加上对r*的加权求和词汇级attention。Copy机制则可以看作是在传统Seq2Seq方法计算原始概率的前提下，引入了额外的概率来反映r*对y_t生成概率的影响。</li>
-<li>重排序：本文基于GBDT通过六个特征训练一个重排序分类模型。其中前四个特征为成对特征，后两个特征为基于回复属性的特征。包括：1)单词重叠率相似性，通过one-hot和cosine相似度计算 2)实体相似性，识别人物、位置、机构等明明实体后计算余弦相似性 3)话题相似性，训练包含1000个主题的LDA模型后计算余弦相似性 4)构建统计机器翻译模型计算翻译概率 5)句子长度，会归一化到[0,1]之间 6）流畅性，通过计算候选答案中的二元组共现概率的平均值作为流畅度。本文通过负采样来训练这个GBDT模型。</li>
+<li>重排序：本文基于GBDT通过六个特征训练一个重排序分类模型。其中前四个特征为成对特征，后两个特征为基于回复属性的特征。包括：1)单词重叠率相似性，通过one-hot和cosine相似度计算 2)实体相似性，识别人物、位置、机构等命名实体后计算余弦相似性 3)话题相似性，训练包含1000个主题的LDA模型后计算余弦相似性 4)构建统计机器翻译模型计算翻译概率 5)句子长度，会归一化到[0,1]之间 6）流畅性，通过计算候选答案中的二元组共现概率的平均值作为流畅度。本文通过负采样来训练这个GBDT模型。</li>
 </ul>
 
       
@@ -431,7 +431,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -444,7 +444,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
